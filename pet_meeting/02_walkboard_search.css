@@ -1,0 +1,59 @@
+#title {
+    text-align: center;
+    font-size: 2em;
+    border: 1px solid white;
+}
+
+.join {
+    text-align: right;
+}
+
+.s_wrapper {
+    text-align: center;
+    border: 1px solid white;
+    width: 50%;
+    height: 20%;
+    margin: auto;
+}
+
+#walk {
+    float: left;
+    font-size: 1.2em;
+    padding: 5%;
+    border: 1px solid white;
+}
+
+.search {
+    margin-top: 8%;
+}
+
+#search-box {
+    width: 250px;
+    height: 25px;
+}
+
+#search-button {
+    width: 45px;
+    height: 30px;
+}
+
+#d-option {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    padding: 5%;
+}
+
+.select {
+    width: 100%;
+    height: 30px;
+}
+
+#btn {
+    width: 300px;
+    height: 40px;
+    font-size: 1.2em;
+    margin: auto;
+    margin-top: 3%;
+    display: block;
+}
