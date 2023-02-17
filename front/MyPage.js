@@ -10,21 +10,14 @@ $(document).ready(function() {
         $("#"+tab_id).addClass('current');
     })
 
+    let num = 1;
     $('#btn_add').click(function() {
-        let num = 1;
-        
-        
-        $().after();    
-        
-    
 
+        $('#tab_title' + (num++)).css('display', 'inline-block');
+
+        console.log(num);
 
     });
     
-    
-
-
-
-
 
 });
