@@ -1,0 +1,66 @@
+header {
+    border: 1px solid;
+    height: 100px;
+}
+
+nav {
+    border: 1px solid;
+    margin-top: 10px;
+    height: 30px;
+}
+
+#member_info {
+    border: 1px solid;
+    margin-top: 10px;
+    height: 300px;
+}
+
+#dog_info {
+    border: 1px solid;
+    margin-top: 5px;
+    height: 200px;
+}
+
+/* 탭 메뉴 css */
+body{
+    margin-top: 100px;
+    font-family: 'Trebuchet MS', serif;
+    line-height: 1.6
+}
+
+.container{
+    width: 500px;
+    margin: 0 auto;
+}
+
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+ul.tabs li.current{
+    background: #ededed;
+    color: #222;
+}
+
+#tab_title1, #tab_title2, #tab_title3 {
+    display: none;
+}
+
+.tab-content{
+    display: none;
+    background: #ededed;
+    padding: 15px;
+}
+
+.tab-content.current{
+    display: inherit;
+}

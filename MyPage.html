@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPage</title>
+    <link rel="stylesheet" href="./MyPage.css">
+    <script src="../04_jQuery/js/jquery-3.6.3.js"></script>
+    <script src="./MyPage.js"></script>
+</head>
+<body>
+    <h1>MyPage</h1>
+    <header>
+        
+    </header>
+    <nav></nav>
+    <section>
+        <article id="member_info">
+            <h2>나의 정보</h2>
+        </article>
+        <article id="dog_info">
+            <button id="btn_add">추가</button>
+            <button>제거</button>
+            <h2>강아지 정보</h2>
+
+            <!-- 탭 메뉴 만들기 -->
+            <div class="container">
+
+                <ul class="tabs">
+                    <li class="tab-link current" data-tab="tab-1">강아지</li>
+                    <li class="tab-link" data-tab="tab-2">강아지</li>
+                    <li class="tab-link" data-tab="tab-3">강아지</li>
+                    <li class="tab-link" id="tab_title1" data-tab="tab-4">강아지</li>
+                    <li class="tab-link" id="tab_title2" data-tab="tab-5">강아지</li>
+                    <li class="tab-link" id="tab_title3" data-tab="tab-6">강아지</li>
+                </ul>
+                
+                <div id="tab-1" class="tab-content current">tab content1</div>
+                <div id="tab-2" class="tab-content">tab content2</div>
+                <div id="tab-3" class="tab-content">tab content3</div>
+                <div id="tab-4" class="tab-content">tab content4</div>
+                <div id="tab-5" class="tab-content">tab content5</div>
+                <div id="tab-6" class="tab-content">tab content6</div>
+            
+            </div>
+        </article>
+    </section>
+    <footer>
+        
+    </footer>
+</body>
+</html>
