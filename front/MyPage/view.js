@@ -15,9 +15,26 @@ $(document).ready(function() {
 
         $('#tab_title' + (num++)).css('display', 'inline-block');
 
-        console.log(num);
+        if(num > 6) {
+            num = 5;
+            alert('마지막 페이지입니다.')
+        }
 
     });
     
+    $('#btn_del').on('click', function() {
+        
+        $('#tab_title' + (num)).css('display', 'none');
+
+        num--;
+
+        if(num < 0) {
+            alert('더 이상 제거 할 수 없습니다.')
+            num = 1;
+        }
+
+        // 데이터 삭제하는 쿼리문 짜기
+
+    });
 
 });
