@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#title {
+    text-align: center;
+    font-size: 2em;
+}
+
+.join {
+    text-align: right;
+}
+
+.b_wrapper {
+    text-align: center;
+    border: 1px solid white;
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+#walk-list {
+    border: 1px solid white;
+    background-color: skyblue;
+    font-size: 2em;
+    width: 45%;
+    height: 50%;
+    float: left;
+    box-sizing: border-box;
+    transform: translate(0, 50%);
+    margin-right: 5%;
+}
+
+#walk-board {
+    border: 1px solid white;
+    background-color: skyblue;
+    font-size: 2em;
+    width: 45%;
+    height: 50%;
+    float: left;
+    box-sizing: border-box;
+    transform: translate(0, 50%);
+    margin-left: 5%;
+}
