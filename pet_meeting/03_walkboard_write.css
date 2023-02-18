@@ -1,0 +1,68 @@
+#title {
+    text-align: center;
+    font-size: 2em;
+    border: 1px solid white;
+}
+
+#board_title {
+    text-align: center;
+}
+
+.join {
+    text-align: right;
+}
+
+#t_wrapper {
+    width: 60%;
+    height: 20%;
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+}
+
+#content_title {
+    width:750px;
+    height: 30px;
+}
+
+#content {
+    border: 1px solid white;
+    width: 750px;
+    height: 30px;
+}
+
+#upfile {
+    border: 1px solid white;
+    width: 750px;
+    height: 30px;
+}
+
+#content_box {
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.ck.ck-editor {
+    max-width: 900px;
+}
+
+.ck-editor__editable { 
+    min-height: 400px;
+}
+
+#btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 2%;
+}
+
+#btn1 {
+    display: inline-block;
+    margin-right: 1.2%;
+}
+
+#btn2 {
+    display: inline-block;
+}
