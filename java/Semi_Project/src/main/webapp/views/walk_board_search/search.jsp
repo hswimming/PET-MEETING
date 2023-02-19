@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -9,14 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 검색 화면</title>
-<link rel="stylesheet" href="${ path }/resources/css/main_style.css">
+<link rel="stylesheet" href="${ path }/resources/css/search_style.css">
 <script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 </head>
 <body>
 	<header>
-		<!-- 우측 상단 로그아웃 메뉴 -->
-		<div>
-			<nav class="join">
+        <!-- 우측 상단 로그아웃 메뉴 -->
+        <div>
+            <nav class="join">
                 <a href="https://www.naver.com">로그아웃</a>
                 <a href="https://www.naver.com">마이페이지</a>
             </nav>
@@ -34,7 +35,7 @@
             </div>
             <!-- 검색 바 -->
             <form class="search">
-                <input type="text" id="search-box" name="search-box" placeholder="검색어를 입력 해주세요.">
+                <input type="text" id="search-box" name="search-box" placeholder="검색어를 입력해 주세요.">
                 <button type="submit" id="search-button" >검색</button>
             </form>
         </div>
@@ -42,7 +43,7 @@
         <div id="test">
             <form>
                 <fieldset id="d-option">
-                    <legend style="text-align: center; font-size: 1.5em;">&nbsp;같이 산책하고 싶은 친구의 유형을 선택 해주세요!&nbsp;</legend>
+                    <legend style="text-align: center; font-size: 1.5em;">&nbsp;같이 산책하고 싶은 친구의 유형을 선택해 주세요!&nbsp;</legend>
                 <!-- 강아지 옵션 -->
                 <label>크기 분류</label><br><br>
                 <select name="size" id="size" class="select">
@@ -128,7 +129,7 @@
         <!-- 게시글 검색 버튼 -->
         <footer class="search-btn">
             <div>
-                <button id="btn">검색 조건으로 친구 찾기</button>
+                <button type="submit" id="btn">검색 조건으로 친구 찾기</button>
             </div>
         </footer>
     </section>

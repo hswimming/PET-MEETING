@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -15,7 +16,7 @@
 <body>
 	<header>
         <!-- 우측 상단 로그인 메뉴 -->
-		<div>
+        <div>
             <nav class="join">
                 <a href="https://www.naver.com">로그인</a>
                 <a href="https://www.naver.com">회원가입</a>
@@ -34,9 +35,9 @@
                 <a href="https://www.google.com">산책 경로 추천</a>
             </div>
             <div id="walk-board">
-                <a href="https://www.google.com">산책 친구 게시판</a>
+                <a href="${ path }/board/list">산책 친구 게시판</a>
             </div>
         </div>
-	</section>
+    </section>
 </body>
 </html>
