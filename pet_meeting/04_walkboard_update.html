@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>산책 게시판 게시글 작성 화면</title>
-    <link rel="stylesheet" href="./03_walkboard_write.css">
+    <title>산책 게시판 게시글 수정 화면</title>
+    <link rel="stylesheet" href="./04_walkboard_update.css">
     <!-- 1. CDN 붙여넣기 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
@@ -26,10 +26,10 @@
     </header>
     <section>
         <div id="board_title">
-            <h2>게시판 작성</h2>
+            <h2>게시판 수정</h2>
         </div>
         <div id="t_wrapper">
-            <!-- 게시판 작성 화면 -->
+            <!-- 게시판 수정 화면 -->
             <table>
                 <tr>
                     <td style="width: 50%;">제목</td>
@@ -54,10 +54,10 @@
             <!-- 2. TEXT 편집 툴을 사용할 textarea -->
             <textarea name="content" id="editor"></textarea>
         </div>
-        <!-- 등록 버튼 -->
+        <!-- 수정 버튼 -->
         <div id="btn">
-            <div id="btn1"><input type="submit" value="등록"></div>
-            <div id="btn2"><input type="reset" value="취소"></div>
+            <div id="btn1"><input type="submit" value="수정"></div>
+            <div id="btn2"><input type="button" value="목록"></div>
         </div>
     </section>
 

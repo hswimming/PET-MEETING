@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산책 게시판 게시글 보기 화면</title>
+    <link rel="stylesheet" href="./05_walkboard_view.css">
+</head>
+<body>
+    <header>
+        <!-- 우측 상단 로그아웃 메뉴 -->
+        <div>
+            <nav class="join">
+                <a href="https://www.naver.com">로그아웃</a>
+                <a href="https://www.naver.com">마이페이지</a>
+            </nav>
+        </div>
+        <!-- 상단 고정 타이틀 -->
+        <div id="title">
+            <h1>PET-MEETING</h1>
+        </div>
+    </header>
+    <section>
+        <div id="board_title">
+            <h2>게시글 보기</h2>
+        </div>
+        <!-- 게시글 상세 조회 -->
+        <div id="table_wrapper">
+            <table id="tbl">
+                <tr>
+                    <th colspan="2">제목</th>
+                </tr>
+                <tr>
+                    <th>글번호</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>조회수</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th colspan="2">내용</th>
+                </tr>
+                <tr>
+                    <td colspan="2" id="table-box"></td>
+                </tr>
+                <!-- 로그인 했을 때 보이는 버튼 -->
+                <tr>
+                    <th colspan="2">
+                        <button type="button">수정</button>
+                        <button type="button">삭제</button>
+                        <button type="button">목록</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <!-- 댓글 작성 -->
+        <div id="comment">
+            <form action="">
+                <input type="hidden">
+                <textarea name="" id="replyContent" cols="90" rows="3"></textarea>
+                <button type="submit" id="replybtn">등록</button>
+            </form>
+        </div>
+        <!-- 댓글 조회 -->
+        <div id="reply">
+            <table id="reply-table">
+                <tr>
+                    <td>
+                        <sub>작성자 ID</sub>
+                        <sub>작성 날짜</sub>
+                        <br>
+                        <span>댓글 내용</span>
+                    </td>
+                    <td>
+                        <button type="submit" id="commentbtn">삭제</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,35 @@
+#title {
+    text-align: center;
+    font-size: 2em;
+    border: 1px solid white;
+}
+
+#board_title {
+    text-align: center;
+    margin-top: 5%;
+}
+
+#list-div {
+    margin-top: 3%;
+}
+
+.join {
+    text-align: right;
+}
+
+div#list-div button {
+    float: right;
+    margin-bottom: 2%;
+}
+
+#list-table {
+    border: 1px solid;
+}
+
+#num-click {
+    border: 1px solid white;
+}
+
+div#num-click button {
+    margin: 5px 5px 5px 5px;
+}
