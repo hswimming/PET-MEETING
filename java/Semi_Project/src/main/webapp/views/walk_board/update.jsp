@@ -5,13 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+
+<jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${ path }/resources/css/update_style.css">
+<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
+
+<%-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 게시글 수정 화면</title>
-<link rel="stylesheet" href="${ path }/resources/css/update_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
@@ -29,10 +32,11 @@
         <div id="title">
             <h1>PET-MEETING</h1>
         </div>
-    </header>
+    </header> --%>
+    
     <section>
         <div id="board_title">
-            <h2>게시판 수정</h2>
+            <h1>게시판 수정</h1>
         </div>
         <div id="t_wrapper">
             <!-- 게시판 수정 화면 -->
@@ -81,3 +85,5 @@
     </script>
 </body>
 </html>
+
+<jsp:include page="/views/common/footer.jsp" />

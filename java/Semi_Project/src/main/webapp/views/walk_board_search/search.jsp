@@ -5,13 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+
+<jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${ path }/resources/css/search_style.css">
+<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
+
+<<%-- !DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 검색 화면</title>
-<link rel="stylesheet" href="${ path }/resources/css/search_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 </head>
 <body>
 	<header>
@@ -28,7 +31,8 @@
         </div>
     </header>
     <!-- 카테고리 선택 타이틀 -->
-    <section>
+    <section> --%>
+    
         <div class="s_wrapper">
             <div id="walk">
                 <h2>오늘은 어떤 강아지와 달려볼까요?</h2>
@@ -36,7 +40,7 @@
             <!-- 검색 바 -->
             <form class="search">
                 <input type="text" id="search-box" name="search-box" placeholder="검색어를 입력해 주세요.">
-                <button type="submit" id="search-button" >검색</button>
+                <button type="submit" id="search-button"><a href="${ path }/board/list">검색</a></button>
             </form>
         </div>
         <!-- 카테고리 선택 옵션 -->
@@ -135,3 +139,5 @@
     </section>
 </body>
 </html>
+
+<jsp:include page="/views/common/footer.jsp" />

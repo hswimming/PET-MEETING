@@ -9,26 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Walk_Board {
-
+public class Walk_Comment {
+	
+	private int wcNo;
+	
 	private int wbNo;
 	
-	private int memberCode;
-	
-	private String nickname;
-	
-	private String dogId;
-	
-	private String wbTitle;
-	
-	private String wbContent;
+	private String wbComment;
 	
 	private Date createDate;
 	
 	private Date modifyDate;
 	
-	private int wbViews;
-	
-	private String wbStatus;
-	
+	private String wcStatus;
+
 }

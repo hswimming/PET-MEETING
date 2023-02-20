@@ -6,15 +6,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-<%-- <jsp:include page="메인 화면으로 가는 경로.jsp" /> --%>
+<jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${ path }/resources/css/list_style.css">
+<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 
-<!DOCTYPE html>
+<%-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 목록</title>
-<link rel="stylesheet" href="${ path }/resources/css/list_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 
 <!-- 부트스트랩 코드 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -33,15 +33,16 @@
         <div id="title">
             <h1>PET-MEETING</h1>
         </div>
-    </header>
+    </header> --%>
+    
     <section>
         <div id="board_title">
-            <h2 class="text-center">게시글 목록</h2>
+            <h1 class="text-center">게시글 목록</h1>
         </div>
         <!-- 게시글 목록 메뉴 -->
         <div class="container" id="list-div">
             <!-- 우측 게시글 작성 버튼 -->
-            <button type="button" class="btn btn-outline-info">작성하기</button>
+            <button type="button" class="btn btn-outline-info" onclick="location.href='${ path }/walk_board/write'">작성하기</button>
             
             <table class="table table-hover table-striped text-center" id="list-table">
                 <thead>
@@ -101,3 +102,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<jsp:include page="/views/common/footer.jsp" />

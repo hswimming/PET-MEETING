@@ -5,13 +5,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+
+<jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${ path }/resources/css/write_style.css">
+<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
+
+<!-- CK 에디터를 사용하기 위해 아래 코드 복붙 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+
+<%-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 게시글 작성 화면</title>
-<link rel="stylesheet" href="${ path }/resources/css/write_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
@@ -29,13 +36,15 @@
         <div id="title">
             <h1>PET-MEETING</h1>
         </div>
-    </header>
+    </header> --%>
+    
     <section>
         <div id="board_title">
-            <h2>게시판 작성</h2>
+            <h1>게시판 작성</h1>
         </div>
         <div id="t_wrapper">
             <!-- 게시판 작성 화면 -->
+            <form action="${ path }/walk_board/write" method="POST" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td style="width: 50%;">제목</td>
@@ -46,7 +55,7 @@
                 <tr>
                     <td style="width: 50%;">작성자</td>
                     <td colspan="2">
-                        <input type="text" name="content" id="content">
+                        <input type="text" name="content" id="content" value="${ Walk_Board.dogId }" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -54,16 +63,21 @@
                     <td><input type="file" name="file" id="upfile"></td>
                 </tr>
             </table>
-        </div>
-        <!-- 게시글 내용 입력 칸 -->
-        <div id="content_box">
-            <!-- 2. TEXT 편집 툴을 사용할 textarea -->
-            <textarea name="content" id="editor"></textarea>
-        </div>
-        <!-- 등록 버튼 -->
-        <div id="btn">
-            <div id="btn1"><input type="submit" value="등록"></div>
-            <div id="btn2"><input type="reset" value="취소"></div>
+	        <!-- 게시글 내용 입력 칸 -->
+	        <div id="content_box">
+	            <!-- 2. TEXT 편집 툴을 사용할 textarea -->
+	            <textarea name="content" id="editor"></textarea>
+	        </div>
+	        <!-- 등록 버튼 -->
+	        <div id="btn">
+	            <div id="btn1"><input type="submit" value="등록"></div>
+	            <div id="btn2">
+	            	<a href="${ path }/board/list">
+	            		<input type="reset" value="취소">
+	            	</a>
+	            </div>
+	        </div>
+            </form>
         </div>
     </section>
 
@@ -81,3 +95,5 @@
     </script>
 </body>
 </html>
+
+<jsp:include page="/views/common/footer.jsp" />

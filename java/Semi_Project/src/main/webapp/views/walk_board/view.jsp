@@ -5,13 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+
+<jsp:include page="/views/common/header.jsp" />
+<link rel="stylesheet" href="${ path }/resources/css/view_style.css">
+<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
+
+<%-- <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>산책 게시판 게시글 보기 화면</title>
-<link rel="stylesheet" href="${ path }/resources/css/view_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 </head>
 <body>
 	<header>
@@ -26,7 +29,8 @@
         <div id="title">
             <h1>PET-MEETING</h1>
         </div>
-    </header>
+    </header> --%>
+    
     <section>
         <div id="board_title">
             <h2>게시글 보기</h2>
@@ -96,3 +100,5 @@
     </section>
 </body>
 </html>
+
+<jsp:include page="/views/common/footer.jsp" />
