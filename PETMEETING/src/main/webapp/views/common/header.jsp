@@ -36,12 +36,14 @@
                   	  	<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" alt="" id="logoimg">
                 	  </div>
                   	  	<button type="button" id="si" class="btn btn-outline-secondary">회원가입</button>
-                   	 	<button type="button" id="so"  class="btn btn-outline-secondary">로그인</button>             
+                   	 	<button type="button" id="so" class="btn btn-outline-secondary">로그인</button>             
 					</c:if>
             	</div>
            </div>
     </nav>
-       
+           <div style="text-align: right; padding: 3px">
+		       <button id="btnMyPage">마이페이지로 이동</button>
+		   </div>
     
     <div id="title">
             PET MEETING
@@ -99,6 +101,14 @@
 	$(document).ready(() => {
 		$('#btnMyPage').on('click', () => {
 			location.replace("${ path }/views/member/myPage.jsp");	
+		});
+		
+		$('#si').on('click', () => {
+			location.replace("${ path }/views/member/signup.jsp");
+		});
+		
+		$('#so').on('click', () => {
+			location.replace("${ path }/views/member/login.jsp");
 		});
 		
 	});

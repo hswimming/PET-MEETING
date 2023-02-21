@@ -102,6 +102,26 @@ footer ul {
     font-family: 'Jua', sans-serif;
 }
 
+/* 마이페이지 회원 정보 css */
+#memberInfoTable {
+    margin: auto;
+}
+
+#memberInfoTable tr td{
+    border: 1px solid gray;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#memberInfoTable tr td:first-child {
+    background-color: blanchedalmond;
+    height: 50px;
+}
+
+#memberInfoTable tr td:last-child {
+    width: 80%;
+}
+
 /* 탭 메뉴 css */
 body{
     margin-top: 100px;
@@ -128,7 +148,7 @@ ul.tabs li{
 }
 
 ul.tabs li.current{
-    background: #ededed;
+    background: blanchedalmond;
     color: #222;
 }
 
@@ -138,7 +158,7 @@ ul.tabs li.current{
 
 .tab-content{
     display: none;
-    background: #ededed;
+    background: blanchedalmond;
     padding: 15px;
 }
 

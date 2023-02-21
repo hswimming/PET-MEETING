@@ -1,32 +1,105 @@
-nav {
-    margin-top: 2px;
-    height: 40px;
-    background-color: palegoldenrod;
+
+
+body{
+    margin: 0px;
 }
 
-#memberInfoTable {
-    height: 250px;
+#logoimg{
+    height: 50px;
+    margin: auto;
+}
+/*상단 하얀부분*/
+#nav1{
+    height: 65px;
 }
 
-#memberInfoTable tr td {
-    padding-left: 20px;
+
+/*회원가입, 로그인 버튼*/
+#si {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    color: rgb(12, 66, 12);
+    font-family: 'Jua', sans-serif;
+}
+#so{
+    position: absolute;
+    top: 15px;
+    right: 120px;
+    color: rgb(12, 66, 12);
+    font-family: 'Jua', sans-serif;
+}
+
+header{
+    background-color: blanchedalmond;
+    height: 15%;
+}
+/*title*/
+#title{
+    font-size: 7em;
+    margin: auto;
+    text-align: center;
+    color: rgb(12, 66, 12);
+    font-family: 'Jua', sans-serif;
 }
 
 
-#member_info {
-    background-color: lightyellow;
-    margin-top: 2px;
+
+/* section메인내용*/
+#addimg{
+    height: 400px;
+    background: url("https://cdn.pixabay.com/photo/2015/12/13/07/31/new-years-day-1090770_960_720.jpg") fixed; 
+}
+
+#fixed{
+    font-family: 'Jua', sans-serif;
+    position: fixed;
+    /* position: sticky; */
+    top: 400px;
+    right: 20px;
+    width: 150px;
+    font-size: 1.5em;
+    text-align: center;
+    opacity: 0.5;
+    z-index: 9999;
+}
+
+#carouselExampleAutoplaying{
+    margin: auto;
+    margin-top: 100px;
+    width: 65%;
+    margin-bottom: 200px;
+}
+
+#search, #map, #petdiary{
+    text-align: center;
+    color: rgb(12, 66, 12);
+    font-family: 'Jua', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 100px;
+    background-color: blanchedalmond;
+}
+
+#search, #petdiary{
+    margin-left: 10%;
+}
+
+#map{
+    margin-left: 57%;
+}
+
+footer{
+    margin-top: 300px;    
+    background-color: blanchedalmond;
     height: 300px;
 }
 
-#dog_info {
-    background-color: lightyellow;
-    margin-top: 5px;
-    height: 900px;
-}
-
-article>h3 {
+footer ul {
+    list-style-type: none;
+    padding: 8%;
     text-align: center;
+    color: rgb(12, 66, 12);
+    font-family: 'Jua', sans-serif;
 }
 
 /* 탭 메뉴 css */
@@ -55,7 +128,7 @@ ul.tabs li{
 }
 
 ul.tabs li.current{
-    background: #ededed;
+    background: blanchedalmond;
     color: #222;
 }
 
@@ -65,13 +138,33 @@ ul.tabs li.current{
 
 .tab-content{
     display: none;
-    background: #ededed;
+    background: blanchedalmond;
     padding: 15px;
 }
 
 .tab-content.current{
     display: inherit;
 }
+/* 마이페이지 회원 정보 css */
+#memberInfoTable {
+    margin: auto;
+}
+
+#memberInfoTable tr td{
+    border: 1px solid gray;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#memberInfoTable tr td:first-child {
+    background-color: blanchedalmond;
+    height: 50px;
+}
+
+#memberInfoTable tr td:last-child {
+    width: 80%;
+}
+
 
 /* 강아지 탭 안에 들어가는 정보 css*/
 .form-control {
@@ -97,5 +190,3 @@ select{
     outline: none;
     font-size: 1.2em;
 }
-
-

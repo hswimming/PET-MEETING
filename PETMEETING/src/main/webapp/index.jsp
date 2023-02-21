@@ -25,11 +25,7 @@
                  <span class="visually-hidden">Next</span>
              </button>
      </div>
- <nav>
-	 <div style="text-align: right; padding: 3px">
-		<button id="btnMyPage">마이페이지로 이동</button>
-	 </div>
- </nav>
+
  <section id="content">
  	    <div class="card" style="width: 55rem;" id="search">
                     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbC3VYr%2FbtrZJ2Z3j7e%2FTMsy0kgAAyW2IG1k9Bfgl0%2Fimg.png" class="card-img-top" alt="…">

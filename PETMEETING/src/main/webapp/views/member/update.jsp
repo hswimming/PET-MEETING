@@ -10,6 +10,7 @@
 <section>
 	<article id="member_info">
 	<hr>
+	<h3 style="text-align: center;">사용자 정보</h3>
     <table id="memberInfoTable">
 	    <tr>
 	        <td width="150px">
@@ -69,11 +70,15 @@
 	        </td>
 	    </tr>
 	</table>
-	
-	        </article>
+	<div style="text-align: center; margin-top: 10px">
+		<button>비밀번호 수정</button>
+	</div>
+	</article>
+	<br>
+	<hr>
     <article id="dog_info">
-       <h3>강아지 정보</h3>
-        <div style="padding-left: 10%; margin-bottom: 10px;">
+   	   <h3 style="text-align: center;">강아지 정보</h3>
+        <div style="padding-left: 11%; margin-bottom: 10px;">
             <button id="btn_add">추가</button>
             <button id="btn_del">제거</button>
         </div>

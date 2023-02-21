@@ -10,73 +10,73 @@
 
  <section>
     <article id="member_info">
-     <hr>
-     <table id="memberInfoTable">
-         <tr>
-             <td width="150px">
-                 아이디
-             </td>
-             <td>
-                 leenabro
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 이름
-             </td>
-             <td>
-                 이정환
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 닉네임
-             </td>
-             <td>
-                 이나브로
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 주소
-             </td>
-             <td>
-                 서울 송파구 잠실동
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 핸드폰 번호
-             </td>
-             <td>
-                 010-1234-5678
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 이메일
-             </td>
-             <td>
-                 leenabro.be@gamil.com
-             </td>
-         </tr>
-         <tr>
-             <td>
-                 성별
-             </td>
-             <td>
-                 남자
-             </td>
-         </tr>
-     </table>
-
-     </article>
+	<hr>
+    <div style="text-align: center;">
+    <h3 style="text-align: center;">사용자 정보</h3>
+	    <table id="memberInfoTable" style="text-align: center;">
+	        <tr>
+	            <td width="150px">
+	                아이디
+	            </td>
+	            <td>
+	                leenabro
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                이름
+	            </td>
+	            <td>
+	                이정환
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                닉네임
+	            </td>
+	            <td>
+	                이나브로
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                주소
+	            </td>
+	            <td>
+	                서울 송파구 잠실동
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                핸드폰 번호
+	            </td>
+	            <td>
+	                010-1234-5678
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                이메일
+	            </td>
+	            <td>
+	                leenabro.be@gamil.com
+	             </td>
+	        </tr>
+	        <tr>
+	            <td>
+	                성별
+	            </td>
+	            <td>
+	                남자
+	            </td>
+	        </tr>
+	     </table>
+    </div>
+	<br>
+	<hr>
+    </article>
     <article id="dog_info">
-        <h3>강아지 정보</h3>
-        <div style="padding-left: 10%; margin-bottom: 10px;">
-            <button id="btn_add">추가</button>
-            <button id="btn_del">제거</button>
-        </div>
+        <h3 style="text-align: center;">강아지 정보</h3>
 
         <!-- 탭 메뉴 만들기 -->
         <!-- 비동기로 수정, 저장할 수 있도록 구현 -->
@@ -93,9 +93,6 @@
 	            <div id="tab-1" class="tab-content current">
 	                <!-- 강아지 정보 삽입 -->
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
-	                <div style="text-align: center; margin-top: 10px;">
-	                    <button>사진 선택</button>
-	                </div>
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
                         <input type="text" class="form-control" name="dogName1" id="dogName" value="${ dog.name }">
