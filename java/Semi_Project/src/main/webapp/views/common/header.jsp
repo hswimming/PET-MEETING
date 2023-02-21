@@ -35,8 +35,8 @@
 					  <div>
                   	  	<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" alt="" id="logoimg">
                 	  </div>
-                  	  	<button type="button" id="si" class="btn btn-outline-secondary">회원가입</button>
-                   	 	<button type="button" id="so"  class="btn btn-outline-secondary">로그인</button>             
+                  	  	<button type="button" onclick="location.href='${ path }/member/signup'" id="si" class="btn btn-outline-secondary">회원가입</button>
+                   	 	<button type="button" onclick="location.href='${ path }/member/login'" id="so"  class="btn btn-outline-secondary">로그인</button>             
 					</c:if>
             	</div>
            </div>

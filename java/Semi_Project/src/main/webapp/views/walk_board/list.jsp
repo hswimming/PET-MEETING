@@ -42,10 +42,11 @@
         <!-- 게시글 목록 메뉴 -->
         <div class="container" id="list-div">
             <!-- 우측 게시글 작성 버튼 -->
-            <button type="button" class="btn btn-outline-info" onclick="location.href='${ path }/walk_board/write'">작성하기</button>
+            <c:if test="${ not empty loginMember }">
+ 	           <button type="button" class="btn btn-outline-info" onclick="location.href='${ path }/walk_board/write'">작성하기</button>
+            </c:if>
             
             <table class="table table-hover table-striped text-center" id="list-table">
-                <thead>
                     <tr>
                         <th>글번호</th>
                         <th>제목</th>
@@ -53,16 +54,28 @@
                         <th>작성일</th>
                         <th>조회수</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>글번호1</td>
-                        <td><a href="${ path }/board/view">제목1</a></td>
-                        <td>작성자1</td>
-                        <td>작성일1</td>
-                        <td>조회수1</td>
-                    </tr>
-                </tbody>
+                    <c:if test="${ empty list }">
+                    	<tr>
+                    		<td colspan="6">
+                    			조회된 게시글이 없습니다.
+                    		</td>
+                    	</tr>
+                    </c:if>
+                    <c:if test="${ not empty list }">
+                    	<c:forEach var="walk_Board" items="${ list }">
+                    		<tr>
+		                        <td>${ walk_Board.rowNum }</td>
+		                        <td>
+		                        	<a href="${ path }/board/view?wbNo=${ walk_Board.wbNo }">
+		                        		${ walk_Board.wbTitle }
+		                        	</a>
+		                        </td>
+		                        <td>${ walk_Board.memNickname }</td>
+		                        <td>${ walk_Board.createDate }</td>
+		                        <td>${ walk_Board.wbViews }</td>
+                    		</tr>
+                    	</c:forEach>
+                    </c:if>
             </table>
             <!-- 하단 목록 이동 버튼 -->
             <div id="num-click">

@@ -40,25 +40,27 @@
             <table id="tbl">
                 <tr>
                     <th colspan="2">제목</th>
+                    <td>${ walk_board.wbTitle }</td>
                 </tr>
                 <tr>
                     <th>글번호</th>
-                    <td></td>
+                    <td>${ walk_board.wbNo }</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td></td>
+                    <td>${ walk_board.memNickname }</td>
                 </tr>
                 <tr>
                     <th>조회수</th>
-                    <td></td>
+                    <td>${ walk_board.wbViews }</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>첨부파일</th>
                     <td></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th colspan="2">내용</th>
+                    <td>${ walk_board.wbContent }</td>
                 </tr>
                 <tr>
                     <td colspan="2" id="table-box"></td>
@@ -66,38 +68,62 @@
                 <!-- 로그인 했을 때 보이는 버튼 -->
                 <tr>
                     <th colspan="2">
-                        <button type="button">수정</button>
-                        <button type="button">삭제</button>
-                        <button type="button" onclick="location.replace('${path}/board/list')">목록</button>
+                    <c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
+                        <button type="button" onclick="location.href='${ path }/board/update?wbNo=${ walk_board.wbNo }'">수정</button>
+                        <button type="button" id="btnDelete">삭제</button>
+                    </c:if>
+                        <button type="button" onclick="location.replace('${ path }/board/list')">목록</button>
                     </th>
                 </tr>
             </table>
         </div>
         <!-- 댓글 작성 -->
         <div id="comment">
-            <form action="">
-                <input type="hidden">
-                <textarea name="" id="replyContent" cols="90" rows="3"></textarea>
+            <form action="${ path }/board/comment" method="POST">
+                <input type="hidden" name="walk_boardwbNo" value="${ walk_board.wbNo }">
+                <textarea name="" id="commentContent" cols="90" rows="3"></textarea>
                 <button type="submit" id="replybtn">등록</button>
             </form>
         </div>
         <!-- 댓글 조회 -->
         <div id="reply">
             <table id="reply-table">
+            	<c:forEach var="walk_comment" items="${ walk_Comment.comments}">
                 <tr>
                     <td>
-                        <sub>작성자 ID</sub>
-                        <sub>작성 날짜</sub>
+                        <sub>${ walk_Comment.wcNickname }</sub>
+                        <sub>${ walk_Comment.createDate }</sub>
                         <br>
-                        <span>댓글 내용</span>
+                        <span>${ walk_Comment.wbComment }</span>
                     </td>
                     <td>
-                        <button type="submit" id="commentbtn">삭제</button>
+                    	<c:if test="${ not empty loginMember && loginMember.id == reply.writerId }">
+	                        <button type="submit" id="commentbtn">삭제</button>
+                    	</c:if>
                     </td>
                 </tr>
+            	</c:forEach>
             </table>
         </div>
     </section>
+<script>
+	$(document).ready(() => {
+		$('#btnDelete').on('click', () => {
+			if (confirm('정말로 게시글을 삭제 하시겠습니까?')) {
+				location.replace('${ path }/board/delete?wbNo=${ walk_board.wbNo }');
+			}
+		});
+		
+		$('#commentContent').on('focus', () => {
+			if (${ empty loginMember }) {
+				alert('로그인 후 이용 해주세요.');
+				
+				$('#userId').focus();
+			}
+		});
+	});
+</script>
+    
 </body>
 </html>
 

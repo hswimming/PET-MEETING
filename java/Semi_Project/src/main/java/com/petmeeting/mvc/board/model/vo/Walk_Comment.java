@@ -15,6 +15,8 @@ public class Walk_Comment {
 	
 	private int wbNo;
 	
+	private String wcNickname;
+	
 	private String wbComment;
 	
 	private Date createDate;
