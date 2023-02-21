@@ -55,7 +55,7 @@
                 <tr>
                     <td style="width: 50%;">작성자</td>
                     <td colspan="2">
-                        <input type="text" name="content" id="content" value="${ Walk_Board.dogId }" readonly>
+                        <input type="text" name="content_writer" id="content" value="${ loginMember.nickname }" readonly>
                     </td>
                 </tr>
                 <tr>

@@ -15,6 +15,7 @@ import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.close;
 
 public class Walk_BoardDao {
 	
+	/* 게시글 총 개수 조회 쿼리 */
 	public int getWalk_BoardCount(Connection connection) {
 		int count = 0;
 		PreparedStatement pstmt = null;
@@ -40,6 +41,7 @@ public class Walk_BoardDao {
 		return count;
 	}
 	
+	/* 게시글 목록 조회 쿼리 */
 	public List<Walk_Board> findAll(Connection connection, PageInfo pageInfo) {
 		List<Walk_Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -99,6 +101,7 @@ public class Walk_BoardDao {
 		return list;
 	}
 	
+	/* 게시글 상세 조회 쿼리 */
 	public Walk_Board findWalk_BoardBywbNo(Connection connection, int wbNo) {
 		Walk_Board walk_Board = null;
 		PreparedStatement pstmt = null;
@@ -130,7 +133,7 @@ public class Walk_BoardDao {
 				walk_Board.setWbViews(rs.getInt("WB_VIEWS"));
 				walk_Board.setWbContent(rs.getString("WB_CONTENT"));
 				
-				walk_Board.setComments(this.getCommentsByNo(connection, wbNo));
+				walk_Board.setComments(this.getCommentsBywcNo(connection, wbNo));
 				walk_Board.setCreateDate(rs.getDate("CREATE_DATE"));
 				walk_Board.setModifyDate(rs.getDate("MODIFY_DATE"));
 				
@@ -147,7 +150,8 @@ public class Walk_BoardDao {
 		return walk_Board;
 	}
 	
-	private List<Walk_Comment> getCommentsByNo(Connection connection, int wbNo) {
+	/* 댓글 조회 쿼리 */
+	private List<Walk_Comment> getCommentsBywcNo(Connection connection, int wcNo) {
 		List<Walk_Comment> comments = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -166,7 +170,7 @@ public class Walk_BoardDao {
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, wbNo);
+			pstmt.setInt(1, wcNo);
 			
 			rs = pstmt.executeQuery();
 			
@@ -195,19 +199,20 @@ public class Walk_BoardDao {
 		return comments;
 	}
 
+	/* 게시글 등록 쿼리 */
 	public int insert_Walk_Board(Connection connection, Walk_Board walk_Board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO WALK_BOARD VALUES(WB_NO_SEQ.NEXTVAL,8,swimming,?,?,DEFAULT,DEFAULT,?,DEFAULT)";
+		String query = "INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, ?, DEFAULT)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-//			pstmt.setInt(1, walk_Board.getMemberCode());
-			// pstmt.setString(1, walk_Board.getDogId());
-			pstmt.setString(1, walk_Board.getWbTitle());
-			pstmt.setString(2, walk_Board.getWbContent());
-			pstmt.setInt(3, walk_Board.getWbViews());
+			pstmt.setInt(1, walk_Board.getMemberCode());
+			pstmt.setString(2, walk_Board.getDogId());
+			pstmt.setString(3, walk_Board.getWbTitle());
+			pstmt.setString(4, walk_Board.getWbContent());
+			pstmt.setInt(5, walk_Board.getWbViews());
 			
 			result = pstmt.executeUpdate();
 			
@@ -219,7 +224,6 @@ public class Walk_BoardDao {
 		}
 		
 		return result;
-		
 	}
 
 	public int update_Walk_Board(Connection connection, Walk_Board walk_Board) {

@@ -88,16 +88,16 @@
         <!-- 댓글 조회 -->
         <div id="reply">
             <table id="reply-table">
-            	<c:forEach var="walk_comment" items="${ walk_Comment.comments}">
+            	<c:forEach var="walk_comment" items="${ walk_board.comments }">
                 <tr>
                     <td>
-                        <sub>${ walk_Comment.wcNickname }</sub>
-                        <sub>${ walk_Comment.createDate }</sub>
+                        <sub>${ walk_comment.wcNickname }</sub>
+                        <sub>${ walk_comment.createDate }</sub>
                         <br>
-                        <span>${ walk_Comment.wbComment }</span>
+                        <span>${ walk_comment.wbComment }</span>
                     </td>
                     <td>
-                    	<c:if test="${ not empty loginMember && loginMember.id == reply.writerId }">
+                    	<c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
 	                        <button type="submit" id="commentbtn">삭제</button>
                     	</c:if>
                     </td>

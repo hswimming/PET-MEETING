@@ -85,6 +85,7 @@ INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, 36, 17, '산책 친구 구합�
 INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, 37, 18, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y');
 INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, 38, 19, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y');
 INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, 39, 20, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y');
+INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, 39, 20, '산책 친구 구합니다', '산책 친구 구합니다', DEFAULT, DEFAULT, 0, DEFAULT);
 
 -- WALK_COMMENT
 INSERT INTO "WALK_COMMENT" VALUES (WC_NO_SEQ.NEXTVAL, 1, '유저1', '저랑 산책 하실래요?', SYSDATE, SYSDATE, 'Y');

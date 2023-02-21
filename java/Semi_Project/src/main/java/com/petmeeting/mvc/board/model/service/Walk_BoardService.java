@@ -61,19 +61,14 @@ public class Walk_BoardService {
 		
 		Connection connection = getConnection();
 		
-		if (walk_Board.getWbNo() > 0) {
+		result = new Walk_BoardDao().insert_Walk_Board(connection, walk_Board);
 			
-			result = new Walk_BoardDao().update_Walk_Board(connection, walk_Board);
-			
-		} else {
-			
-			result = new Walk_BoardDao().insert_Walk_Board(connection, walk_Board);
-		}
-		
 		if (result > 0) {
 			commit(connection);
+			
 		} else {
 			rollback(connection);
+			
 		}
 		
 		close(connection);

@@ -35,7 +35,7 @@
 	<div class="card" style="width: 55rem;" id="search">
 		<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbC3VYr%2FbtrZJ2Z3j7e%2FTMsy0kgAAyW2IG1k9Bfgl0%2Fimg.png" class="card-img-top" alt="…">
 		<div class="card-body">
-			<p class="card-text" id="serch"><a href="${ path }/board/main">친구찾기</a></p>
+			<p class="card-text" id="serch"><a href="${ path }/board/list">친구찾기</a></p>
 		</div>
 	</div>
 	<div class="card" style="width: 55rem;" id="map">
