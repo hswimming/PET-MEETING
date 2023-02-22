@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.petmeeting.mvc.board.model.service.Walk_BoardService;
+import com.petmeeting.mvc.board.model.vo.Dog;
 import com.petmeeting.mvc.board.model.vo.Walk_Board;
+import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Member;
 
 @WebServlet(name = "boardWrite", urlPatterns = { "/walk_board/write" })
@@ -22,19 +24,19 @@ public class BoardWriteServlet extends HttpServlet {
 
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/views/walk_board/write.jsp").forward(request, response);
     	
     	HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
     	
     	if (loginMember != null) {
-    		request.getRequestDispatcher("views/walk_board/write.jsp").forward(request, response);
+    		request.getRequestDispatcher("/views/walk_board/write.jsp").forward(request, response);
     		
     	} else {
     		request.setAttribute("msg", "로그인 후 작성 해주세요.");
     		request.setAttribute("location", "/");
     		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     	}
+    	// request.getRequestDispatcher("/views/walk_board/write").forward(request, response);
     }
 
     @Override
@@ -46,12 +48,18 @@ public class BoardWriteServlet extends HttpServlet {
     		
     		Walk_Board walk_Board = new Walk_Board();
     		
+    		Dog dog = new MemberService().findDogByCode(loginMember.getMemCode());
+    		
+    		walk_Board.setMemberCode(loginMember.getMemCode());
     		
     		walk_Board.setMemNickname(loginMember.getNickname());
+    		walk_Board.setDogId(dog.getId());
+    		
     		walk_Board.setWbTitle(request.getParameter("content_title"));
     		walk_Board.setWbContent(request.getParameter("content"));
+    		System.out.println(walk_Board);
     		
-    		int result = new Walk_BoardService().save(walk_Board);
+			int result = new Walk_BoardService().save(walk_Board);
     		
     		if (result > 0) {
     			request.setAttribute("msg", "게시글 등록 성공");
@@ -65,6 +73,7 @@ public class BoardWriteServlet extends HttpServlet {
     	} else {
     		request.setAttribute("msg", "로그인 후 작성 해주세요.");
     		request.setAttribute("location", "/");
+
     	}
     	
     	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

@@ -38,4 +38,17 @@ public class Walk_Board {
 	
 	private Date modifyDate;
 	
+//	강아지 정보
+	private String name;
+	
+	private String kind;
+	
+	private String size;
+	
+	private String gender;
+	
+	private String neutered;
+	
+	private String vaccine;
+	
 }

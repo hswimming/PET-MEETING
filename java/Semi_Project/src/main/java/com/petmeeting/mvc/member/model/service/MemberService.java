@@ -2,6 +2,7 @@ package com.petmeeting.mvc.member.model.service;
 
 import java.sql.Connection;
 
+import com.petmeeting.mvc.board.model.vo.Dog;
 import com.petmeeting.mvc.member.model.dao.MemberDao;
 import com.petmeeting.mvc.member.model.vo.Member;
 import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.commit;
@@ -54,8 +55,18 @@ public class MemberService {
 		return member;
 	}
 	
-	
-	
-	
+	public Dog findDogByCode(int code) {
+		Connection connection = getConnection();
+		
+		Dog dog = new MemberDao().findDogByCode(connection, code);
+		
+		close(connection);
+		
+		return dog;
+	}
+
+	public Boolean isDuplicateNick(String nickname) {
+		return this.findMemberById(nickname) != null;
+	}
 	
 }

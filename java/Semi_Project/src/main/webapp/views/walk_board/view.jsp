@@ -51,6 +51,15 @@
                     <td>${ walk_board.memNickname }</td>
                 </tr>
                 <tr>
+                	<th>강아지 정보</th>
+                	<td>${ walk_board.name }</td>
+                	<td>${ walk_board.kind }</td>
+                	<td>${ walk_board.size }</td>
+                	<td>${ walk_board.gender }</td>
+                	<td>${ walk_board.neutered }</td>
+                	<td>${ walk_board.vaccine }</td>
+                </tr>
+                <tr>
                     <th>조회수</th>
                     <td>${ walk_board.wbViews }</td>
                 </tr>
@@ -88,13 +97,13 @@
         <!-- 댓글 조회 -->
         <div id="reply">
             <table id="reply-table">
-            	<c:forEach var="walk_comment" items="${ walk_board.comments }">
+            	<c:forEach var="comments" items="${ walk_board.comments }">
                 <tr>
                     <td>
-                        <sub>${ walk_comment.wcNickname }</sub>
-                        <sub>${ walk_comment.createDate }</sub>
+                        <sub>${ comments.wcNickname }</sub>
+                        <sub>${ comments.createDate }</sub>
                         <br>
-                        <span>${ walk_comment.wbComment }</span>
+                        <span>${ comments.wbComment }</span>
                     </td>
                     <td>
                     	<c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
@@ -114,13 +123,13 @@
 			}
 		});
 		
-		$('#commentContent').on('focus', () => {
+	/* 	$('#commentContent').on('focus', () => {
 			if (${ empty loginMember }) {
 				alert('로그인 후 이용 해주세요.');
 				
 				$('#userId').focus();
 			}
-		});
+		}); */
 	});
 </script>
     

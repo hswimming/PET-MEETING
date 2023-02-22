@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.petmeeting.mvc.board.model.vo.Dog;
 import com.petmeeting.mvc.board.model.vo.Walk_Board;
 import com.petmeeting.mvc.board.model.vo.Walk_Comment;
 import com.petmeeting.mvc.common.util.PageInfo;
@@ -106,15 +107,23 @@ public class Walk_BoardDao {
 		Walk_Board walk_Board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT WB.WB_NO, "
+		
+		String query = "SELECT  WB.WB_NO, "
 					 + "WB.WB_TITLE, "
 					 + "M.MEM_NICKNAME, "
 					 + "WB.WB_VIEWS, "
 					 + "WB.WB_CONTENT, "
 					 + "WB.CREATE_DATE, "
-					 + "WB.MODIFY_DATE "
+					 + "WB.MODIFY_DATE, "
+					 + "D.D_NAME, "
+					 + "D.D_KIND, "
+					 + "D.D_SIZE, "
+					 + "D.D_GENDER, "
+					 + "D.NEUTERED, "
+					 + "D.VACCINE "
 				+ "FROM WALK_BOARD WB "
 				+ "JOIN MEMBER M ON(WB.MEM_CODE = M.MEM_CODE) "
+				+ "JOIN DOG_INFO D ON (WB.D_ID = D.D_ID) "
 				+ "WHERE WB.WB_STATUS = 'Y' AND WB.WB_NO=?";
 		
 		try {
@@ -132,6 +141,13 @@ public class Walk_BoardDao {
 				walk_Board.setMemNickname(rs.getString("MEM_NICKNAME"));
 				walk_Board.setWbViews(rs.getInt("WB_VIEWS"));
 				walk_Board.setWbContent(rs.getString("WB_CONTENT"));
+				
+				walk_Board.setName(rs.getString("D_NAME"));
+				walk_Board.setKind(rs.getString("D_KIND"));
+				walk_Board.setSize(rs.getString("D_SIZE"));
+				walk_Board.setKind(rs.getString("D_GENDER"));
+				walk_Board.setNeutered(rs.getString("NEUTERED"));
+				walk_Board.setVaccine(rs.getString("VACCINE"));
 				
 				walk_Board.setComments(this.getCommentsBywcNo(connection, wbNo));
 				walk_Board.setCreateDate(rs.getDate("CREATE_DATE"));
@@ -156,15 +172,15 @@ public class Walk_BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT C.WC_NO,"
+		String query = "SELECT C.WC_NO, "
 						+ "C.WB_NO,"
-						+ "C.WB_COMMENT,"
-						+ "M.MEM_NICKNAME,"
-						+ "C.CREATE_DATE,"
+						+ "C.WB_COMMENT, "
+						+ "M.MEM_NICKNAME, "
+						+ "C.CREATE_DATE, "
 						+ "C.MODIFY_DATE "
 					 + "FROM WALK_COMMENT C "
 					 + "JOIN MEMBER M ON(C.WC_NICKNAME = M.MEM_NICKNAME) "
-					 + "WHERE C.WC_STATUS='Y' AND WB_NO=? "
+					 + "WHERE C.WC_STATUS='Y' AND WC_NO=? "
 					 + "ORDER BY C.WC_NO DESC";
 		
 		try {
@@ -180,7 +196,7 @@ public class Walk_BoardDao {
 				comment.setWcNo(rs.getInt("WC_NO"));
 				comment.setWbNo(rs.getInt("WB_NO"));
 				comment.setWbComment(rs.getString("WB_COMMENT"));
-				comment.setWcNickname(rs.getString("WC_NICKNAME"));
+				comment.setWcNickname(rs.getString("MEM_NICKNAME"));
 				comment.setCreateDate(rs.getDate("CREATE_DATE"));
 				comment.setModifyDate(rs.getDate("MODIFY_DATE"));
 				
@@ -203,7 +219,7 @@ public class Walk_BoardDao {
 	public int insert_Walk_Board(Connection connection, Walk_Board walk_Board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, ?, DEFAULT)";
+		String query = "INSERT INTO WALK_BOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, 0, DEFAULT)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -212,7 +228,7 @@ public class Walk_BoardDao {
 			pstmt.setString(2, walk_Board.getDogId());
 			pstmt.setString(3, walk_Board.getWbTitle());
 			pstmt.setString(4, walk_Board.getWbContent());
-			pstmt.setInt(5, walk_Board.getWbViews());
+			
 			
 			result = pstmt.executeUpdate();
 			
@@ -225,7 +241,8 @@ public class Walk_BoardDao {
 		
 		return result;
 	}
-
+	
+	/* 게시글 수정 쿼리 */
 	public int update_Walk_Board(Connection connection, Walk_Board walk_Board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -249,13 +266,35 @@ public class Walk_BoardDao {
 		return result;
 	}
 
-	public int updateReadCount(Connection connection, Walk_Board walk_Board) {
+	/* 조회수 증가 쿼리 */
+	public int updateWb_Views(Connection connection, Walk_Board walk_Board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "";
-		return 0;
+		String query = "UPDATE WALK_BOARD SET WB_VIEWS=? WHERE WB_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			walk_Board.setWbViews(walk_Board.getWbViews() + 1);
+			
+			pstmt.setInt(1, walk_Board.getWbViews());
+			pstmt.setInt(2, walk_Board.getWbNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	
+	public Dog findDogByCode(Connection connection, int memCode) {
+		return null;
+	}
 	
 }

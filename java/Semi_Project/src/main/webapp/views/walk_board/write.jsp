@@ -44,7 +44,7 @@
         </div>
         <div id="t_wrapper">
             <!-- 게시판 작성 화면 -->
-            <form action="${ path }/walk_board/write" method="POST" enctype="multipart/form-data">
+            <form action="${ path }/walk_board/write" method="POST">
             <table>
                 <tr>
                     <td style="width: 50%;">제목</td>
@@ -57,6 +57,12 @@
                     <td colspan="2">
                         <input type="text" name="content_writer" id="content" value="${ loginMember.nickname }" readonly>
                     </td>
+                </tr>
+                <tr>
+                	<td>내 강아지 정보</td>
+                	<td colspan="2">
+                		<input type="text" name="dog_list" id="content_dog" value="${ dog.name }" readonly>
+                	</td>
                 </tr>
                 <tr>
                     <td>첨부파일</td>

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.petmeeting.mvc.board.model.vo.Dog;
 import com.petmeeting.mvc.member.model.vo.Member;;
 
 public class MemberDao {
@@ -101,19 +102,41 @@ public class MemberDao {
 		
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public Dog findDogByCode(Connection connection, int code) {
+		Dog dog = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT  D_ID, D_NAME, D_KIND, D_SIZE, D_GENDER, NEUTERED, VACCINE, MEM_CODE "
+				
+				+ "FROM DOG_INFO WHERE MEM_CODE=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, code);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dog = new Dog();
+				
+				dog.setId(rs.getString("D_ID"));
+				dog.setMemCode(rs.getInt("MEM_CODE"));
+				dog.setName(rs.getString("D_NAME"));
+				dog.setKind(rs.getString("D_KIND"));
+				dog.setSize(rs.getString("D_SIZE"));
+				dog.setGender(rs.getString("D_GENDER"));
+				dog.setNeutered(rs.getString("NEUTERED"));
+				dog.setVaccine(rs.getString("VACCINE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return dog;
+	}
 }
