@@ -74,10 +74,10 @@ public class MemberService {
 		return result;
 	}
 	
-	public Dog findDogById(String id) {
+	public Dog findDogByCode(int code) {
 		Connection connection = getConnection();
 		
-		Dog dog = new MemberDao().findDogById(connection, id);
+		Dog dog = new MemberDao().findDogByCode(connection, code);
 		
 		close(connection);
 		

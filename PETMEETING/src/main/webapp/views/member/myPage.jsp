@@ -18,7 +18,7 @@
 	            <td width="150px">
 	                아이디
 	            </td>
-	            <td>
+	            <td id="memberId">
 	                ${ loginMember.id }
 	            </td>
 	        </tr>
@@ -100,40 +100,40 @@
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
-                        <input type="text" class="form-control" name="dogName1" id="dogName" value="${ dog.name }">
+                        <input type="text" class="form-control" name="dogName1" id="dogName" value="${ name }">
                     </div>
                     <div class="form-div">
                         <label class="form-label"><b>종류</b></label><br>
-                        <p>${ dog.kind }</p>
+                        <p>${ kind }</p>
                     </div>
                     <div class="form-div">
                         <label class="form-label"><b>크기</b></label><br>
-                        <p>${ dog.size }</p>
+                        <p>${ size }</p>
                     </div>
                     <br>
                     <div class="form-div">
                         <label class="form-label"><b>성별</b></label> <br>
-                        <c:if test="${ dog.gender == 'M' }">
-                        	<p>수컷</p>
+                        <c:if test="${ gender == 'M' }">
+                        	<p>남자 아이</p>
                         </c:if>
-                        <c:if test="${ dog.gender == 'F' }">
-                        	<p>암컷</p>
+                        <c:if test="${ gender == 'F' }">
+                        	<p>여자 아이</p>
                         </c:if>
                     </div>
                     <br>
                     <div>
                    	<label><b>중성화 여부</b></label> <br>
-		                <c:if test="${ dog.neutered == 'Y' }">
-	                      	<p>중성화 O</p>
+		                <c:if test="${ neutered == 'Y' }">
+	                      	<p>중성화 한 친구</p>
 	                    </c:if>
-	                    <c:if test="${ dog.neutered == 'N' }">
-	                      	<p>중성화 X</p>
+	                    <c:if test="${ neutered == 'N' }">
+	                      	<p>중성화 하지 않은 친구</p>
 	                    </c:if>
                     </div> 
                     <br>
                     <div class="form-div">
                          <label class="form-label"><b>예방 접종 여부(접종한 항목을 체크하세요.)</b></label> <br>
-                         <p>${ dog.vaccine }</p>
+                         <p>${ vaccine }</p>
                     </div>
 	        	</div>
 	        </div>

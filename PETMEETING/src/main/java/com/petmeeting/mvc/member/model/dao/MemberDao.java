@@ -141,7 +141,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public Dog findDogById(Connection connection, String id) {
+	public Dog findDogByCode(Connection connection, int code) {
 		Dog dog = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -150,7 +150,7 @@ public class MemberDao {
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, id);
+			pstmt.setInt(1, code);
 			
 			rs = pstmt.executeQuery();
 			

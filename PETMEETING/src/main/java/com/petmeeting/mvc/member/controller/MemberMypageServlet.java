@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Dog;
 import com.petmeeting.mvc.member.model.vo.Member;
 
@@ -22,9 +23,16 @@ public class MemberMypageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member)session.getAttribute("loginMember");
+    	Dog loginMemberDog = null;
     	
     	if(loginMember != null) {
-    		request.setAttribute("loginMemberDog", loginMember);
+    		loginMemberDog = new MemberService().findDogByCode(loginMember.getMemCode());
+    		request.setAttribute("name", loginMemberDog.getName());
+    		request.setAttribute("kind", loginMemberDog.getKind());
+    		request.setAttribute("size", loginMemberDog.getSize());
+    		request.setAttribute("gender", loginMemberDog.getGender());
+    		request.setAttribute("neutered", loginMemberDog.getNeutered());
+    		request.setAttribute("vaccine", loginMemberDog.getVaccine());
     		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
     	} else {
 			request.setAttribute("msg", "로그인 후 수정해 주세요.");

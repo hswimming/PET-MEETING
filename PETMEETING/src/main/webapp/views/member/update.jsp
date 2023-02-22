@@ -118,12 +118,12 @@
                         <label class="form-label"><b>종류</b></label><br>
                         <select name="dogKind1">
                             <option autofocus>----------------</option>
-                            <option value="골든리트리버">골든리트리버</option><option value="닥스훈트">닥스훈트</option><option value="도베르만핀셔">도베르만핀셔</option><option value="래브라도 리트리버">래브라도 리트리버</option><option value="몰티즈">몰티즈</option><option value="미니어처 슈나우저">미니어처 슈나우저</option><option value="미니어처 푸들">미니어처 푸들</option>
-                            <option value="미니어처 핀셔">미니어처 핀셔</option><option value="">버니즈마운틴도그</option><option value="">베들링턴 테리어</option><option value="">보더 콜리</option><option value="">보스턴 테리어</option><option value="">비글</option><option value="">비숑 프리제</option><option value="">사모예드</option>
-                            <option value="">살루키</option><option value="">셰블랜드 쉽독</option><option value="">스탠더드 푸들</option><option value="">시바 이누</option><option value="">시베리안 허스키</option><option value="">시츄</option><option value="">아메리칸 코카 스파니엘</option><option value="">알레스칸맬러뮤트</option>
-                            <option value="">요크셔 테리어</option><option value="">웰시 코기</option><option value="">이탈리안 그레이하운드</option><option value="">제페니스 스피츠</option><option value="">진돗개</option><option value="">치와와</option><option value="">카바리에 킹찰스 스파니</option><option value="">코커 스패니얼</option>
-                            <option value="">토이 푸들</option><option value="">파피용</option><option value="">퍼그</option><option value="">페키니즈</option><option value="">펨브록 웰시 코기</option><option value="">포메라니안</option><option value="">푸들</option><option value="">풍산개</option>
-                            <option value="">프렌치 불도그</option><option value="">믹스견</option><option value="">기타</option>
+                            <option value="골든리트리버">골든리트리버</option><option value="닥스훈트">닥스훈트</option><option value="도베르만핀셔">도베르만 핀셔</option><option value="래브라도 리트리버">래브라도 리트리버</option><option value="몰티즈">몰티즈</option><option value="미니어처 슈나우저">미니어처 슈나우저</option><option value="미니어처 푸들">미니어처 푸들</option>
+                            <option value="미니어처 핀셔">미니어처 핀셔</option><option value="버니즈마운틴도그">버니즈마운틴도그</option><option value="베들링턴 테리어">베들링턴 테리어</option><option value="보더 콜리">보더 콜리</option><option value="보스턴 테리어">보스턴 테리어</option><option value="비글">비글</option><option value="비숑 프리제">비숑 프리제</option><option value="사모예드">사모예드</option>
+                            <option value="살루키">살루키</option><option value="셰블랜드 쉽독">셰블랜드 쉽독</option><option value="스탠더드 푸들">스탠더드 푸들</option><option value="시바 이누">시바 이누</option><option value="시베리안 허스키">시베리안 허스키</option><option value="시츄">시츄</option><option value="아메리칸 코카 스파니엘">아메리칸 코카 스파니엘</option><option value="알레스칸맬러뮤트">알레스칸맬러뮤트</option>
+                            <option value="요크셔 테리어">요크셔 테리어</option><option value="웰시 코기">웰시 코기</option><option value="이탈리안 그레이하운드">이탈리안 그레이하운드</option><option value="제페니스 스피츠">제페니스 스피츠</option><option value="진돗개">진돗개</option><option value="치와와">치와와</option><option value="카바리에 킹찰스 스파니">카바리에 킹찰스 스파니</option><option value="코커 스패니얼">코커 스패니얼</option>
+                            <option value="토이 푸들">토이 푸들</option><option value="파피용">파피용</option><option value="퍼그">퍼그</option><option value="페키니즈">페키니즈</option><option value="펨브록 웰시 코기">펨브록 웰시 코기</option><option value="포메라니안">포메라니안</option><option value="푸들">푸들</option><option value="풍산개">풍산개</option>
+                            <option value="프렌치 불도그">프렌치 불도그</option><option value="믹스견">믹스견</option><option value="기타">기타</option>
                         </select>
                     </div>
                     <div class="form-div">

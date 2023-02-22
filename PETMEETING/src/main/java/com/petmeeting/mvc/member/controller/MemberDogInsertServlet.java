@@ -24,26 +24,31 @@ public class MemberDogInsertServlet extends HttpServlet {
     	request.setCharacterEncoding("UTF-8");
     	HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member)session.getAttribute("loginMember");
-    	
     	Member member = new Member();
+    	int num = 1;
+    	int result = 0;
+    	
     	Dog dog = new Dog();
     	
-    	member.setMemCode(loginMember.getMemCode());
-    	dog.setName(request.getParameter("dogName1"));
-    	dog.setKind(request.getParameter("dogKind1"));
-    	dog.setSize(request.getParameter("dogSize1"));
-    	dog.setGender(request.getParameter("dogGender1"));
-    	dog.setNeutered(request.getParameter("neutered1"));
+    	String tabName = request.getParameter("dogName"+num);  
     	
-    	String vaccine = request.getParameter("vaccine1") != null ?
-				String.join(",", request.getParameterValues("vaccine1")) : null;
+    	while(tabName != null) {
+    			member.setMemCode(loginMember.getMemCode());
+    			dog.setName(request.getParameter("dogName"+num));
+    			dog.setKind(request.getParameter("dogKind"+num));
+    			dog.setSize(request.getParameter("dogSize"+num));
+    			dog.setGender(request.getParameter("dogGender"+num));
+    			dog.setNeutered(request.getParameter("neutered"+num));
+    			String vaccine = request.getParameter("vaccine"+num) != null ?
+    					String.join(",", request.getParameterValues("vaccine"+num)) : null;
+    			
+    			dog.setVaccine(vaccine);
+    			num++;
+    			
+    			result = new MemberService().dogSave(dog, member);
+    	}
     	
-    	dog.setVaccine(vaccine);
     	
-    	System.out.println(member);
-    	System.out.println(dog);
-    	
-    	int result = new MemberService().dogSave(dog, member);
 
 		if (result > 0) {
 			request.setAttribute("msg", "강아지 정보 저장 성공");

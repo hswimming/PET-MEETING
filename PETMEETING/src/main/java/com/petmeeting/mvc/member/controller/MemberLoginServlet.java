@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.petmeeting.mvc.member.model.service.MemberService;
-import com.petmeeting.mvc.member.model.vo.Dog;
 import com.petmeeting.mvc.member.model.vo.Member;
 
 @WebServlet(name = "login", urlPatterns = { "/member/login" })
