@@ -1,6 +1,7 @@
 package com.petmeeting.mvc.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,16 +24,14 @@ public class MemberMypageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member)session.getAttribute("loginMember");
-    	Dog loginMemberDog = null;
+    	List<Dog> list = null;
     	
     	if(loginMember != null) {
-    		loginMemberDog = new MemberService().findDogByCode(loginMember.getMemCode());
-    		request.setAttribute("name", loginMemberDog.getName());
-    		request.setAttribute("kind", loginMemberDog.getKind());
-    		request.setAttribute("size", loginMemberDog.getSize());
-    		request.setAttribute("gender", loginMemberDog.getGender());
-    		request.setAttribute("neutered", loginMemberDog.getNeutered());
-    		request.setAttribute("vaccine", loginMemberDog.getVaccine());
+    		list = new MemberService().findAllDogByCode(loginMember.getMemCode());
+    		
+    		request.setAttribute("list", list);
+    		
+    		
     		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
     	} else {
 			request.setAttribute("msg", "로그인 후 수정해 주세요.");

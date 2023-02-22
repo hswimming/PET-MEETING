@@ -15,7 +15,18 @@ public class MemberDogUpdateServlet extends HttpServlet {
     }
     
     @Override
-   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	request.setCharacterEncoding("UTF-8");
+    	String dogName1 = request.getParameter("dogName1");
+    	
+    	System.out.println(dogName1);
+    	
+    	if(dogName1 != null) {
+    		request.setAttribute("tabId", "tab-2");
+    		request.setAttribute("dogname", "dogName2");
+    	}
+    	
+    	
        	request.getRequestDispatcher("/views/member/dogUpdate.jsp").forward(request, response);
        }
 

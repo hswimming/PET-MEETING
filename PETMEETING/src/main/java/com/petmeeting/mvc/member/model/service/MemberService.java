@@ -6,6 +6,7 @@ import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.getConnection;
 import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.petmeeting.mvc.member.model.dao.MemberDao;
 import com.petmeeting.mvc.member.model.vo.Dog;
@@ -86,6 +87,15 @@ public class MemberService {
 
 	public Boolean isDuplicateNick(String nickname) {
 		return this.findMemberById(nickname) != null;
+	}
+
+	public List<Dog> findAllDogByCode(int memCode) {
+		List<Dog> list = null;
+		Connection connection = getConnection();
+		
+		list = new MemberDao().findAllDogByCode(connection, memCode);
+		
+		return list;
 	}
 
 }

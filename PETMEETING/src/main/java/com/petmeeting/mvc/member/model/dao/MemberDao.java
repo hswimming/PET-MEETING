@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.petmeeting.mvc.common.jdbc.JDBCTemplate;
 import com.petmeeting.mvc.member.model.vo.Dog;
@@ -109,6 +111,7 @@ public class MemberDao {
 		String query = "INSERT INTO DOG_INFO ( "
 				+ "    D_ID, "
 				+ "    D_IMG, "
+				+ "    D_NUM, "
 				+ "    D_NAME, "
 				+ "    D_KIND, "
 				+ "    D_SIZE, "
@@ -116,18 +119,19 @@ public class MemberDao {
 				+ "    NEUTERED, "
 				+ "    VACCINE, "
 				+ "    MEM_CODE "
-				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, 'NULL', ?, ?, ?, ?, ?, ?, ?)";
+				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, 'NULL', ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, dog.getName());
-			pstmt.setString(2, dog.getKind());
-			pstmt.setString(3, dog.getSize());
-			pstmt.setString(4, dog.getGender());
-			pstmt.setString(5, dog.getNeutered());
-			pstmt.setString(6, dog.getVaccine());
-			pstmt.setInt(7, member.getMemCode());
+			pstmt.setInt(1, dog.getNum());
+			pstmt.setString(2, dog.getName());
+			pstmt.setString(3, dog.getKind());
+			pstmt.setString(4, dog.getSize());
+			pstmt.setString(5, dog.getGender());
+			pstmt.setString(6, dog.getNeutered());
+			pstmt.setString(7, dog.getVaccine());
+			pstmt.setInt(8, member.getMemCode());
 			
 			result = pstmt.executeUpdate();
 			
@@ -173,6 +177,46 @@ public class MemberDao {
 		}
 		
 		return dog;
+	}
+
+	public List<Dog> findAllDogByCode(Connection connection, int memCode) {
+		List<Dog> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT D_NUM, D_NAME, D_KIND, D_SIZE, D_GENDER, NEUTERED, VACCINE, MEM_CODE "
+					 + "FROM DOG_INFO "
+					 + "WHERE MEM_CODE = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, memCode);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Dog dog = new Dog();
+				
+				dog.setMemCode(rs.getInt("MEM_CODE"));
+				dog.setNum(rs.getInt("D_NUM"));
+				dog.setName(rs.getString("D_NAME"));
+				dog.setKind(rs.getString("D_KIND"));
+				dog.setSize(rs.getString("D_SIZE"));
+				dog.setGender(rs.getString("D_GENDER"));
+				dog.setNeutered(rs.getString("NEUTERED"));
+				dog.setVaccine(rs.getString("VACCINE"));
+				
+				list.add(dog);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

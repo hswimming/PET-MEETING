@@ -30,35 +30,39 @@ public class MemberDogInsertServlet extends HttpServlet {
     	
     	Dog dog = new Dog();
     	
-    	String tabName = request.getParameter("dogName"+num);  
-    	
-    	while(tabName != null) {
-    			member.setMemCode(loginMember.getMemCode());
-    			dog.setName(request.getParameter("dogName"+num));
-    			dog.setKind(request.getParameter("dogKind"+num));
-    			dog.setSize(request.getParameter("dogSize"+num));
-    			dog.setGender(request.getParameter("dogGender"+num));
-    			dog.setNeutered(request.getParameter("neutered"+num));
-    			String vaccine = request.getParameter("vaccine"+num) != null ?
-    					String.join(",", request.getParameterValues("vaccine"+num)) : null;
-    			
-    			dog.setVaccine(vaccine);
-    			
-    			num++;
-    			
-    			result = new MemberService().dogSave(dog, member);
+    	while(request.getParameter("dogName"+num) != null) {
+    		num++;
     	}
+    	
+    	if(loginMember != null) {
+    		member.setMemCode(loginMember.getMemCode());
+    		dog.setNum(num);
+    		dog.setName(request.getParameter("dogName"+num));
+    		dog.setKind(request.getParameter("dogKind"+num));
+    		dog.setSize(request.getParameter("dogSize"+num));
+    		dog.setGender(request.getParameter("dogGender"+num));
+    		dog.setNeutered(request.getParameter("neutered"+num));
+    		String vaccine = request.getParameter("vaccine"+num) != null ?
+    				String.join(",", request.getParameterValues("vaccine"+num)) : null;
+    		
+    		dog.setVaccine(vaccine);
+    		
+    		result = new MemberService().dogSave(dog, member);
+		
     	
     	
 
-		if (result > 0) {
-			request.setAttribute("msg", "강아지 정보 저장 성공");
-			request.setAttribute("location", "/member/myPage");
-		} else {
-			request.setAttribute("msg", "강아지 정보 저장 실패");
-			request.setAttribute("location", "/member/update"); 
-			// location은 replace기 때문에 url이 변경된다 따라서 다시 뒤와 같은 url설정으로 forward 되도록 한다.
-		}
+			if (result > 0) {
+				request.setAttribute("msg", "강아지 정보 저장 성공");
+				request.setAttribute("location", "/member/myPage");
+			} else {
+				request.setAttribute("msg", "강아지 정보 저장 실패");
+				request.setAttribute("location", "/member/update"); 
+			}
+    	} else {
+    		request.setAttribute("msg", "로그인 후 이용하세요.");
+    		request.setAttribute("location", "/"); 
+    	}
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     }

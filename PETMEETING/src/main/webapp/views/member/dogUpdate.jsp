@@ -12,10 +12,6 @@
 	<hr>
     <article id="dog_info">
    	   <h3 style="text-align: center;">강아지 정보</h3>
-        <div style="padding-left: 11%; margin-bottom: 10px;">
-            <button id="btn_add">추가</button>
-            <button id="btn_del">제거</button>
-        </div>
 
         <!-- 탭 메뉴 만들기 -->
         <!-- 비동기로 수정, 저장할 수 있도록 구현 -->
@@ -29,7 +25,7 @@
                 	<li class="tab-link" id="tab_title4" data-tab="tab-5">강아지</li>
                 	<li class="tab-link" id="tab_title5" data-tab="tab-6">강아지</li>
             	</ul>
-	            <div id="tab-1" class="tab-content current">
+	            <div id="${ tabId }" class="tab-content current">
 	                <!-- 강아지 정보 삽입 -->
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
 	                <div style="text-align: center; margin-top: 10px;">
@@ -37,12 +33,12 @@
 	                </div>
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
-                        <input type="text" class="form-control" name="dogName1" id="dogName" value="${ name1 }">
+                        <input type="text" class="form-control" name="${ dogname }" id="dogName">
                     </div>
                     <div class="form-div">
                         <label class="form-label"><b>종류</b></label><br>
                         <select name="dogKind1">
-                            <option>${ kind1 }</option>
+                            <option>---------------</option>
                             <option value="골든리트리버">골든리트리버</option><option value="닥스훈트">닥스훈트</option><option value="도베르만핀셔">도베르만 핀셔</option><option value="래브라도 리트리버">래브라도 리트리버</option><option value="몰티즈">몰티즈</option><option value="미니어처 슈나우저">미니어처 슈나우저</option><option value="미니어처 푸들">미니어처 푸들</option>
                             <option value="미니어처 핀셔">미니어처 핀셔</option><option value="버니즈마운틴도그">버니즈마운틴도그</option><option value="베들링턴 테리어">베들링턴 테리어</option><option value="보더 콜리">보더 콜리</option><option value="보스턴 테리어">보스턴 테리어</option><option value="비글">비글</option><option value="비숑 프리제">비숑 프리제</option><option value="사모예드">사모예드</option>
                             <option value="살루키">살루키</option><option value="셰블랜드 쉽독">셰블랜드 쉽독</option><option value="스탠더드 푸들">스탠더드 푸들</option><option value="시바 이누">시바 이누</option><option value="시베리안 허스키">시베리안 허스키</option><option value="시츄">시츄</option><option value="아메리칸 코카 스파니엘">아메리칸 코카 스파니엘</option><option value="알레스칸맬러뮤트">알레스칸맬러뮤트</option>
@@ -54,7 +50,7 @@
                     <div class="form-div">
                         <label class="form-label"><b>크기</b></label><br>
                         <select name="dogSize1">
-                            <option>${ size1 }</option>
+                            <option>---------------</option>
                             <option value="대형견">대형견</option>
                             <option value="중형견">중형견</option>
                             <option value="소형견">소형견</option>
@@ -63,22 +59,12 @@
                     <br>
                     <div class="form-div">
                         <label class="form-label"><b>성별</b></label> <br>
-                        <c:if test="${ gender1 == 'M' }">
                         <label style="margin-right: 40px">
                             <input type="radio" id="male" name="dogGender1" value="M" checked> 남자
                         </label>
                         <label>
                             <input type="radio" id="female" name="dogGender1" value="F"> 여자
                         </label>
-                        </c:if>
-                        <c:if test="${ gender1 == 'F' }">
-                        <label style="margin-right: 40px">
-                            <input type="radio" id="male" name="dogGender1" value="M"> 남자
-                        </label>
-                        <label>
-                            <input type="radio" id="female" name="dogGender1" value="F" checked> 여자
-                        </label>
-                        </c:if>
                     </div>
                     <br>
                     <div>
