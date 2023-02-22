@@ -1,0 +1,20 @@
+header
+	nav  id=nav1 class=navbar bg-light
+           div class=container-fluid
+            	div class=login-container
+					cif test=${ empty loginMember }
+					  div
+                  	  	img src=httpscdn.pixabay.comphoto201205071346foot-48503__340.png alt= id=logoimg
+                	  div
+                  	  	button type=button id=si onclick=location.href='${ path }membersignup' class=btn btn-outline-secondary회원가입button
+                   	 	button type=button id=so onclick=location.href='${ path }memberlogin' class=btn btn-outline-secondary로그인button             
+					cif
+					cif test=${ not empty loginMember }
+						${ loginMember.name }님 안녕하세요.
+						brbr
+						button onclick=location.href='${ path }membermyPage' class=btn btn-outline-secondary내 정보button
+						button onclick=location.replace('${ path }logout') class=btn btn-outline-secondary로그아웃button
+					cif
+            	div
+           div
+    nav
