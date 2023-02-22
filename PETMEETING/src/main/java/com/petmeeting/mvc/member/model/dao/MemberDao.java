@@ -82,16 +82,15 @@ public class MemberDao {
 	public int updateMember(Connection connection, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query ="UPDATE MEMBER SET MEM_PWD=?,MEM_NICKNAME=?,MEM_PHONE=?,MEM_ADDRESS=? WHERE MEM_CODE=?";
+		String query ="UPDATE MEMBER SET MEM_NICKNAME=?, MEM_PHONE=?, MEM_ADDRESS=? WHERE MEM_CODE=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setString(1, member.getPassword());
-			pstmt.setString(2, member.getNickname());
-			pstmt.setString(3, member.getPhone());
-			pstmt.setString(4, member.getAddress());
-			pstmt.setInt(5, member.getMemCode());
+			pstmt.setString(1, member.getNickname());
+			pstmt.setString(2, member.getPhone());
+			pstmt.setString(3, member.getAddress());
+			pstmt.setInt(4, member.getMemCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -104,7 +103,7 @@ public class MemberDao {
 	}
 	
 	// 강아지 정보 인서트
-	public int insertDog(Connection connection, Dog dog) {
+	public int insertDog(Connection connection, Dog dog, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO DOG_INFO ( "
@@ -116,8 +115,8 @@ public class MemberDao {
 				+ "    D_GENDER, "
 				+ "    NEUTERED, "
 				+ "    VACCINE, "
-				+ "    MEMBER_CODE "
-				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, 'NULL', ?, ?, ?, ?, ?, ?,'1')";
+				+ "    MEM_CODE "
+				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, 'NULL', ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -128,6 +127,7 @@ public class MemberDao {
 			pstmt.setString(4, dog.getGender());
 			pstmt.setString(5, dog.getNeutered());
 			pstmt.setString(6, dog.getVaccine());
+			pstmt.setInt(7, member.getMemCode());
 			
 			result = pstmt.executeUpdate();
 			
@@ -139,6 +139,40 @@ public class MemberDao {
 		
 		
 		return result;
+	}
+	
+	public Dog findDogById(Connection connection, String id) {
+		Dog dog = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM DOG_INFO WHERE MEM_CODE=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dog = new Dog();
+				
+				dog.setMemCode(rs.getInt("MEM_CODE"));
+				dog.setName(rs.getString("D_NAME"));
+				dog.setKind(rs.getString("D_KIND"));
+				dog.setSize(rs.getString("D_SIZE"));
+				dog.setGender(rs.getString("D_GENDER"));
+				dog.setNeutered(rs.getString("NEUTERED"));
+				dog.setVaccine(rs.getString("VACCINE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return dog;
 	}
 
 }

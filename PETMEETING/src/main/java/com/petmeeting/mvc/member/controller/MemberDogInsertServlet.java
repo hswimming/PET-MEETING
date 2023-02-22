@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Dog;
+import com.petmeeting.mvc.member.model.vo.Member;
 
 @WebServlet(name = "memberDogInsert", urlPatterns = { "/member/dog/insert" })
 public class MemberDogInsertServlet extends HttpServlet {
@@ -20,9 +22,13 @@ public class MemberDogInsertServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");
+    	HttpSession session = request.getSession(false);
+    	Member loginMember = (session == null) ? null : (Member)session.getAttribute("loginMember");
     	
+    	Member member = new Member();
     	Dog dog = new Dog();
     	
+    	member.setMemCode(loginMember.getMemCode());
     	dog.setName(request.getParameter("dogName1"));
     	dog.setKind(request.getParameter("dogKind1"));
     	dog.setSize(request.getParameter("dogSize1"));
@@ -33,10 +39,11 @@ public class MemberDogInsertServlet extends HttpServlet {
 				String.join(",", request.getParameterValues("vaccine1")) : null;
     	
     	dog.setVaccine(vaccine);
-    
+    	
+    	System.out.println(member);
     	System.out.println(dog);
     	
-    	int result = new MemberService().dogSave(dog);
+    	int result = new MemberService().dogSave(dog, member);
 
 		if (result > 0) {
 			request.setAttribute("msg", "강아지 정보 저장 성공");

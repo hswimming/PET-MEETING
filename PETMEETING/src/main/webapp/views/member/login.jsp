@@ -52,40 +52,41 @@
     }
 
 </style>
-    <section>
-        <div id="container" class="container">
-            <h1 id="login" style="text-align: center;">Login</h1>
-            <div class="content">
-                <div class="login_wrap">
+<section>
+    <div id="container" class="container">
+        <h1 id="login" style="text-align: center;">Login</h1>
+        <div class="content">
+            <div class="login_wrap">
 
-                    <form action="" method="POST">
-                        <div>
-                            <input type="text" id="id" name="id" class="input_text" placeholder="아이디" maxlength="16">
-                        </div>
-                        <br>
-                        <div>
-                            <input type="password" id="password" name="password" class="input_text" placeholder="비밀번호" maxlength="16">
-                        </div>
-                        <div class="btn_login_wrap"> 
-                            <button type="submit" class="btn_login" id="btn_login">
-                                <span class="btn_login_text">로그인</span>
-                            </button>
-                        <br>
-                        </div>
-                        <div>
-                            <label for="saveid">
-                                <input type="checkbox" id="saveid" name="saveid" class="input_save">
-                                <span style="font-size: small;">아이디 저장</span>
-                            </label>
-                        </div>
-                    </form>
-                    <ul class="find_wrap" id="find_wrap">
-                        <li><a href="" class="find_text">아이디 / 비밀번호 찾기<br></a></li>
-                        <li><a href="${ path }/member/signup" class="find_text" style="padding: 50px;">회원가입</a></li>
+                <form action="${ path }/member/login" method="POST">
+                    <div>
+                        <input type="text" id="id" name="id" class="input_text" placeholder="아이디" maxlength="16">
                     </div>
-                    </ul>
-            </div>
+                    <br>
+                    <div>
+                        <input type="password" id="password" name="password" class="input_text" placeholder="비밀번호" maxlength="16">
+                    </div>
+                    <div class="btn_login_wrap"> 
+                        <button type="submit" class="btn_login" id="btn_login">
+                            <span class="btn_login_text">로그인</span>
+                        </button>
+                    <br>
+                    </div>
+                    <div>
+                        <label for="saveid">
+                            <input type="checkbox" id="saveid" name="saveid" class="input_save">
+                            <span style="font-size: small;">아이디 저장</span>
+                        </label>
+                    </div>
+                </form>
+                <ul class="find_wrap" id="find_wrap">
+                    <li><a href="" class="find_text">아이디 / 비밀번호 찾기<br></a></li>
+                    <li><a href="${ path }/member/signup" class="find_text" style="padding: 50px;">회원가입</a></li>
+                </div>
+                </ul>
         </div>
-    </section>
-
+    </div>
+</section>
+	
+	
 <jsp:include page="/views/common/footer.jsp" /> 

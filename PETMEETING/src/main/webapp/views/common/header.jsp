@@ -41,9 +41,6 @@
             	</div>
            </div>
     </nav>
-           <div style="text-align: right; padding: 3px">
-		       <button id="btnMyPage">마이페이지로 이동</button>
-		   </div>
     
     <div id="title">
             PET MEETING

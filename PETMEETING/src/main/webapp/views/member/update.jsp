@@ -10,69 +10,78 @@
 <section>
 	<article id="member_info">
 	<hr>
-	<h3 style="text-align: center;">사용자 정보</h3>
-    <table id="memberInfoTable">
-	    <tr>
-	        <td width="150px">
-	            아이디
-	        </td>
-	        <td>
-	            leenabro
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            이름
-	        </td>
-	        <td>
-	            이정환
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            닉네임
-	        </td>
-	        <td>
-	            <input type="text" value="이나브로">
-                <button>중복확인</button>
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            주소
-	        </td>
-	        <td>
-	            <input type="text" value="서울 송파구 잠실동">
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            핸드폰 번호
-	        </td>
-	        <td>
-	            <input type="tel" value="010-1234-5678">
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            이메일
-	        </td>
-	        <td>
-	            leenabro.be@gamil.com
-	        </td>
-	    </tr>
-	    <tr>
-	        <td>
-	            성별
-	        </td>
-	        <td>
-	            남자
-	        </td>
-	    </tr>
-	</table>
-	<div style="text-align: center; margin-top: 10px">
-		<button>비밀번호 수정</button>
-	</div>
+	<form action="${ path }/member/update" method="post">
+		<h3 style="text-align: center;">사용자 정보</h3>
+	    <table id="memberInfoTable">
+		    <tr>
+		        <td width="150px">
+		            아이디
+		        </td>
+		        <td>
+		            ${ loginMember.id }
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            이름
+		        </td>
+		        <td>
+		            ${ loginMember.name }
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            닉네임
+		        </td>
+		        <td>
+		            <input type="text" id="nickname" name="nickname" value="${ loginMember.nickname }" required>
+		            <input type="button" id="checkDuplicate" value="중복확인">
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            핸드폰 번호
+		        </td>
+		        <td>
+		            <input type="tel" id="phone" name="phone" value="${ loginMember.phone }">
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            주소
+		        </td>
+		        <td>
+		            <input type="text" name="address" value="${ loginMember.address }">
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            이메일
+		        </td>
+		        <td>
+		            ${ loginMember.email }
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>
+		            성별
+		        </td>
+		        <td>
+		        	<c:if test="${ loginMember.gender == 'M' }">
+		        		남자
+		        	</c:if>
+		        	<c:if test="${ loginMember.gender == 'F' }">
+		        		여자
+		        	</c:if>
+		        </td>
+		    </tr>
+		</table>
+		<div style="text-align: center; margin-top: 10px">
+			<input type="submit" id="memberUpate_btn" value="저장">
+			<input type="button" id="pwdUpdate_btn" value="비밀번호 수정">
+			
+		</div>
+	</form>
 	</article>
 	<br>
 	<hr>
@@ -189,10 +198,46 @@
 	        	</div>
 	        </div>
 	        <div style="text-align: center; margin-top: 10px">
-	   			<button type="submit">저장</button>
+		        <input type="submit" value="저장">
 	        </div>
       	</form>
         </article>
     </section>
+    
+    <script>
+	// 아이디 중복 확인
+	$(document).ready(() => {
+		$('#checkDuplicate').on('click', () => {
+			let nickname = $('#nickname').val().trim();
+			
+			$.ajax({
+				type: 'POST',
+				url: '${ path }/member/nickCheck',
+				dataType: 'json',
+				data: {
+					nickname
+				},
+				success: (obj) => {
+					console.log(obj);
+					
+					if (obj.duplicate) {
+						alert("이미 사용중인 닉네임 입니다.")
+					} else {
+						alert("사용 가능한 닉네임입니다.")
+					}
+					
+				},
+				error: (error) => {
+					console.log(error);
+				}
+				
+				
+			})		
+		
+		});
+	});
+</script>
+    
+    
     
     <jsp:include page="/views/common/footer.jsp" /> 

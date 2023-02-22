@@ -52,17 +52,16 @@ public class MemberService {
 		
 		close(connection);
 		
-		
 		return member;
 	}
 	
 	
 	// 강아지 정보 인서트
-	public int dogSave(Dog dog) {
+	public int dogSave(Dog dog, Member member) {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		result = new MemberDao().insertDog(connection, dog);
+		result = new MemberDao().insertDog(connection, dog, member);
 		
 		if(result > 0) {
 			commit(connection);
@@ -73,6 +72,20 @@ public class MemberService {
 		close(connection);
 		
 		return result;
+	}
+	
+	public Dog findDogById(String id) {
+		Connection connection = getConnection();
+		
+		Dog dog = new MemberDao().findDogById(connection, id);
+		
+		close(connection);
+		
+		return dog;
+	}
+
+	public Boolean isDuplicateNick(String nickname) {
+		return this.findMemberById(nickname) != null;
 	}
 
 }

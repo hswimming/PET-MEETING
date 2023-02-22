@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "MemberDogUpdate", urlPatterns = { "/member/update" })
+@WebServlet(name = "MemberDogUpdate", urlPatterns = { "/member/dogUpdate" })
 public class MemberDogUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

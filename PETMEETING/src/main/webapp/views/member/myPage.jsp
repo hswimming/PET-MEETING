@@ -12,14 +12,14 @@
     <article id="member_info">
 	<hr>
     <div style="text-align: center;">
-    <h3 style="text-align: center;">사용자 정보</h3>
+   		<h3 style="text-align: center;">사용자 정보</h3>
 	    <table id="memberInfoTable" style="text-align: center;">
 	        <tr>
 	            <td width="150px">
 	                아이디
 	            </td>
 	            <td>
-	                leenabro
+	                ${ loginMember.id }
 	            </td>
 	        </tr>
 	        <tr>
@@ -27,7 +27,7 @@
 	                이름
 	            </td>
 	            <td>
-	                이정환
+	                ${ loginMember.name }
 	            </td>
 	        </tr>
 	        <tr>
@@ -35,7 +35,7 @@
 	                닉네임
 	            </td>
 	            <td>
-	                이나브로
+	                ${ loginMember.nickname }
 	            </td>
 	        </tr>
 	        <tr>
@@ -43,7 +43,7 @@
 	                주소
 	            </td>
 	            <td>
-	                서울 송파구 잠실동
+	                ${ loginMember.address }
 	            </td>
 	        </tr>
 	        <tr>
@@ -51,7 +51,7 @@
 	                핸드폰 번호
 	            </td>
 	            <td>
-	                010-1234-5678
+	                ${ loginMember.phone }
 	            </td>
 	        </tr>
 	        <tr>
@@ -59,15 +59,20 @@
 	                이메일
 	            </td>
 	            <td>
-	                leenabro.be@gamil.com
-	             </td>
+	                ${ loginMember.email }
+	            </td>
 	        </tr>
 	        <tr>
 	            <td>
 	                성별
 	            </td>
 	            <td>
-	                남자
+	                <c:if test="${ loginMember.gender == 'M' }">
+		        		남자
+		        	</c:if>
+		        	<c:if test="${ loginMember.gender == 'F' }">
+		        		여자
+		        	</c:if>
 	            </td>
 	        </tr>
 	     </table>
@@ -80,7 +85,7 @@
 
         <!-- 탭 메뉴 만들기 -->
         <!-- 비동기로 수정, 저장할 수 있도록 구현 -->
-        <form class="dogInfo" action="${ path }/member/update" method="post">
+        <form class="dogInfo" method="post">
         	<div class="container" id="dog_infos">
             	<ul class="tabs">
                 	<li class="tab-link current" id="tab_std" data-tab="tab-1">강아지</li>
@@ -132,13 +137,21 @@
                     </div>
 	        	</div>
 	        </div>
-	        <div style="text-align: center; margin-top: 10px">
+      	</form>
+	        <div id="memberUpdate_btn" style="text-align: center; margin-top: 10px">
 	   			<button type="submit">수정</button>
 	        </div>
-      	</form>
     </article>
 </section>
-	
-	
-	<jsp:include page="/views/common/footer.jsp" /> 
+
+<script>
+	$(document).ready(() => {
+		$('#memberUpdate_btn').on('click', () => {
+			location.replace('${ path }/views/member/update.jsp');
+		});
+	});
+
+</script>	
+
+<jsp:include page="/views/common/footer.jsp" /> 
 	
