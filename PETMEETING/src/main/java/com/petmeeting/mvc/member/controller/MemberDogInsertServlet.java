@@ -43,6 +43,7 @@ public class MemberDogInsertServlet extends HttpServlet {
     					String.join(",", request.getParameterValues("vaccine"+num)) : null;
     			
     			dog.setVaccine(vaccine);
+    			
     			num++;
     			
     			result = new MemberService().dogSave(dog, member);
