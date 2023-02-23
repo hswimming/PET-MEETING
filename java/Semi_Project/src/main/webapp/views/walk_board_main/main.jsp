@@ -19,9 +19,9 @@
     
 		<!-- 게시판 선택 화면 -->
 		<div class="b_wrapper">
-			<img src="D:\develop\semi-project\java\Semi_Project\src\main\webapp\views\walk_board_main" id="walkimg">
-			<div id="walk-list" onclick="location.href='${ path }/board/search'"></div>
-			<div id="walk-board" onclick="location.href='${ path }/board/search'"></div>
+			<img src="${ path }/image/walkmain.jpg" id="walkimg">
+			<div id="walk-list" onclick="location.href='${ path }/walk_board/search'"></div>
+			<div id="walk-board" onclick="location.href='${ path }/walk_board/search'"></div>
 		</div>
 	</section>
 </body>

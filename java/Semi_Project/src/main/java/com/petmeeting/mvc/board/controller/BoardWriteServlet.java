@@ -15,7 +15,7 @@ import com.petmeeting.mvc.board.model.vo.Walk_Board;
 import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Member;
 
-@WebServlet(name = "boardWrite", urlPatterns = { "/walk_board/write" })
+@WebServlet(name = "walkBoardWrite", urlPatterns = { "/walk_board/write" })
 public class BoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -63,11 +63,11 @@ public class BoardWriteServlet extends HttpServlet {
     		
     		if (result > 0) {
     			request.setAttribute("msg", "게시글 등록 성공");
-        		request.setAttribute("location", "/board/list");
+        		request.setAttribute("location", "/walk_board/list");
         		
     		} else {
     			request.setAttribute("msg", "게시글 등록 실패");
-        		request.setAttribute("location", "/board/list");
+        		request.setAttribute("location", "/walk_board/list");
     		}
     		
     	} else {

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "boardSearch", urlPatterns = { "/board/search" })
+@WebServlet(name = "walkBoardSearch", urlPatterns = { "/walk_board/search" })
 public class BoardSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

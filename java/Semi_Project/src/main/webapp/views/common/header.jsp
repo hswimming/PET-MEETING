@@ -71,7 +71,7 @@
 				
 				
 				<div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="fixed" >
-						<a href="${ path }/board/main"><button type="button" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button></a>
+						<a href="${ path }/walk_board/main"><button type="button" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button></a>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
                         <ul class="dropdown-menu">

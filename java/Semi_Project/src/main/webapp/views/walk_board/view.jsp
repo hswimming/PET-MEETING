@@ -78,17 +78,17 @@
                 <tr>
                     <th colspan="2">
                     <c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
-                        <button type="button" onclick="location.href='${ path }/board/update?wbNo=${ walk_board.wbNo }'">수정</button>
+                        <button type="button" onclick="location.href='${ path }/walk_board/update?wbNo=${ walk_board.wbNo }'">수정</button>
                         <button type="button" id="btnDelete">삭제</button>
                     </c:if>
-                        <button type="button" onclick="location.replace('${ path }/board/list')">목록</button>
+                        <button type="button" onclick="location.replace('${ path }/walk_board/list')">목록</button>
                     </th>
                 </tr>
             </table>
         </div>
         <!-- 댓글 작성 -->
         <div id="comment">
-            <form action="${ path }/board/comment" method="POST">
+            <form action="${ path }/walk_board/comment" method="POST">
                 <input type="hidden" name="walk_boardwbNo" value="${ walk_board.wbNo }">
                 <textarea name="" id="commentContent" cols="90" rows="3"></textarea>
                 <button type="submit" id="replybtn">등록</button>

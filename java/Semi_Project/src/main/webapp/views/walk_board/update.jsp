@@ -1,89 +1,145 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-<jsp:include page="/views/common/header.jsp" />
-<link rel="stylesheet" href="${ path }/resources/css/update_style.css">
-<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
-
-<%-- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>산책 게시판 게시글 수정 화면</title>
-
-<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+	<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
+    <style>
+		h1 {
+		    font-family: 'Jua', sans-serif;
+		    color: rgb(12, 66, 12);
+		    text-align: center;
+		    padding: 100px;
+		}
+		
+		#boardname{
+		    font-family: 'Jua', sans-serif;
+		    color: rgb(12, 66, 12);
+		    width: 100%;
+		    padding:  10px;
+		}
+		
+		.ck-editor__editable {
+		    font-family: 'Jua', sans-serif;
+		    color: rgb(12, 66, 12);
+		    min-height: 500px;
+		}
+		
+		#button{
+		    padding:  10px;
+		    font-family: 'Jua', sans-serif;
+		    color: rgb(12, 66, 12);   
+		}
+		
+		#title, #writer, #subject{
+		    width: 97%;
+		}
+		
+		#upfile1, #upfile2{
+		margin-bottom: 5px;
+		}
+		
+		div#board-write-container{
+		    width:100%;
+		    margin:0 auto;
+		    text-align:center;
+		}
+		div#board-write-container h2{
+		    margin:10px 0;
+		}
+		table#tbl-board{
+		    width:50%;
+		    margin:0 auto;
+		    height: 50%;
+		    border:1px solid black;
+		    border-collapse:collapse;
+		    margin-bottom: 100px;
+		}
+		table#tbl-board th{
+		    border:1px solid;
+		    padding:5px 0;
+		    text-align:center;
+		}
+		table#tbl-board td{
+		    border:1px solid;
+		    padding:5px 0 5px 10px;
+		    text-align:left;
+		}
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="./boardUpdate.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+	<!--한글폰트-->
+	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+	
+	<!--영어폰트-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-	<header>
-        <!-- 우측 상단 로그아웃 메뉴 -->
-        <div>
-            <nav class="join">
-                <a href="https://www.naver.com">로그아웃</a>
-                <a href="https://www.naver.com">마이페이지</a>
-            </nav>
-        </div>
-        <!-- 상단 고정 타이틀 -->
-        <div id="title">
-            <h1>PET-MEETING</h1>
-        </div>
-    </header> --%>
+
+    <h1>게시글 수정하기</h1>
+
+    <form action="${ path }/walk_board/update" method="POST">
+    <input type="hidden" name="boardNo" value="${ walk_board.wbNo }">
     
-    <section>
-        <div id="board_title">
-            <h1>게시판 수정</h1>
-        </div>
-        <div id="t_wrapper">
-            <!-- 게시판 수정 화면 -->
-            <table>
-                <tr>
-                    <td style="width: 50%;">제목</td>
-                    <td colspan="2">
-                        <input type="text" name="content_title" id="content_title" placeholder="제목을 작성해 주세요.">
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 50%;">작성자</td>
-                    <td colspan="2">
-                        <input type="text" name="content" id="content">
-                    </td>
-                </tr>
-                <tr>
-                    <td>첨부파일</td>
-                    <td><input type="file" name="file" id="upfile"></td>
-                </tr>
-            </table>
-        </div>
-        <!-- 게시글 내용 입력 칸 -->
-        <div id="content_box">
-            <!-- 2. TEXT 편집 툴을 사용할 textarea -->
-            <textarea name="content" id="editor"></textarea>
-        </div>
-        <!-- 수정 버튼 -->
-        <div id="btn">
-            <div id="btn1"><input type="submit" value="수정"></div>
-            <div id="btn2"><input type="button" onclick="location.replace('${path}/board/list')" value="목록"></div>
-        </div>
-    </section>
+        <table id='tbl-board'>
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" id="title" value=${ walk_board.wbTitle }></td>
+            </tr>
+            <tr>
+                <th>작성자</th>
+                <td><input type="text" name="writer" id="writer" value="${ walk_board.memNickname }" readonly></td>
+            </tr>
+            <tr>
+                <th>강아지 정보</th>
+                <td>
+                	${ dog.name }<br>
+					${ dog.kind }<br>
+					${ dog.size }<br>
+					${ dog.gender }<br>
+					${ dog.neutered }<br>
+					${ dog.vaccine }<br>
+                </td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td> 
+                    <div id="editorbox">
+                        <textarea name="content" id="editor"  placeholder="내용을 입력하세요." >${ walk_board.wbContent }</textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <div id="button">
+                        <input type="submit" value="수정" class="btn btn-outline-secondary"> 
+                        <input type="button" onclick="location.replace('${path}/walk_board/list)" value="목록으로" class="btn btn-outline-secondary">
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </form>
 
-    <!-- 3. CKeditor5를 생성할 textarea 지정 -->
-    <script>
-        ClassicEditor.create( document.querySelector( '#editor' ), {
-            language: 'ko',
-        } )
-        
-        // removePlugins: [ 'ImageUpload' ]
+<!--ckeditor-->
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
-        .catch( error => {
-                console.error( error );
-            } );
-    </script>
+<!--ckeditor한국어 연결 옵션-->
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/translations/ko.js"></script>
+<script>ClassicEditor.create( document.querySelector( '#editor' ), { language: "ko" }); </script>
+
 </body>
 </html>
-
-<jsp:include page="/views/common/footer.jsp" />

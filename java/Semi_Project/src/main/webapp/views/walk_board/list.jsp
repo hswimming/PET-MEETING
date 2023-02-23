@@ -66,7 +66,7 @@
                     		<tr>
 		                        <td>${ walk_Board.rowNum }</td>
 		                        <td>
-		                        	<a href="${ path }/board/view?wbNo=${ walk_Board.wbNo }">
+		                        	<a href="${ path }/walk_board/view?wbNo=${ walk_Board.wbNo }">
 		                        		${ walk_Board.wbTitle }
 		                        	</a>
 		                        </td>
@@ -81,10 +81,10 @@
             <div id="num-click">
                		<ul class="pagination justify-content-center">
                 	<!-- 맨 처음 목록으로 이동 -->
-                    <li><button onclick="location.href='${ path }/board/list?page=1'">&lt;&lt;</button></li>
+                    <li><button onclick="location.href='${ path }/walk_board/list?page=1'">&lt;&lt;</button></li>
                     
                     <!-- 이전 페이지로 이동 -->
-                     <li><button onclick="location.href='${ path }/board/list?page=${ pageInfo.prevPage }'">&lt;</button></li>
+                     <li><button onclick="location.href='${ path }/walk_board/list?page=${ pageInfo.prevPage }'">&lt;</button></li>
                     
                     <!-- 10개 페이지 목록 -->
                     <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -93,16 +93,16 @@
 								<li><button disabled>${ status.current }</button></li>
 							</c:when>
 							<c:otherwise>
-								<li><button onclick="location.href='${ path }/board/list?page=${ status.current }'">${ status.current }</button></li>
+								<li><button onclick="location.href='${ path }/walk_board/list?page=${ status.current }'">${ status.current }</button></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					
 					<!-- 다음 페이지로 이동 -->
-                    <li><button onclick="location.href='${ path }/board/list?page=${ pageInfo.nextPage }'">&gt;</button></li>
+                    <li><button onclick="location.href='${ path }/walk_board/list?page=${ pageInfo.nextPage }'">&gt;</button></li>
                     
                     <!-- 맨 마지막 페이지로 이동 -->
-                   	<li><button onclick="location.href='${ path }/board/list?page=${ pageInfo.maxPage }'">&gt;&gt;</button></li>
+                   	<li><button onclick="location.href='${ path }/walk_board/list?page=${ pageInfo.maxPage }'">&gt;&gt;</button></li>
                 	</ul>
             </div>
         </div>

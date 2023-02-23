@@ -13,7 +13,7 @@ import com.petmeeting.mvc.board.model.service.Walk_BoardService;
 import com.petmeeting.mvc.board.model.vo.Walk_Board;
 import com.petmeeting.mvc.common.util.PageInfo;
 
-@WebServlet(name = "boardList", urlPatterns = { "/board/list" })
+@WebServlet(name = "walkBoardList", urlPatterns = { "/walk_board/list" })
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
