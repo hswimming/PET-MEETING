@@ -187,7 +187,6 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE BOARD SET VIEWS=? WHERE BOARD_NO=? AND BOARD_CODE=? ";
-	
 			
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -206,7 +205,6 @@ public class BoardDao {
 		}
 		
 		return result;
-		
 		
 		
 	}

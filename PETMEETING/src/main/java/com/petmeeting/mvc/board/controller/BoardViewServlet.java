@@ -25,7 +25,7 @@ public class BoardViewServlet extends HttpServlet {
     	
     	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
     	
-    	System.out.println("게시글 번호"+ boardNo);
+    	System.out.println("게시글 번호 :" + boardNo);
     	
     	// 1. 쿠키에 게시글을 조회한 이력이 있는지 확인
     	Cookie[] cookies = request.getCookies();
