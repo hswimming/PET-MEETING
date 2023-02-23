@@ -32,20 +32,32 @@ public class BoardService {
 	
 	
 	
+	   public List<Board> getBoardList(PageInfo pageInfo) {
+		      List<Board> list = null;
+		      
+		      Connection connection = getConnection();
+		      
+		      list = new BoardDao().findAll(connection, pageInfo);
+		      
+		      
+		      
+		      close(connection);
+		      
+		      return list;
+		   }
 
-	public List<Board> getBoardList(PageInfo pageInfo) {
-		List<Board> list = null;
-		
-		Connection connection = getConnection();
-		
-		list = new BoardDao().findAll(connection, pageInfo);
-		
-		
-		
-		close(connection);
-		
-		return list;
-	}
+		   public Board getBoardByBoardNo(int boardNo) {
+		      Board board = null;
+		      
+		      Connection connection = getConnection();
+		      
+		      board = new BoardDao().findBoardByBoardNo(connection, boardNo);
+
+		      
+		            
+		      close(connection);
+		      return board;
+		   }
 
 	
 	//———————————————————조회수 증가 
@@ -71,28 +83,28 @@ public class BoardService {
 			return board;
 		}
 
-	public int save(Board board) {
-		int result = 0;
-		Connection connection = getConnection();
-		
-		if(board.getBoardNo() > 0) {
-			result = new BoardDao().updateBoard(connection, board);
-		} else {
-			result = new BoardDao().insertBoard(connection, board);
-			
-		}
-		
-		
-		if(result > 0) {
-			commit(connection);
-		} else {
-			rollback(connection);
-		}
+		 public int save(Board board) {
+		      int result = 0;
+		      Connection connection = getConnection();
+		      
+		      if(board.getBoardNo() > 0) {
+		         result = new BoardDao().updateBoard(connection, board);
+		      } else {
+		         result = new BoardDao().insertBoard(connection, board);
+		         
+		      }
+		      
+		      
+		      if(result > 0) {
+		         commit(connection);
+		      } else {
+		         rollback(connection);
+		      }
 
-		close(connection);
-		
-		return result;
-	}
+		      close(connection);
+		      
+		      return result;
+		   }
 
 
 

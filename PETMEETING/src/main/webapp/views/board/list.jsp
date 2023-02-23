@@ -65,6 +65,7 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>첨부파일</th>
 				<th>조회수</th>
 				<!-- <th>첨부파일</th> -->
 			</tr>
@@ -80,23 +81,16 @@
 					<tr>
 						<td>${ board.rowNum }</td>
 						<td>
-							<a href="${ path }/board/view?boardNo=${board.boardNo}">
+							<a href="${ path }/board/view?boardNo=${ board.boardNo} ">
 								${ board.boardTitle }
 							</a>
 						</td>
 						<td>${ board.memberCode }</td>
 						<td>${ board.createDate }</td>
-				<%-- 		<td>
-							<c:if test="${ empty board.originalFileName }">
+						<td>
 								<span> - </span>
-							</c:if>
-							<c:if test="${  not empty board.originalFileName }">
-								<img src="${ path }/resources/images/file.png">
-							</c:if>
-						</td>	 --%>
+						</td>
 						<td>${ board.views }</td>
-						<%-- <td>${ boardupfile }</td>   --%>
-
 					</tr>
 				</c:forEach>
 			</c:if>

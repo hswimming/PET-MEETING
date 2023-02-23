@@ -95,12 +95,11 @@
                     <th>조회수</th>
                     <td>${ board.views }</td>
                 </tr>
-                <tr>
+             <!--    <tr>
                     <th>첨부파일</th>
                     <td>
-                        <span> - </span>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th>내 용</th>
                     <td>${ board.boardContent }</td>
@@ -150,10 +149,7 @@
  		});
  		
  		
- 		
  	}); 
- 
- 
  </script>   
     
     
