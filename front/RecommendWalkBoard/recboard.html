@@ -15,6 +15,7 @@
 
     <!-- 내가 생성한 파일 연결 -->
     <script src="../js/jquery-3.6.3.js"></script>
+    <link rel="stylesheet" href="./recoboard.css">
 
 </head>
 <body>
@@ -79,8 +80,41 @@
     <nav>
 
     </nav>
-    <section>
-        
+    <section id="recoWalkBoard">
+        <article>
+            <div id="firstDiv" class="mainDiv">
+                <h2 style="text-align: center; margin-top: 10px;">마포구 하늘공원 메타세콰이어길</h2>
+                <br>
+                <div id="mainimg">
+                    <img src="../resouce/mainimg.png">
+                </div>
+                <br>
+                <p style="margin-left: 10%;">
+                    하늘공원의 한강 변 쪽으로 위치한 메타세콰이어길은 총길이 900m의 산책로로 하늘공원의 다른 산책로보다 <br>
+                    유동 인구가 적은 편이라 반려견 동반이 훨씬 수월한 길이다. <br>
+                    특히 가을에 단풍이 들면 무척 아름다운 절경을 볼 수 있는 가을 단풍길이라고도 불리고 있다. <br>
+                    그뿐만 아니라 월드컵공원 반려견 놀이터에서 충분한 시간을 즐기고, 산책과 더불어 하늘공원에 오르는 계단부터 <br>
+                    맹꽁이버스까지 댕댕이와 다양한 체험을 같이 할 수 있는 코스이기도 하다. <br>
+                </p>
+
+                <div id="container"></div>
+                <div id="imgs">
+                    <div class="item active"><img src="../resouce/subimg1.png" class="slideimg"></div>
+                    <div class="item"><img src="../resouce/subimg2.png" class="slideimg"></div>
+                    <div class="item"><img src="../resouce/subimg3.png" class="slideimg"></div>
+                </div>
+                <div>
+                    <button class="prev" id="prev">이전</button>
+                </div>
+                <div>
+                    <button class="next" id="next">다음</button>
+                </div>
+
+            </div>
+            <div id="lastDiv" class="mainDiv">
+
+            </div>
+        </article>
     </section>
     <footer>
         <ul>
@@ -90,5 +124,51 @@
         </ul>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(() => {
+            let curPos = 0; // 현재 보이는 요소의 인덱스 번호
+
+            function prev(){
+                if(curPos > 0){
+                $("button").removeAttr("disabled") // 모든 버튼 사용할 수 있게!
+                // toggleClass : 클래스가 있으면 제거, 없으면 생성!
+                $($(".item")[curPos]).toggleClass("active")
+                $(".item").hide();
+                curPos -= 1;
+                $($(".item")[curPos]).toggleClass("active")
+                $(".active").fadeIn(800); // 새로운 액티브 요소만 스르륵 나타난다
+                }           
+                if(curPos == 0){
+                $(".prev")[0].setAttribute("disabled",'true')
+                }
+            }       
+
+            function next(){
+                if(curPos < 2){
+                    $("button").removeAttr("disabled")
+                    $($(".item")[curPos]).toggleClass("active")
+                    $(".item").hide();
+                    curPos += 1;
+                    $($(".item")[curPos]).toggleClass("active")
+                    $(".active").fadeIn(800); 
+                    }
+                if(curPos == 2){
+                    $(".next")[0].setAttribute("disabled",'true')
+                }
+            }
+
+            function init(){
+            $(".item").hide()
+            $(".active").show()
+            $(".prev").click(prev)
+            $(".next").click(next)
+            }
+
+            init();
+            
+        });
+
+    </script>
+
 </body>
 </html>
