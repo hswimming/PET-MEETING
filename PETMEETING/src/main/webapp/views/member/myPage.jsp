@@ -89,17 +89,20 @@
         <form class="dogInfo" action="${ path }/member/dogUpdate" method="post">
         	<div class="container" id="dog_infos">
             	<ul class="tabs">
-                	<li class="tab-link current" id="tab_std" data-tab="tab-1">강아지</li>
-                	<li class="tab-link" id="tab_title1" data-tab="tab-2">강아지</li>
-	                <li class="tab-link" id="tab_title2" data-tab="tab-3">강아지</li>
-                	<li class="tab-link" id="tab_title3" data-tab="tab-4">강아지</li>
-                	<li class="tab-link" id="tab_title4" data-tab="tab-5">강아지</li>
-                	<li class="tab-link" id="tab_title5" data-tab="tab-6">강아지</li>
+	        		<c:forEach var="dog" items="${ list }">
+        	        	<li class="tab-link current" id="tab_title${ dog.num }" data-tab="tab-${ dog.num }">강아지</li>
+    	    		</c:forEach>
             	</ul>
             	<c:forEach var="dog" items="${ list }">
-	            <div id="tab-${ dog.num }" class="tab-content current">
+				
+	            <div id="tab-${ dog.num }" class="tab-content">
 	                <!-- 강아지 정보 삽입 -->
+	                <c:if test="${ empty dog.imgReName }">
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
+	                </c:if>
+	                <c:if test="${ not empty dog.imgReName}">
+	                <img src="${ path }/resources/upload/dogimg/${ dog.imgReName }" alt="사진을 올려주세요.">
+	                </c:if>
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
                         <input type="text" class="form-control" name="dogName1" id="dogName" value="${ dog.name }" readonly>
@@ -151,67 +154,10 @@
 
 <script>
 	$(document).ready(() => {
-		let num = 1;
+		let num = 7;
 		
 		$('#memberUpdate_btn').on('click', () => {
 			location.replace('${ path }/views/member/update.jsp');
-		});
-		
-		$('#dogUpdate_btn').on('click', () => {
-		
-			
-			
-			if($('#tab-1 input[name=dogName1]').val() != '') {
-		 		
-				console.log($('#tab-'+num+' input:last-child').attr('name'));
-				switch ($('#tab-'+num+' input:last-child').attr('name')) {
-				case 'dogName1':
-					num = 2;
-					
-					break;
-				case 'dogName2':
-					num = 3;
-					
-					break;
-				case 'dogName3':
-					num = 4;
-					
-					break;
-				case 'dogName4':
-					num = 5;
-					
-					break;
-				case 'dogName5':
-					num = 6;
-					
-					break;
-				}
-				console.log(num);
-				
-				let tabContent = $('#tab-1').clone().prop('id', 'tab-' + num);
-		 		$('#dog_infos').append(tabContent);
-				$('#tab-'+num).attr('class', 'tab-content');
-				
-				$('#tab-'+num+' input[name=dogName1]').attr('name', 'dogName'+num);
-				$('#tab-'+num+' select[name=dogKind1]').attr('name', 'dogKind'+num);
-				$('#tab-'+num+' select[name=dogSize1]').attr('name', 'dogSize'+num);
-				$('#tab-'+num+' input[name=dogGender1]').attr('name', 'dogGender'+num);
-				$('#tab-'+num+' input[name=neutered1]').attr('name', 'neutered'+num);
-				$('#tab-'+num+' input[name=vaccine1]').attr('name', 'vaccine'+num);
-				
-	 			$('#tab_title'+(num - 1)).css('display', 'inline-block');
-	
-	 			if( num > 6) {
-		            num = 6;
-		            alert('더이상 추가 할 수 없습니다.');
-	 			} else {
-	 				
-	 			}
-				
-			 } else {
-				 
-			 }
-	        
 		});
 		
 		// 텝 메뉴 js 파일
@@ -226,24 +172,41 @@
 	    })
 
 	    
-	    
-	    $('#dogUpdate_btn').click(function() {
-			 
-			 
-	    });
-	    
 	    $('#dogDelete_btn').on('click', function() {
 	         
-	         if(num > 1) {
-		  	 $('div#tab-'+(num)).remove()
-	         $('#tab_title' + (num-1)).css('display', 'none');
-	         num--;
-	        
-	         } else {
-	             alert('더 이상 제거 할 수 없습니다.')
-	             num = 1;
-	         }
-
+	    	if($('#tab-6').index() == -1) {
+	    		if($('#tab-5').index() == -1) {
+	    			if($('#tab-4').index() == -1) {
+	    				if($('#tab-3').index() == -1) {
+	    					if($('#tab-2').index() == -1) {
+	    						alert('더이상 삭제할 수 없습니다.')
+	    					} else {
+		    					$('div#tab-2').remove();
+		    			 	    $('li#tab_title2').remove();
+		    			    	location.replace('${ path }/member/dogDelete');
+	    					}
+	    				} else {
+	    					$('div#tab-3').remove();
+	    			 	    $('li#tab_title3').remove();
+	    			    	location.replace('${ path }/member/dogDelete');
+	    				}
+	    			} else {
+    					$('div#tab-4').remove();
+    			 	    $('li#tab_title4').remove();
+    			    	location.replace('${ path }/member/dogDelete');
+	    			}
+	    		} else {
+	    			$('div#tab-5').remove();
+			 	    $('li#tab_title5').remove();
+			    	location.replace('${ path }/member/dogDelete');
+	    		}
+	    	} else {
+	    		$('div#tab-6').remove();
+		 	    $('li#tab_title6').remove();
+		    	location.replace('${ path }/member/dogDelete');
+	    	}
+	    	
+	    	
 	    });
 	
 	});

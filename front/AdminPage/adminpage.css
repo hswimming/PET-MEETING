@@ -107,18 +107,33 @@ section article {
     margin-top: 20px;
 }
 
-section article:first-child {
+section article div{
+    height: 50%;
+}
+
+/* section에 두 번째 태그에 있는 article을 가리키는 선택자 */
+section article:nth-child(2) {
     border: 1px solid;
     display: inline-block;
     width: 15%;
 }
 
-#allStatus tr{
+.adminTable tr{
     border: 1px solid grey;
     height: 60px;
 }
 
-#allStatus tr th{
+.adminTable tr th{
     text-align: center;
+}
+
+.adminTable tr td{
+    text-align: right;
+    padding-right: 10px;
+}
+
+.adminTable {
+    border: 1px solid;
+    width: 100%;
 }
 

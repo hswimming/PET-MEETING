@@ -112,9 +112,15 @@
 					console.log(error);
 				}
 				
-				
-			})		
+			})
+		});
 		
+		$('#pwdUpdate_btn').on('click', () => {
+			let url = '${ path }/member/updatePwd';
+			
+			let status = 'left=500px, top=200px, width=500px, height=250px';
+			
+			open(url, 'updatePwd', status);
 		});
 	});
 </script>

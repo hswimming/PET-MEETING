@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.petmeeting.mvc.admin.model.service.AdminService;
+import com.petmeeting.mvc.admin.model.vo.Admin;
 import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Member;
 
@@ -29,11 +31,13 @@ public class MemberLoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		Member loginMember = new MemberService().login(id, password);
+		Admin admin = new AdminService().login(id, password);
 		
-		if (loginMember != null) {
+		if (loginMember != null || admin != null) {
 			
 			session = request.getSession();
 			
+			session.setAttribute("admin", admin);
 			session.setAttribute("loginMember", loginMember);
 			
 			response.sendRedirect(request.getContextPath() + "/");

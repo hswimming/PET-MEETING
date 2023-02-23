@@ -98,4 +98,32 @@ public class MemberService {
 		return list;
 	}
 
+	public int countMemberDog(int memCode) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().countMemberDog(connection, memCode);
+		
+		
+		return result;
+	}
+
+	public int updatePassword(int memCode, String userPwd) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().updateMemberPassword(connection, memCode, userPwd);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+		
+	}
+
 }

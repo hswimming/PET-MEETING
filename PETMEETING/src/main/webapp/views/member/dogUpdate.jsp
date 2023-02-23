@@ -15,29 +15,24 @@
 
         <!-- 탭 메뉴 만들기 -->
         <!-- 비동기로 수정, 저장할 수 있도록 구현 -->
-        <form class="dogInfo" action="${ path }/member/dog/insert" method="post">
+        <form class="dogInfo" action="${ path }/member/dog/insert" enctype="multipart/form-data" method="post">
         	<div class="container" id="dog_infos">
             	<ul class="tabs">
                 	<li class="tab-link current" id="tab_std" data-tab="tab-1">강아지</li>
-                	<li class="tab-link" id="tab_title1" data-tab="tab-2">강아지</li>
-	                <li class="tab-link" id="tab_title2" data-tab="tab-3">강아지</li>
-                	<li class="tab-link" id="tab_title3" data-tab="tab-4">강아지</li>
-                	<li class="tab-link" id="tab_title4" data-tab="tab-5">강아지</li>
-                	<li class="tab-link" id="tab_title5" data-tab="tab-6">강아지</li>
             	</ul>
-	            <div id="${ tabId }" class="tab-content current">
+	            <div id="tab-1" class="tab-content current">
 	                <!-- 강아지 정보 삽입 -->
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
 	                <div style="text-align: center; margin-top: 10px;">
-	                    <button>사진 선택</button>
+	                    <input type="file" name="upimg"><br>
 	                </div>
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
-                        <input type="text" class="form-control" name="${ dogname }" id="dogName">
+                        <input type="text" class="form-control" name="dogName" id="dogName">
                     </div>
                     <div class="form-div">
                         <label class="form-label"><b>종류</b></label><br>
-                        <select name="dogKind1">
+                        <select name="dogKind">
                             <option>---------------</option>
                             <option value="골든리트리버">골든리트리버</option><option value="닥스훈트">닥스훈트</option><option value="도베르만핀셔">도베르만 핀셔</option><option value="래브라도 리트리버">래브라도 리트리버</option><option value="몰티즈">몰티즈</option><option value="미니어처 슈나우저">미니어처 슈나우저</option><option value="미니어처 푸들">미니어처 푸들</option>
                             <option value="미니어처 핀셔">미니어처 핀셔</option><option value="버니즈마운틴도그">버니즈마운틴도그</option><option value="베들링턴 테리어">베들링턴 테리어</option><option value="보더 콜리">보더 콜리</option><option value="보스턴 테리어">보스턴 테리어</option><option value="비글">비글</option><option value="비숑 프리제">비숑 프리제</option><option value="사모예드">사모예드</option>
@@ -49,7 +44,7 @@
                     </div>
                     <div class="form-div">
                         <label class="form-label"><b>크기</b></label><br>
-                        <select name="dogSize1">
+                        <select name="dogSize">
                             <option>---------------</option>
                             <option value="대형견">대형견</option>
                             <option value="중형견">중형견</option>
@@ -60,20 +55,20 @@
                     <div class="form-div">
                         <label class="form-label"><b>성별</b></label> <br>
                         <label style="margin-right: 40px">
-                            <input type="radio" id="male" name="dogGender1" value="M" checked> 남자
+                            <input type="radio" id="male" name="dogGender" value="M" checked> 남자
                         </label>
                         <label>
-                            <input type="radio" id="female" name="dogGender1" value="F"> 여자
+                            <input type="radio" id="female" name="dogGender" value="F"> 여자
                         </label>
                     </div>
                     <br>
                     <div>
                    	<label><b>중성화 여부</b></label> <br>
 	                   	<label style="margin-right: 10px">
-	                           <input type="radio" id="neuterdeY" name="neutered1" value="Y"> 중성화 O
+	                           <input type="radio" id="neuterdeY" name="neutered" value="Y"> 중성화 O
 	                       </label>
 	                       <label>
-	                           <input type="radio" id="neuterdeN" name="neutered1" value="N" checked> 중성화 X
+	                           <input type="radio" id="neuterdeN" name="neutered" value="N" checked> 중성화 X
 	                    </label>
                     </div> 
                     <br>
@@ -83,34 +78,34 @@
                              <tr>
                                  <td>
                                      <label>
-                                         <input type="checkbox" name="vaccine1" value="종합백신"> 종합백신(DHPPL)
+                                         <input type="checkbox" name="vaccine" value="종합백신"> 종합백신(DHPPL)
                                      </label> 
                                  </td>
                                  <td>
                                      <label>
-                                         <input type="checkbox" name="vaccine1" value="코로나백신"> 코로나백신(Corona Virus)
+                                         <input type="checkbox" name="vaccine" value="코로나백신"> 코로나백신(Corona Virus)
                                      </label>
                                  </td>
                                  <td>
                                      <label>
-                                         <input type="checkbox" name="vaccine1" value="켄넬코프"> 캔넬코프(Kennel Cough)
+                                         <input type="checkbox" name="vaccine" value="켄넬코프"> 캔넬코프(Kennel Cough)
                                      </label>
                                  </td>
                              </tr>
                              <tr>
                                  <td>
                                      <label> 
-                                         <input type="checkbox" name="vaccine1" value="신종플루"> 인플루엔자(신종플루)
+                                         <input type="checkbox" name="vaccine" value="신종플루"> 인플루엔자(신종플루)
                                      </label>
                                  </td>
                                  <td>
                                      <label>
-                                         <input type="checkbox" name="vaccine1" value="광견병"> 광견병
+                                         <input type="checkbox" name="vaccine" value="광견병"> 광견병
                                      </label> 
                                  </td>
                                  <td>
                                      <label>
-                                         <input type="checkbox" name="vaccine1" value="접종안함"> 접종 안함
+                                         <input type="checkbox" name="vaccine" value="접종안함"> 접종 안함
                                      </label>
                                  </td>
                              </tr>

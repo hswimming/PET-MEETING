@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.petmeeting.mvc.admin.model.vo.Admin;
 import com.petmeeting.mvc.common.jdbc.JDBCTemplate;
 import com.petmeeting.mvc.member.model.vo.Dog;
 import com.petmeeting.mvc.member.model.vo.Member;
@@ -110,7 +111,8 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO DOG_INFO ( "
 				+ "    D_ID, "
-				+ "    D_IMG, "
+				+ "    D_ORI_IMG, "
+				+ "    D_RE_IMG, "
 				+ "    D_NUM, "
 				+ "    D_NAME, "
 				+ "    D_KIND, "
@@ -119,19 +121,21 @@ public class MemberDao {
 				+ "    NEUTERED, "
 				+ "    VACCINE, "
 				+ "    MEM_CODE "
-				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, 'NULL', ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ ") VALUES('DOG' || DOG_ID.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, dog.getNum());
-			pstmt.setString(2, dog.getName());
-			pstmt.setString(3, dog.getKind());
-			pstmt.setString(4, dog.getSize());
-			pstmt.setString(5, dog.getGender());
-			pstmt.setString(6, dog.getNeutered());
-			pstmt.setString(7, dog.getVaccine());
-			pstmt.setInt(8, member.getMemCode());
+			pstmt.setString(1, dog.getImgOriginName());
+			pstmt.setString(2, dog.getImgReName());
+			pstmt.setInt(3, dog.getNum());
+			pstmt.setString(4, dog.getName());
+			pstmt.setString(5, dog.getKind());
+			pstmt.setString(6, dog.getSize());
+			pstmt.setString(7, dog.getGender());
+			pstmt.setString(8, dog.getNeutered());
+			pstmt.setString(9, dog.getVaccine());
+			pstmt.setInt(10, member.getMemCode());
 			
 			result = pstmt.executeUpdate();
 			
@@ -157,7 +161,6 @@ public class MemberDao {
 			pstmt.setInt(1, code);
 			
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
 				dog = new Dog();
 				
@@ -183,7 +186,7 @@ public class MemberDao {
 		List<Dog> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT D_NUM, D_NAME, D_KIND, D_SIZE, D_GENDER, NEUTERED, VACCINE, MEM_CODE "
+		String query = "SELECT D_NUM, D_ORI_IMG, D_RE_IMG, D_NAME, D_KIND, D_SIZE, D_GENDER, NEUTERED, VACCINE, MEM_CODE "
 					 + "FROM DOG_INFO "
 					 + "WHERE MEM_CODE = ?";
 		
@@ -199,6 +202,8 @@ public class MemberDao {
 				
 				dog.setMemCode(rs.getInt("MEM_CODE"));
 				dog.setNum(rs.getInt("D_NUM"));
+				dog.setImgOriginName(rs.getString("D_ORI_IMG"));
+				dog.setImgReName(rs.getString("D_RE_IMG"));
 				dog.setName(rs.getString("D_NAME"));
 				dog.setKind(rs.getString("D_KIND"));
 				dog.setSize(rs.getString("D_SIZE"));
@@ -217,6 +222,88 @@ public class MemberDao {
 		}
 		
 		return list;
+	}
+
+	public int countMemberDog(Connection connection, int memCode) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT COUNT(D_NUM) "
+					 + "FROM DOG_INFO "
+					 + "WHERE MEM_CODE = ?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, memCode);
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			result = rs.getInt("COUNT(D_NUM)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public Admin findAdminById(Connection connection, String id) {
+		Admin admin = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM ADMIN WHERE ADM_ID=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				admin = new Admin();
+				
+				admin.setId(rs.getString("ADM_ID"));
+				admin.setPassword(rs.getString("ADM_PWD"));
+				admin.setRole(rs.getString("ADM_ROLE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return admin;
+	}
+
+	public int updateMemberPassword(Connection connection, int memCode, String userPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE MEMBER SET MEM_PWD=? WHERE MEM_CODE=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, userPwd);
+			pstmt.setInt(2, memCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

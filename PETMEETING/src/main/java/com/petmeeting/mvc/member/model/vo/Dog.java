@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class Dog {
 	private String id;
 	
+	private String imgReName;
+	
+	private String imgOriginName;
+	
 	private int num;
 	
 	private String name;

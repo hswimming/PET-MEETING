@@ -31,7 +31,6 @@ public class MemberMypageServlet extends HttpServlet {
     		
     		request.setAttribute("list", list);
     		
-    		
     		request.getRequestDispatcher("/views/member/myPage.jsp").forward(request, response);
     	} else {
 			request.setAttribute("msg", "로그인 후 수정해 주세요.");
