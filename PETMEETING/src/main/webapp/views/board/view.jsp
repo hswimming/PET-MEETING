@@ -95,11 +95,23 @@
                     <th>조회수</th>
                     <td>${ board.views }</td>
                 </tr>
-             <!--    <tr>
+                <tr>
                     <th>첨부파일</th>
                     <td>
+                    <c:if test="${ empty board.originalFileName }">
+                    	<span> - </span>
+                    </c:if>
+                    <c:if test="${ not empty board.originalFileName }">
+					    <%--  <a href="javascript:" id="fileDown">
+	                    	<span> ${ board.originalFileName }</span>
+					     </a>      --%>   
+					    <a href="${ path }/resources/upload/board/${board.renamedFileName}" download="${ board.originalFileName }">
+					    	<span> ${ board.originalFileName } </span>
+					    </a>        	
+                    </c:if>
+                    	
                     </td>
-                </tr> -->
+                </tr> 
                 <tr>
                     <th>내 용</th>
                     <td>${ board.boardContent }</td>
@@ -148,6 +160,9 @@
  			}
  		});
  		
+ 		$('#fileDown').on('click', () => {
+ 			location.assign('${ path }/board/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName}');
+ 		});
  		
  	}); 
  </script>   
