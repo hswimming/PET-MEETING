@@ -63,8 +63,8 @@
 		<!-- 게시판 선택 화면 -->
 		<div class="b_wrapper">
 			<img src="${ path }/resources/image/walkmain.jpg" id="walkimg">
-			<div id="walk-list" onclick="location.href='${ path }/walk_board/search'"></div>
-			<div id="walk-board" onclick="location.href='${ path }/walk_board/search'"></div>
+			<div id="walk-list" onclick="location.href='${ path }/views/walkboard/recowalk.jsp'"></div>
+			<div id="walk-board" onclick="location.href='${ path }/views/walkboard/walksearch.jsp'"></div>
 		</div>
 	</section>
 </body>

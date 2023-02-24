@@ -32,7 +32,7 @@ public class MemberUpdatePasswordServlet extends HttpServlet {
 
     	if(loginMember != null) {
     		
-    		result = new MemberService().updatePassword(loginMember.getMemCode(), userPwd);
+    		result = new MemberService().updatePassword(loginMember.getMCode(), userPwd);
     		
     		if(result > 0) {
     			session.setAttribute("loginMember", new MemberService().findMemberById(loginMember.getId()));

@@ -183,27 +183,27 @@
 	    					} else {
 		    					$('div#tab-2').remove();
 		    			 	    $('li#tab_title2').remove();
-		    			    	location.replace('${ path }/member/dogDelete');
+// 		    			    	location.replace('${ path }/member/dogDelete');
 	    					}
 	    				} else {
 	    					$('div#tab-3').remove();
 	    			 	    $('li#tab_title3').remove();
-	    			    	location.replace('${ path }/member/dogDelete');
+// 	    			    	location.replace('${ path }/member/dogDelete');
 	    				}
 	    			} else {
     					$('div#tab-4').remove();
     			 	    $('li#tab_title4').remove();
-    			    	location.replace('${ path }/member/dogDelete');
+//     			    	location.replace('${ path }/member/dogDelete');
 	    			}
 	    		} else {
 	    			$('div#tab-5').remove();
 			 	    $('li#tab_title5').remove();
-			    	location.replace('${ path }/member/dogDelete');
+// 			    	location.replace('${ path }/member/dogDelete');
 	    		}
 	    	} else {
 	    		$('div#tab-6').remove();
 		 	    $('li#tab_title6').remove();
-		    	location.replace('${ path }/member/dogDelete');
+// 		    	location.replace('${ path }/member/dogDelete');
 	    	}
 	    	
 	    	

@@ -29,7 +29,7 @@ public class MemberService {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		if(member.getMemCode() > 0) {
+		if(member.getMCode() > 0) {
 			result = new MemberDao().updateMember(connection, member);
 		} else {
 			result = new MemberDao().insertMember(connection, member);
@@ -89,30 +89,30 @@ public class MemberService {
 		return this.findMemberById(nickname) != null;
 	}
 
-	public List<Dog> findAllDogByCode(int memCode) {
+	public List<Dog> findAllDogByCode(int mCode) {
 		List<Dog> list = null;
 		Connection connection = getConnection();
 		
-		list = new MemberDao().findAllDogByCode(connection, memCode);
+		list = new MemberDao().findAllDogByCode(connection, mCode);
 		
 		return list;
 	}
 
-	public int countMemberDog(int memCode) {
+	public int countMemberDog(int mCode) {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		result = new MemberDao().countMemberDog(connection, memCode);
+		result = new MemberDao().countMemberDog(connection, mCode);
 		
 		
 		return result;
 	}
 
-	public int updatePassword(int memCode, String userPwd) {
+	public int updatePassword(int mCode, String userPwd) {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		result = new MemberDao().updateMemberPassword(connection, memCode, userPwd);
+		result = new MemberDao().updateMemberPassword(connection, mCode, userPwd);
 		
 		if(result > 0) {
 			commit(connection);

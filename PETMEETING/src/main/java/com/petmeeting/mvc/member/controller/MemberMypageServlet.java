@@ -27,7 +27,7 @@ public class MemberMypageServlet extends HttpServlet {
     	List<Dog> list = null;
     	
     	if(loginMember != null) {
-    		list = new MemberService().findAllDogByCode(loginMember.getMemCode());
+    		list = new MemberService().findAllDogByCode(loginMember.getMCode());
     		
     		request.setAttribute("list", list);
     		

@@ -28,5 +28,5 @@ public class Dog {
 	
 	private String vaccine;
 	
-	private int memCode;
+	private int mCode;
 }

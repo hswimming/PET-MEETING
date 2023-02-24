@@ -42,9 +42,9 @@ public class MemberDogInsertServlet extends HttpServlet {
         	// DefaultFileRenamePolicy : 중복되는 이름 뒤에 1 ~ 9999 붙인다.
         	MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
     		
-    		num = new MemberService().countMemberDog(loginMember.getMemCode());
+    		num = new MemberService().countMemberDog(loginMember.getMCode());
     		
-    		member.setMemCode(loginMember.getMemCode());
+    		member.setMCode(loginMember.getMCode());
     		// 파일에 대한 정보를 가져올 때
     		dog.setImgOriginName(mr.getOriginalFileName("upimg"));
     		dog.setImgReName(mr.getFilesystemName("upimg"));

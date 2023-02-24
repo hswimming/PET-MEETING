@@ -1,4 +1,4 @@
-package com.petmeeting.mvc.walkboard;
+package com.petmeeting.mvc.walkboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

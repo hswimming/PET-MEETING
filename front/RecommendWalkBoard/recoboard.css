@@ -1,5 +1,4 @@
 
-
 body{
     margin: 0px;
 }
@@ -106,13 +105,10 @@ footer ul {
 .mainDiv {
     display: inline-block;
     /* border 삭제하기 */
-    border: 1px solid;
-    height: auto;
-    margin-top: 10px;
+
 }
 
 #firstDiv {
-    border: 1px solid;
     width: 80%;
     margin-right: 20px;
     float: left;
@@ -143,38 +139,43 @@ footer {
     display: flex;
     justify-content: center; 
     align-items: center;
+    overflow: scroll;
+
 }
 
 .item{
-    height: 400px; display: flex;
-    justify-content: center; align-items: center;
-    display: none;
+    height: auto;
+    margin-top: 10px;
+    justify-content: center; 
+    align-items: center;
+    display: flex;
+    background-color: rgb(255, 249, 239);
 }
 
 .active{
-    display: flex;
-    height: 400px; 
-    width: 600px; 
+    display: inline-block;
 }
 
 #prev, #prev:active, #prev:focus{
-    float: left;
     top: 45%;
     transform: translateY(-50%);
     width: 50px; height: 20px;
     border: none; background-color: blanchedalmond; outline: none;
-    margin-left: 30%;
+    float: left;
+    clear: left;
 }
 #next, #next:active, #next:focus{
-    float: right;
     top: 45%;
     transform: translateY(-50%);
     width: 50px; height: 20px;
     border: none; background-color: blanchedalmond; outline: none;
-    margin-right: 30%;
+    float: right;
+    clear: right;
+    margin-right: 20%;
+
 }
 
 
-p {
+.recoPtag {
     clear: both;
 }

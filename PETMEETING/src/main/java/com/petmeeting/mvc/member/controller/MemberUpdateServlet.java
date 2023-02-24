@@ -32,7 +32,7 @@ public class MemberUpdateServlet extends HttpServlet {
     	if(loginMember != null) {
     		member = new Member();
     		
-    		member.setMemCode(loginMember.getMemCode());
+    		member.setMCode(loginMember.getMCode());
     		member.setNickname(request.getParameter("nickname"));
     		member.setPhone(request.getParameter("phone"));
     		member.setAddress(request.getParameter("address"));
