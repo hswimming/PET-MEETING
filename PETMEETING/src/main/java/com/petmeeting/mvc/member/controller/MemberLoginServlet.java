@@ -33,6 +33,8 @@ public class MemberLoginServlet extends HttpServlet {
 		Member loginMember = new MemberService().login(id, password);
 		Admin admin = new AdminService().login(id, password);
 		
+		System.out.println(loginMember);
+		
 		if (loginMember != null || admin != null) {
 			
 			session = request.getSession();
@@ -49,7 +51,7 @@ public class MemberLoginServlet extends HttpServlet {
 		}
 		
 		
-		
+	
 		
 		
 		

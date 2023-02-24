@@ -45,19 +45,26 @@
     %>
     <section id="content">
 		<div id="board-list-container">
-		<h2 id="boardH2"style="text-align: center; font-size: 2em;">${ param.boardCode }</h2>
+		<h2 id="boardH2"style="text-align: center; font-size: 2em;">
+		<c:if test="${ param.boardCode eq 'B1' }"><c:out value="펫 다이어리"/></c:if>
+            <c:if test="${ param.boardCode eq 'B2' }"><c:out value="펫미팅 후기"/></c:if>
+            <c:if test="${ param.boardCode eq 'B3' }"><c:out value="정보 공유"/></c:if>
+            <c:if test="${ param.boardCode eq 'B4' }"><c:out value="문의 / 건의"/></c:if>
+            <c:if test="${ param.boardCode eq 'B5' }"><c:out value="공지사항"/></c:if>
+            <c:if test="${ param.boardCode eq 'B6' }"><c:out value="신고하기"/></c:if>
+        </h2>
 		<c:if test="${ not empty loginMember }">
 			<button id="btn-add" onclick="location.href='${ path }/board/write'">글쓰기</button><br><br>
 		</c:if>
               
 		<select name="category" id="category" onchange="location.href=this.value" style="margin-bottom: 5px;">
-			<option value="" selected disabled>카테고리</option>
+			<option value="카테고리" selected disabled>카테고리</option>
 			<option value="${ path }/board/list?boardCode=B1&page=1">펫 다이어리</option>
 			<option value="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</option>
 			<option value="${ path }/board/list?boardCode=B3&page=1">정보 공유</option>
 			<option value="${ path }/board/list?boardCode=B4&page=1">문의 / 건의</option>
 			<option value="${ path }/board/list?boardCode=B5&page=1">공지사항</option>
-			<option value="${ path }/board/list?boardCode=B5&page=1">신고하기</option>
+			<option value="${ path }/board/list?boardCode=B6&page=1">신고하기</option>
 		</select>
 		<select name="writingnumber" id="writingnumber" style="float: right; margin-bottom: 5px;">
 			<option value="5" id="five">5개씩 보기</option>
@@ -125,6 +132,9 @@
       $(document).ready(() => {
     	  $('#category').val('${ param.boardCode }').attr("selected", true);
     	  
+    	  $(function(){
+    		  $("#category").val("카테고리").attr("selected","true");
+    	  });
     	  
       });
       </script>

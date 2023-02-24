@@ -17,7 +17,7 @@ public class EncryptPasswordWrapper extends HttpServletRequestWrapper {
 		String value = "";
 		
 		// 클라이언트가 전달하는 값 중에 userPwd 값만 암호화 처리하고 나머지는 정상적으로 반환하도록 구현
-		if(name.equals("password")) {
+		if(name.equals("password") || name.equals("userPwd")) {
 			value = Encrypt.SHA512(value);
 		} else {
 			value = super.getParameter(name);

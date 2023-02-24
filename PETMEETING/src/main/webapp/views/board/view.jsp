@@ -113,7 +113,7 @@
                     <th colspan="4">
                     <c:if test="${ not empty loginMember && loginMember.id == board.memberId }">
                         <button type="button" onclick="location.href='${ path }/board/update?boardNo=${ board.boardNo }'">수정</button>
-                        <button type="button">삭제</button>
+                        <button type="button" id="btnDelete">삭제</button>
                         </c:if>
                         <button type="button" onclick="location.href='${ path }/board/list?boardCode=${ board.boardCode }&page=1'">목록</button>
                  
@@ -172,6 +172,12 @@
 	            $('#so').focus();
 	         }
 	      });
+    	
+    	$('#btnDelete').on('click', (event) => {
+			if(confirm('정말로 게시글을 삭제 하시겠습니까?')) {
+				location.replace('${ path }/board/delete?boardNo=${ board.boardNo }&boardCode=${board.boardCode}');
+			}
+    	});
 		
 	});
     </script>

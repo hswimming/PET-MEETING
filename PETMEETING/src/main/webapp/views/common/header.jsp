@@ -32,14 +32,60 @@
            <div class="container-fluid">
             	<div class="login-container">
 					  <div>
-                  	  	<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" alt="" id="logoimg">
+					  	<a href="${ path }">
+                  	  		<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" id="logoimg">
+						</a>
                 	  </div>
 					<c:if test="${ empty loginMember && empty admin }">
                   	  	<button type="button" id="si" class="btn btn-outline-secondary">회원가입</button>
                    	 	<button type="button" id="so" class="btn btn-outline-secondary">로그인</button>             
 					</c:if>
             	</div>
-           </div>
+           		<c:if test="${ not empty loginMember }">
+           		<div style="position: absolute; right: 16%">
+           			${ loginMember.name }님 안녕하세요.
+           		</div>
+            	<div class="login-container">
+            		
+					<table>
+						<tr>
+							<td>
+								<button id="myPage" class="btn btn-outline-secondary" onclick="location.href='${ path }/member/myPage'">내 정보</button>
+							</td>
+							<td>
+								<button id="logout" class="btn btn-outline-secondary" onclick="location.replace('${ path }/logout')">로그아웃</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				</c:if>
+				<c:if test="${ empty loginMember && not empty admin }">
+					<div style="position: absolute; right: 16%">
+						관리자님 어서오시라요.
+					</div>
+					<div class="login-container">
+						<table>
+							<tr>
+								<td colspan="2">
+					
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button id="aLogout" class="btn btn-outline-secondary" onclick="location.replace('${ path }/logout')">로그아웃</button>
+									<button id="manageMem" class="btn btn-outline-secondary" onclick="location.replace('${ path }/admin/manage')">회원관리</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</c:if>
+            	</div>
+            	
     </nav>
     
     <div id="title">
@@ -50,38 +96,7 @@
     </div> 
   
 			
-				<c:if test="${ not empty loginMember }">
-					<table>
-						<tr>
-							<td colspan="2">
-								${ loginMember.name }님 안녕하세요.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button onclick="location.href='${ path }/member/myPage'">내 정보</button>
-							</td>
-							<td>
-								<button onclick="location.replace('${ path }/logout')">로그아웃</button>
-							</td>
-						</tr>
-					</table>
-				</c:if>
-				<c:if test="${ empty loginMember && not empty admin }">
-					<table>
-						<tr>
-							<td colspan="2">
-								관리자님 어서오시라요.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button onclick="location.replace('${ path }/logout')">로그아웃</button>
-								<button onclick="location.replace('${ path }/admin/manage')">회원관리</button>
-							</td>
-						</tr>
-					</table>
-				</c:if>
+				
 				
 				
 				<div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="fixed" >

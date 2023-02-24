@@ -39,12 +39,23 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoardByBoardNo(int boardNo) {
+	public Board getBoardByBoardNo(int boardNo, boolean hasRead) {
+		int result = 0;
 		Board board = null;
 		
 		Connection connection = getConnection();
 		
 		board = new BoardDao().findBoardByBoardNo(connection, boardNo);
+		
+		if(board != null && !hasRead) {
+			result = new BoardDao().updateReadCount(connection, board);
+			
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
 
 		close(connection);
 		return board;
@@ -107,6 +118,24 @@ public class BoardService {
 		
 		close(connection);
 		
+		return result;
+	}
+
+	public int delete(int boardNo, String boardCode) {
+		int result = 0;
+		//트랜잭션 처리를 서비스에서! 
+		Connection connection = getConnection();
+
+		result = new BoardDao().boardStatus(connection, boardNo, boardCode);
+
+		if(result > 0) {
+		commit(connection);
+		} else {
+		rollback(connection);
+		}
+
+		close(connection);
+
 		return result;
 	}
 

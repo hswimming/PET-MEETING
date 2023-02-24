@@ -27,7 +27,7 @@ public class BoardUpdateServlet extends HttpServlet {
         Member loginMember =(session == null) ? null : (Member) session.getAttribute("loginMember");
         
         if(loginMember != null) {
-        	Board board = new BoardService().getBoardByBoardNo(Integer.parseInt(request.getParameter("boardNo")));
+        	Board board = new BoardService().getBoardByBoardNo(Integer.parseInt(request.getParameter("boardNo")), true);
         	
         	if(board != null && loginMember.getId().equals(board.getMemberId())) {
         		request.setAttribute("board", board);

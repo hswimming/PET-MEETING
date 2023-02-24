@@ -15,14 +15,14 @@ body{
 
 
 /*회원가입, 로그인 버튼*/
-#si {
+#si, #myPage, #manageMem {
     position: absolute;
     top: 15px;
     right: 30px;
     color: rgb(12, 66, 12);
     font-family: 'Jua', sans-serif;
 }
-#so{
+#so, #logout, #aLogout{
     position: absolute;
     top: 15px;
     right: 120px;
@@ -47,8 +47,9 @@ header{
 
 /* section메인내용*/
 #addimg{
-    height: 400px;
-    background: url("https://cdn.pixabay.com/photo/2015/12/13/07/31/new-years-day-1090770_960_720.jpg") fixed; 
+    height: 500px;
+    background: url("https://cdn.pixabay.com/photo/2015/12/13/07/31/new-years-day-1090770_960_720.jpg");
+    background-position: center; 
 }
 
 #fixed{
@@ -85,7 +86,8 @@ header{
 }
 
 #map{
-    margin-left: 57%;
+    float: right;
+    margin-right: 10%
 }
 
 footer{
@@ -177,14 +179,14 @@ ul.tabs li.current{
     margin: auto;
 }
 
-select{
-    width:95%;
-    height:30px;
-    margin: 5px 10px 8px 0px;
-    border: none;
-    outline: none;
-    font-size: 1.2em;
-}
+/* select{ */
+/*     width:95%; */
+/*     height:30px; */
+/*     margin: 5px 10px 8px 0px; */
+/*     border: none; */
+/*     outline: none; */
+/*     font-size: 1.2em; */
+/* } */
 
 /* adminpage section */
 #adminSection article {

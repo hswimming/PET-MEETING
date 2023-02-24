@@ -31,7 +31,6 @@ public class BoardListServlet extends HttpServlet {
       String boardCode = null;
 
       boardCode = request.getParameter("boardCode");
-      System.out.println(boardCode);
          
       try {
     	  page = Integer.parseInt(request.getParameter("page"));			
@@ -40,12 +39,9 @@ public class BoardListServlet extends HttpServlet {
       }
 
       listCount = new BoardService().getBoardCount(boardCode);
-      System.out.println(listCount);
-      System.out.println(page);
       pageInfo = new PageInfo(page, 5, listCount, 10);
       list = new BoardService().getBoardList(pageInfo, boardCode);
       
-      System.out.println(list);
       
       request.setAttribute("pageInfo", pageInfo);
       request.setAttribute("list", list);

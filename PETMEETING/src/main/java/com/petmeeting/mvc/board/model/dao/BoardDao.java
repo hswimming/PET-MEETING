@@ -306,6 +306,50 @@ public class BoardDao {
 		
 		return result;
 	}
+
+	public int updateReadCount(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET B_VIEWS=? WHERE B_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			board.setViews(board.getViews() + 1);
+			
+			pstmt.setInt(1, board.getViews());
+			pstmt.setInt(2, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int boardStatus(Connection connection, int boardNo, String boardCode) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET B_STATUS='N' WHERE B_NO=? AND B_CODE=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, boardCode);			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 
 
