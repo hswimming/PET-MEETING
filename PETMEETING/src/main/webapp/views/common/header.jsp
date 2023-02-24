@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,12 +76,12 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${ path }/board/list">펫다이어리</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list">펫미팅 후기</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list">정보 공유</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list">문의하기</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list">공지사항</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list">신고하기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B1&page=1">펫다이어리</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B3&page=1">정보 공유</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B4&page=1">문의하기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B5&page=1">공지사항</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B6&page=1">신고하기</a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,6 +103,7 @@
 		});
 		
 	});
+	
 
 </script>
 

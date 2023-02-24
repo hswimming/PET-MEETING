@@ -1,7 +1,9 @@
 package com.petmeeting.mvc.board.model.vo;
 
 import java.util.Date;
+import java.util.List;
 
+import com.petmeeting.mvc.board.model.vo.Reply;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,14 +28,11 @@ public class Board {
    private Date modifyDate;
    private int views;
    private String boardStatus;
- 
+   private List<Reply> replies;
    
-   public int getReadCount() {
-		int result = 0;
-		
-		
-		return result;
-	}
-	public void setReadCount(int i) {
-	}
+   private String originalFileName;
+   private String renamedFileName;
+
+
+   
 }

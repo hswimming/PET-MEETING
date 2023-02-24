@@ -15,7 +15,7 @@ public class MemberDao {
 		Member member = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM MEMBER WHERE MEM_ID=? AND MEM_STATUS='Y'";
+		String query = "SELECT * FROM MEMBER WHERE M_ID=? AND M_STATUS='Y'";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -27,18 +27,18 @@ public class MemberDao {
 			while(rs.next()) {
 				member = new Member();
 				
-				member.setMemCode(rs.getInt("MEM_CODE"));
-				member.setId(rs.getString("MEM_ID"));
-				member.setPassword(rs.getString("MEM_PWD"));
-				member.setName(rs.getString("MEM_NAME"));
-				member.setNickname(rs.getString("MEM_NICKNAME"));
-				member.setPhone(rs.getString("MEM_PHONE"));
-				member.setAddress(rs.getString("MEM_ADDRESS"));
-				member.setEmail(rs.getString("MEM_EMAIL"));
-				member.setBirth(rs.getString("MEM_BIRTH"));
-				member.setSignUpDate(rs.getDate("MEM_SU_DATE"));
-				member.setGender(rs.getString("MEM_GENDER"));
-				member.setStatus(rs.getString("MEM_STATUS"));
+				member.setMCode(rs.getInt("M_CODE"));
+				member.setId(rs.getString("M_ID"));
+				member.setPassword(rs.getString("M_PWD"));
+				member.setName(rs.getString("M_NAME"));
+				member.setNickname(rs.getString("M_NICKNAME"));
+				member.setPhone(rs.getString("M_PHONE"));
+				member.setAddress(rs.getString("M_ADDRESS"));
+				member.setEmail(rs.getString("M_EMAIL"));
+				member.setBirth(rs.getString("M_BIRTH"));
+				member.setSignUpDate(rs.getDate("M_SU_DATE"));
+				member.setGender(rs.getString("M_GENDER"));
+				member.setStatus(rs.getString("M_STATUS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class MemberDao {
 	public int insertMember(Connection connection, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO MEMBER VALUES(MEM_CODE_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,DEFAULT,?,DEFAULT)";
+		String query = "INSERT INTO MEMBER VALUES(M_CODE_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,DEFAULT,?,DEFAULT)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -81,7 +81,7 @@ public class MemberDao {
 	public int updateMember(Connection connection, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query ="UPDATE MEMBER SET MEM_PWD=?,MEM_NICKNAME=?,MEM_PHONE=?,MEM_ADDRESS=? WHERE MEM_CODE=?";
+		String query ="UPDATE MEMBER SET M_PWD=?,M_NICKNAME=?,M_PHONE=?,M_ADDRESS=? WHERE M_CODE=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -90,7 +90,7 @@ public class MemberDao {
 			pstmt.setString(2, member.getNickname());
 			pstmt.setString(3, member.getPhone());
 			pstmt.setString(4, member.getAddress());
-			pstmt.setInt(5, member.getMemCode());
+			pstmt.setInt(5, member.getMCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

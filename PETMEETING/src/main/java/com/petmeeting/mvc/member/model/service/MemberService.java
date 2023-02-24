@@ -26,7 +26,7 @@ public class MemberService {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		if(member.getMemCode() > 0) {
+		if(member.getMCode() > 0) {
 			result = new MemberDao().updateMember(connection, member);
 		} else {
 			result = new MemberDao().insertMember(connection, member);

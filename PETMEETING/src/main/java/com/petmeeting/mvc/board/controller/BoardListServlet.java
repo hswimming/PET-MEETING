@@ -26,20 +26,25 @@ public class BoardListServlet extends HttpServlet {
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       int page = 0;
       int listCount = 0;
-      
+
       PageInfo pageInfo = null;
       List<Board> list = null;
+      String boardCode = null;
 
-      try {
-         page = Integer.parseInt(request.getParameter("page"));
+         boardCode = request.getParameter("boardCode");
+         System.out.println(boardCode);
          
-      } catch (NumberFormatException e) {
-         page = 1;
-      }
-      
-      listCount = new BoardService().getBoardCount();
+         try {
+     		page = Integer.parseInt(request.getParameter("page"));			
+ 		} catch (NumberFormatException e) {
+ 			page = 1;
+ 		}
+
+      listCount = new BoardService().getBoardCount(boardCode);
+      System.out.println(listCount);
+      System.out.println(page);
       pageInfo = new PageInfo(page, 5, listCount, 10);
-      list = new BoardService().getBoardList(pageInfo);
+      list = new BoardService().getBoardList(pageInfo, boardCode);
       
       System.out.println(list);
       

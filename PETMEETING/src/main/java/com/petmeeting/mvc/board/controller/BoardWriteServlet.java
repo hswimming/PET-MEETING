@@ -57,26 +57,25 @@ public class BoardWriteServlet extends HttpServlet {
             Board board = new Board();
             
             board.setBoardCode(mr.getParameter("category"));
-            board.setMemberCode(loginMember.getMemCode());
+            board.setMemberCode(loginMember.getMCode());
             board.setBoardTitle(mr.getParameter("title"));
             board.setBoardContent(mr.getParameter("content"));
             board.setSubjectId(mr.getParameter("subject"));
-            
-
+           
             
             
             int result = new BoardService().save(board);
             
             if(result > 0) {
-         	   request.setAttribute("msg", "게시글 등록 성공");
-         	   request.setAttribute("location", "/board/list");
+         	   request.setAttribute("msg", "게시글이 등록되었습니다.");
+         	   request.setAttribute("location", "/board/list?boardCode="+board.getBoardCode());
             } else {
-         	   request.setAttribute("msg", "게시글 등록 실패");
-         	   request.setAttribute("location", "/board/list");
+         	   request.setAttribute("msg", "게시글이 등록되지 않았습니다.");
+         	   request.setAttribute("location", "/board/list?boardCode="+board.getBoardCode());
             }
         } else {
      	   request.setAttribute("msg", "로그인 후 작성해 주세요");
-            request.setAttribute("location", "/");
+     	   request.setAttribute("location", "/");
         }
         
         request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

@@ -13,8 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    
+    	section{
+    	width:70%;
+    	margin:auto;
+    	}
         section>div#board-write-container{
-            width:600px; margin:0 auto; text-align:center;
+            width: ; margin:0 auto; text-align:center; 
         }
         section>div#board-write-container h2{
             margin:10px 0;
@@ -23,7 +28,7 @@
             width:500px; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both;
         }
         table#tbl-board th{
-            width: 125px; border:1px solid; padding: 5px 0; text-align:center;
+            width: 125px; border:1px solid; padding: 5px 0; text-align:center; background-color:whitesmoke;
         } 
         table#tbl-board td{
             border:1px solid; padding: 5px 0 5px 10px; text-align:left;
@@ -69,106 +74,120 @@
                 <tr>
                     <th>카테고리</th>
                     <td>${ board.boardName }</td>
-                </tr>
-                <tr>
                     <th>글번호</th>
                     <td>${ board.boardNumber }</td>
                 </tr>
+
                 <tr>
                     <th>제 목</th>
-                    <td>${ board.boardTitle }</td>
+                    <td colspan="3">${ board.boardTitle }</td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td>${ board.createDate }</td>
+                    <td colspan="3">${ board.createDate }</td>
                 </tr>
                 
                 <tr>
                     <th>작성자</th>
-                    <td>${ board.memberNickName }</td>
+                    <td colspan="3">${ board.memberNickName }</td>
                 </tr>
                 <tr>
                     <th>대상자</th>
-                    <td>${ board.subjectId }</td>
+                    <td colspan="3">${ board.subjectId }</td>
                 </tr>
                 <tr>
                     <th>조회수</th>
-                    <td>${ board.views }</td>
+                    <td colspan="3">${ board.views }</td>
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td>
-                    <c:if test="${ empty board.originalFileName }">
-                    	<span> - </span>
-                    </c:if>
-                    <c:if test="${ not empty board.originalFileName }">
-					    <%--  <a href="javascript:" id="fileDown">
-	                    	<span> ${ board.originalFileName }</span>
-					     </a>      --%>   
-					    <a href="${ path }/resources/upload/board/${board.renamedFileName}" download="${ board.originalFileName }">
-					    	<span> ${ board.originalFileName } </span>
-					    </a>        	
-                    </c:if>
-                    	
+                    <td colspan="3">
+                        <span> - </span>
                     </td>
-                </tr> 
-                <tr>
-                    <th>내 용</th>
-                    <td>${ board.boardContent }</td>
                 </tr>
                 <tr>
-                    <th colspan="2">
+                    <th>내 용</th>
+                    <td colspan="3">${ board.boardContent }</td>
+                </tr>
+                <tr>
+                    <th colspan="4">
                     <c:if test="${ not empty loginMember && loginMember.id == board.memberId }">
                         <button type="button" onclick="location.href='${ path }/board/update?boardNo=${ board.boardNo }'">수정</button>
                         <button type="button" id="btnDelete">삭제</button>
                         </c:if>
-                        <button type="button" onclick="location.href='${ path }/board/list'">목록</button>
+                        <button type="button" onclick="location.href='${ path }/board/list?boardCode=${ board.boardCode }&page=1'">목록</button>
+                 
                     </th>
                 </tr>
             </table>
+            <hr>
+            
+            <br>
             <div id="comment-container">
                 <div class="comment-editor">
-                    <form action="" method="POST">
-                        <input type="hidden" name="boardNo" value="">
-                        <input type="hidden" name="writer" value="">
-                        <textarea name="content" cols="55" rows="3"></textarea>
+                    <form action="${ path }/board/reply" method="POST">
+	                    
+                        <input type="hidden" name="boardNo" value="${ board.boardNo }">
+                        <textarea name="content" id="content" cols="55" rows="2"></textarea>
                         <button type="submit" id="btn-insert">등록</button>	    			
                     </form>
-                </div> 
+                </div>
             </div>
             <table id="tbl-comment">
-                <tr class="level1">
-                    <td>
-                        <sub class="comment-writer">monimon</sub>
-                        <sub class="comment-date">2023.02.07</sub>
-                        <br>
-                        컨텐츠
-                    </td>
-                    <td>
-                        <button>삭제</button>
-                    </td>
-                </tr>
+            	<c:forEach var="reply" items="${ board.replies }">
+	                <tr class="level1">
+	                    <td>
+	                        <sub class="comment-writer">${ reply.memberNickName }</sub>
+	                        <sub class="comment-date">${ reply.createDate }</sub>
+	                        
+	                        <br>
+	                        <span>${ reply.content }</span>
+	                    </td>
+	                    <td>
+	                    	<c:if test="${ not empty loginMember && loginMember.id == reply.memberId }">
+	                        	
+	                        	<button type="button" id="btnRDelete" rNo="${ reply.replyNo }">삭제</button>
+	                    	</c:if>
+	    
+	                    </td>
+	                </tr>
+            	</c:forEach>
             </table>
         </div>
     </section>
-    
- <script type="text/javascript">
- 	$(document).ready(() => {
- 		$('#btnDelete').on('click', () => {
- 			if(confirm('정말로 게시글을 삭제할까요?' )) {
- 				location.replace('${ path }/board/delete?no=${ board.boardNo }');
- 			}
- 		});
- 		
- 		$('#fileDown').on('click', () => {
- 			location.assign('${ path }/board/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName}');
- 		});
- 		
- 	}); 
- </script>   
+    <script>
+   //delete 
+  
+			
     
     
+    $(document).ready(() => {
+    	$('#btnDelete').on('click', (event) => {
+			if(confirm('정말로 게시글을 삭제 하시겠습니까?')) {
+				location.replace('${ path }/board/delete?boardNo=${ board.boardNo }&boardCode=${board.boardCode}')
+			}
+		});
+    	
+    	
+    	
     
+    	$('#btnRDelete').on('click', (event) => {
+    		let rNo = $(event.target).attr('rNo');
+    		
+    		if(confirm('댓글을 삭제하시겠습니까?')){
+    			location.href='${ path }/board/replydelete?boardNo=${param.boardNo}&replyNo='+rNo;
+    		}		
+    	}); 
+    	
+    	
+    	$('#replyContent').on('focus', () => {
+	         if(${ empty loginMember}) {
+	            alert('로그인 후 이용해 주세요.')   ;
+	            $('#so').focus();
+	         }
+	      });
+		
+	});
+    </script>
 </body>
 </html>
-<jsp:include page="/views/common/footer.jsp" />

@@ -97,13 +97,15 @@ table#tbl-board td{
                 <th><label for="category">카테고리</label></th>
                 <td>
                     <select name="category" id="category" required>
-                        <option selected>선택</option>
-                        <option value="B1">펫 다이어리</option>
-                        <option value="B2">펫 미팅 후기</option>
-                        <option value="B3">정보 공유</option>
-                        <option value="B4">문의 / 건의</option>
-                        <option value="B5">공지사항</option>
-                        <option value="B6">신고하기</option>
+                    	<option value="" selected disabled>선택</option>
+                        <option value="B1" id="B1">펫 다이어리</option>
+                        <option value="B2" id="B2">펫 미팅 후기</option>
+                        <option value="B3" id="B3">정보 공유</option>
+                        <option value="B4" id="B4">문의 / 건의</option>
+                        <option value="B5" id="B5">공지사항</option>
+                        <option value="B6" id="B6">신고하기</option>
+                        
+                        
                     </select>
                 </td>
             </tr>
@@ -123,8 +125,7 @@ table#tbl-board td{
                 <th>첨부파일</th>
                 <td>
                     <input type="file" name="upfile1" id="upfile1"><br>
-<!--                     <input type="file" name="upfile2" id="upfile2"><br> -->
-<!--                     <input type="file" name="upfile3" id="upfile3"> -->
+
                 </td>
             </tr>
             <tr>

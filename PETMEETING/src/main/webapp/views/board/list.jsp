@@ -29,6 +29,9 @@
         table#tbl-board th, table#tbl-board td{
             border:1px solid; padding: 5px 0; text-align:center;
         } 
+        table#tbl-board th{
+        	background-color:orange;
+        }
         button#btn-add{
 			float:right;
         }
@@ -36,25 +39,29 @@
             margin-top:10px; text-align:center;
         }
     </style>
+    <%
+    	String boardCode = request.getParameter("boardCode");
+    	System.out.println("boardCode=" + boardCode);
+    %>
     <section id="content">
 		<div id="board-list-container">
-		<h2 style="text-align: center; font-size: 2em;">정보공유방</h2>
+		<h2 id="boardH2"style="text-align: center; font-size: 2em;">${ param.boardCode }</h2>
 		<c:if test="${ not empty loginMember }">
 			<button id="btn-add" onclick="location.href='${ path }/board/write'">글쓰기</button><br><br>
 		</c:if>
               
-		<select name="category" id="category" style="margin-bottom: 5px;">
-			<option selected>선택</option>
-			<option value="introduce">펫 다이어리</option>
-			<option value="review">펫미팅 후기</option>
-			<option value="info">정보 공유</option>
-			<option value="qna">문의 / 건의</option>
-			<option value="notice">공지사항</option>
-			<option value="report">신고하기</option>
+		<select name="category" id="category" onchange="location.href=this.value" style="margin-bottom: 5px;">
+			<option value="" selected disabled>카테고리</option>
+			<option value="${ path }/board/list?boardCode=B1&page=1">펫 다이어리</option>
+			<option value="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</option>
+			<option value="${ path }/board/list?boardCode=B3&page=1">정보 공유</option>
+			<option value="${ path }/board/list?boardCode=B4&page=1">문의 / 건의</option>
+			<option value="${ path }/board/list?boardCode=B5&page=1">공지사항</option>
+			<option value="${ path }/board/list?boardCode=B5&page=1">신고하기</option>
 		</select>
 		<select name="writingnumber" id="writingnumber" style="float: right; margin-bottom: 5px;">
-			<option value="five">5개씩 보기</option>
-			<option value="ten" selected>10개씩 보기</option>
+			<option value="5" id="five">5개씩 보기</option>
+			<option value="10" id="ten" selected>10개씩 보기</option>
 		</select>
 	
 	
@@ -65,9 +72,7 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				<th>첨부파일</th>
 				<th>조회수</th>
-				<!-- <th>첨부파일</th> -->
 			</tr>
 			<c:if test="${ empty list }">
 				<tr>
@@ -77,28 +82,26 @@
 			</tr>
 			</c:if>
 			<c:if test="${ not empty list }">
-				<c:forEach var="board" items="${ list }">
-					<tr>
-						<td>${ board.rowNum }</td>
-						<td>
-							<a href="${ path }/board/view?boardNo=${ board.boardNo} ">
-								${ board.boardTitle }
-							</a>
-						</td>
-						<td>${ board.memberCode }</td>
-						<td>${ board.createDate }</td>
-						<td>
-								<span> - </span>
-						</td>
-						<td>${ board.views }</td>
-					</tr>
-				</c:forEach>
+			<c:forEach var="board" items="${ list }">
+			<tr>
+				<td>${ board.rowNum }</td>
+				<td>
+					<a href="${ path }/board/view?boardNo=${board.boardNo}">
+						${ board.boardTitle }
+					</a>
+				</td>
+				<td>${ board.memberNickName }</td>
+				<td>${ board.createDate }</td>
+				<td>${ board.views }</td>
+			</tr>
+			</c:forEach>
 			</c:if>
+			
 		</table>
 
 		<div id="pageBar">
-			<button onclick="location.href='${ path }/board/list?page=1'">&lt;&lt;</button>
-			<button onclick="location.href='${ path }/board/list?page=${ pageInfo.prevPage }'">&lt;</button>
+			<button onclick="location.href='${ path }/board/list?boardCode=${ param.boardCode }&page=1'">&lt;&lt;</button>
+			<button onclick="location.href='${ path }/board/list?boardCode=${ param.boardCode }&page=${ pageInfo.prevPage }'">&lt;</button>
 			                  
 			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 				<c:choose>
@@ -106,15 +109,23 @@
 						<button disabled>${ status.current }</button>
 					</c:when>
 					<c:otherwise>
-						<button onclick="location.href='${ path }/board/list?page=${ status.current }'">${ status.current }</button>
+						<button onclick="location.href='${ path }/board/list?boardCode=${ param.boardCode }&page=${ status.current }'">${ status.current }</button>
 					</c:otherwise>
 				</c:choose>
+								                  
 			</c:forEach>
 
 
-                  <button onclick="location.href='${ path }/board/list?page=${ pageInfo.nextPage }'">&gt;</button>
-                  <button onclick="location.href='${ path }/board/list?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
+                  <button onclick="location.href='${ path }/board/list?boardCode=${ param.boardCode }&page=${ pageInfo.nextPage }'">&gt;</button>
+                  <button onclick="location.href='${ path }/board/list?boardCode=${ param.boardCode }&page=${ pageInfo.maxPage }'">&gt;&gt;</button>
               </div>
           </div>
       </section>
+      <script>
+      $(document).ready(() => {
+    	  $('#category').val(${ param.boardCode }).attr("selected", true);
+    	  
+    	  
+      });
+      </script>
 <jsp:include page="/views/common/footer.jsp" />
