@@ -1,6 +1,7 @@
 package com.petmeeting.mvc.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,9 +42,6 @@ public class MemberSignUpServlet extends HttpServlet {
 		
 		int result = new MemberService().memberSave(member);
 		
-		
-		
-		
 		if(result > 0) {
 			request.setAttribute("msg", "회원 가입 성공");
 			request.setAttribute("location", "/");
@@ -55,6 +53,4 @@ public class MemberSignUpServlet extends HttpServlet {
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		
-		
 	}
-

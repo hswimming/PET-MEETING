@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor                    
 public class Member {
-	private int memCode;
+	private int mCode;
 	
 	private String id;
 	
@@ -33,8 +33,5 @@ public class Member {
 	private String gender;
 	
 	private String status;
-	
-	
-	
 	
 }

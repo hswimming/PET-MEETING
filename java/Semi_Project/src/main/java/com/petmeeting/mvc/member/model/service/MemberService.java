@@ -1,17 +1,19 @@
 package com.petmeeting.mvc.member.model.service;
 
-import java.sql.Connection;
-
-import com.petmeeting.mvc.board.model.vo.Dog;
-import com.petmeeting.mvc.member.model.dao.MemberDao;
-import com.petmeeting.mvc.member.model.vo.Member;
-import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.commit;
-import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.rollback;
-import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.getConnection;
 import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.close;
+import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.commit;
+import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.getConnection;
+import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.rollback;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.petmeeting.mvc.member.model.dao.MemberDao;
+import com.petmeeting.mvc.member.model.vo.Dog;
+import com.petmeeting.mvc.member.model.vo.Member;
 
 public class MemberService {
-
+	
 	public Member login(String id, String password) {
 		Member member = this.findMemberById(id);
 		
@@ -27,7 +29,7 @@ public class MemberService {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		if(member.getMemCode() > 0) {
+		if(member.getMCode() > 0) {
 			result = new MemberDao().updateMember(connection, member);
 		} else {
 			result = new MemberDao().insertMember(connection, member);
@@ -51,8 +53,26 @@ public class MemberService {
 		
 		close(connection);
 		
-		
 		return member;
+	}
+	
+	
+	// 강아지 정보 인서트
+	public int dogSave(Dog dog, Member member) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().insertDog(connection, dog, member);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
 	}
 	
 	public Dog findDogByCode(int code) {
@@ -68,5 +88,42 @@ public class MemberService {
 	public Boolean isDuplicateNick(String nickname) {
 		return this.findMemberById(nickname) != null;
 	}
-	
+
+	public List<Dog> findAllDogByCode(int mCode) {
+		List<Dog> list = null;
+		Connection connection = getConnection();
+		
+		list = new MemberDao().findAllDogByCode(connection, mCode);
+		
+		return list;
+	}
+
+	public int countMemberDog(int mCode) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().countMemberDog(connection, mCode);
+		
+		
+		return result;
+	}
+
+	public int updatePassword(int mCode, String userPwd) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().updateMemberPassword(connection, mCode, userPwd);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+		
+	}
+
 }
