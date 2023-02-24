@@ -66,11 +66,9 @@
                 <h2>오늘은 어떤 강아지와 달려볼까요?</h2>
             </div>
 
-            <form class="search">
-            	<div style="text-align: center;">
-	                <button type="submit" id="search-button">산책 게시판으로 이동</button>
-            	</div>
-            </form>
+           	<div style="text-align: center;">
+                <button type="submit" id="search_button">산책 게시판으로 이동</button>
+           	</div>
         </div>
         <br>
         <!-- 카테고리 선택 옵션 -->
@@ -170,9 +168,8 @@
     
     <script>
 		$(document).ready(() => {
-			$('#search-button').on('click', () => {
-				alert('버튼클릭');
-// 				location.replace('${ path }/views/walkboard/list')
+			$('#search_button').on('click', () => {
+				location.replace('${ path }/walkboard/list')
 			});
 		});
 	</script>
