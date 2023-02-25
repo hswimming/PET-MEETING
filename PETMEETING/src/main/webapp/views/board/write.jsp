@@ -124,7 +124,7 @@ table#tbl-board td{
             <tr>
                 <th>첨부파일</th>
                 <td>
-                    <input type="file" name="upfile1" id="upfile1"><br>
+                    <input type="file" name="upfile" id="upfile"><br>
 
                 </td>
             </tr>

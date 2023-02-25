@@ -50,30 +50,26 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String query = "SELECT RNUM, B_NO, B_CODE, BC_NAME, B_NUMBER, B_TITLE, M_CODE, M_ID, M_NICKNAME, CREATE_DATE, B_VIEWS\r\n"
-				+ "FROM(\r\n"
-				+ "    SELECT ROWNUM AS RNUM, B_NO, B_CODE, BC_NAME, B_NUMBER, B_TITLE, M_CODE, M_ID, M_NICKNAME, CREATE_DATE, B_VIEWS\r\n"
-				+ "    FROM (\r\n"
-				+ "        SELECT B.B_NO, B.B_CODE, BC.BC_NAME, B.B_NUMBER, B.B_TITLE, M.M_CODE, M.M_ID, M.M_NICKNAME, B.CREATE_DATE, B.B_VIEWS\r\n"
-				+ "        FROM BOARD B\r\n"
-				+ "        JOIN MEMBER M ON(B.M_CODE = M.M_CODE)\r\n"
-				+ "        JOIN BOARD_CODE BC ON(B.B_CODE = BC.BC_CODE)\r\n"
+		String query = "SELECT RNUM, B_NO, B_CODE, BC_NAME, B_NUMBER, B_TITLE, M_CODE, M_ID, M_NICKNAME, CREATE_DATE, B_VIEWS, ORIGINAL_FILENAME "
+				+ "FROM("
+				+ "    SELECT ROWNUM AS RNUM, B_NO, B_CODE, BC_NAME, B_NUMBER, B_TITLE, M_CODE, M_ID, M_NICKNAME, CREATE_DATE, B_VIEWS, ORIGINAL_FILENAME "
+				+ "    FROM ( "
+				+ "        SELECT B.B_NO, B.B_CODE, BC.BC_NAME, B.B_NUMBER, B.B_TITLE, M.M_CODE, M.M_ID, M.M_NICKNAME, B.CREATE_DATE, B.B_VIEWS, B.ORIGINAL_FILENAME "
+				+ "        FROM BOARD B "
+				+ "        RIGHT OUTER JOIN MEMBER M ON(B.M_CODE = M.M_CODE) "
+				+ "        RIGHT OUTER JOIN BOARD_CODE BC ON(B.B_CODE = BC.BC_CODE) "
 				+ "        WHERE B_STATUS='Y' AND B.B_CODE=? "
-				+ "        ORDER BY B.B_NO DESC\r\n"
-				+ "    )\r\n"
-				+ ")\r\n"
-				+ "WHERE RNUM BETWEEN ? AND ?";
+				+ "        ORDER BY B.B_NO DESC "
+				+ "    ) "
+				+ ") "
+				+ "WHERE RNUM BETWEEN ? AND ? ";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			
-//			pstmt.setInt(1, pageInfo.getStartList());
-//			pstmt.setInt(2, pageInfo.getEndList());
 
-				
 			pstmt.setString(1, boardCode);
-//
+
 			pstmt.setInt(2, pageInfo.getStartList());
 			pstmt.setInt(3, pageInfo.getEndList());
 			
@@ -91,6 +87,7 @@ public class BoardDao {
 				board.setMemberCode(rs.getInt("M_CODE"));
 				board.setMemberId(rs.getString("M_ID"));
 				board.setMemberNickName(rs.getString("M_NICKNAME"));
+				board.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));
 				board.setCreateDate(rs.getDate("CREATE_DATE"));
 				board.setViews(rs.getInt("B_VIEWS"));
 				
@@ -113,11 +110,11 @@ public class BoardDao {
 		Board board = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT B_NO, B.B_CODE, BC.BC_NAME,  B_NUMBER, CREATE_DATE, B.M_CODE, M_ID, M.M_NICKNAME,  S_ID ,B_TITLE, B_CONTENT, B_VIEWS\r\n"
-				+ "FROM BOARD B\r\n"
-				+ "JOIN MEMBER M ON(B.M_CODE = M.M_CODE)\r\n"
-				+ "JOIN BOARD_CODE BC ON(B.B_CODE = BC.BC_CODE)\r\n"
-				+ "WHERE B.B_STATUS = 'Y' AND B_NO=?";
+		String query = "SELECT B_NO, B.B_CODE, BC.BC_NAME,  B_NUMBER, CREATE_DATE, B.M_CODE, M_ID, M.M_NICKNAME, S_ID , ORIGINAL_FILENAME, RENAMED_FILENAME,B_TITLE, B_CONTENT, B_VIEWS "
+				+ "FROM BOARD B "
+				+ "JOIN MEMBER M ON(B.M_CODE = M.M_CODE) "
+				+ "JOIN BOARD_CODE BC ON(B.B_CODE = BC.BC_CODE) "
+				+ "WHERE B.B_STATUS = 'Y' AND B_NO=? ";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -138,6 +135,8 @@ public class BoardDao {
 				board.setMemberId(rs.getString("M_ID"));
 				board.setMemberNickName(rs.getString("M_NICKNAME"));
 				board.setSubjectId(rs.getString("S_ID"));
+				board.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));
+				board.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
 				board.setBoardTitle(rs.getString("B_TITLE"));
 				board.setBoardContent(rs.getString("B_CONTENT"));
 				
@@ -158,12 +157,12 @@ public class BoardDao {
 	public int insertBoard(Connection connection, Board board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query1 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_INTRODUCE_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-		String query2 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_REVIEW_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-		String query3 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_INFO_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-		String query4 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_QNA_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-		String query5 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_REPORT_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
-		String query6 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_NOTICE_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
+		String query1 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_INTRODUCE_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
+		String query2 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_REVIEW_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
+		String query3 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_INFO_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
+		String query4 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_QNA_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
+		String query5 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_REPORT_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
+		String query6 = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL, ?, SEQ_NOTICE_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)";
 		
 		
 		try {
@@ -186,6 +185,8 @@ public class BoardDao {
 			pstmt.setInt(3, board.getMemberCode());
 			pstmt.setString(4, board.getBoardContent());
 			pstmt.setString(5, board.getSubjectId());
+			pstmt.setString(6, board.getOriginalFileName());
+			pstmt.setString(7, board.getRenamedFileName());
 			
 			result = pstmt.executeUpdate();
 			
@@ -198,18 +199,19 @@ public class BoardDao {
 	}
 	
 	
-
 	public int updateBoard(Connection connection, Board board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query="UPDATE BOARD SET B_TITLE=?,B_CONTENT=?, MODIFY_DATE=SYSDATE WHERE B_NO=?";
+		String query="UPDATE BOARD SET B_TITLE=?,B_CONTENT=?,ORIGINAL_FILENAME=?,RENAMED_FILENAME=?, MODIFY_DATE=SYSDATE WHERE B_NO=?";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
 			pstmt.setString(1, board.getBoardTitle());
 			pstmt.setString(2, board.getBoardContent());
-			pstmt.setInt(3, board.getBoardNo());
+			pstmt.setString(3, board.getOriginalFileName());
+			pstmt.setString(4, board.getRenamedFileName());
+			pstmt.setInt(5, board.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -225,11 +227,11 @@ public class BoardDao {
 		List<Reply> replies = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT R.R_NO, R.B_NO, R.R_CONTENT, M.M_ID, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE\r\n"
-				+ "FROM REPLY R\r\n"
-				+ "JOIN MEMBER M ON(R.M_CODE = M.M_CODE)\r\n"
-				+ "WHERE R.R_STATUS='Y' AND B_NO=?\r\n"
-				+ "ORDER BY R.R_NO";
+		String query = "SELECT R.R_NO, R.B_NO, R.R_CONTENT, M.M_ID, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE "
+				+ "FROM REPLY R "
+				+ "JOIN MEMBER M ON(R.M_CODE = M.M_CODE) "
+				+ "WHERE R.R_STATUS='Y' AND B_NO=? "
+				+ "ORDER BY R.R_NO ";
 		
 		
 		try {

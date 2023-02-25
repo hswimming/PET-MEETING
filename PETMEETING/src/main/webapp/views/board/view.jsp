@@ -101,9 +101,21 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td colspan="3">
-                        <span> - </span>
-                    </td>
+                    
+                    <c:if test="${ empty board.originalFileName }">
+	                    <td colspan="3">
+	                        <span> - </span>
+	                    </td>
+                    </c:if>
+                    <c:if test="${ not empty board.originalFileName }">
+	                    <td colspan="3">
+	                        
+	                        <a href="javascript:" id="fileDown">
+	                        	<span> ${ board.originalFileName } </span>
+	                        </a>
+	                         
+	                    </td>
+                    </c:if>
                 </tr>
                 <tr>
                     <th>내 용</th>
@@ -165,6 +177,13 @@
     		}		
     	});
     	
+    	$('#fileDown').on('click', () => {
+            let oname = encodeURIComponent('${ board.originalFileName }');
+            let rname = encodeURIComponent('${ board.renamedFileName }');
+            
+            location.assign('${ path }/board/fileDown?oname=' + oname + '&rname=' + rname);
+    		
+    	});
     	
     	$('#replyContent').on('focus', () => {
 	         if(${ empty loginMember}) {

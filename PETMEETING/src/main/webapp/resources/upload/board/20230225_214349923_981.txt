@@ -1,0 +1,192 @@
+보드서비스
+//———————————————————조회수 증가 
+	public Board getBoardByBoardNo(int boardNo, boolean hasRead) {
+		Board board = null;
+		Connection connection = getConnection();
+		
+		board = new BoardDao().findBoardByBoardNo(connection, boardNo);
+		
+		// 게시글 조회 수 증가 로직
+		if(board != null && !hasRead) {
+			int result = new BoardDao().updateReadCount(connection, board);
+					
+			if(result > 0) {
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
+						
+		close(connection);
+				
+		return board;
+	}
+
+
+
+
+보드다오
+public int updateReadCount(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE BOARD SET VIEW=? WHERE BOARD_NO=?";		
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			board.setReadCount(board.getReadCount()+ 1);
+			
+			pstmt.setInt(1, board.getReadCount());
+			pstmt.setInt(2, board.getBoardNo());
+			
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+보드
+
+public int getReadCount() {
+	int result = 0;
+	
+	
+	return result;
+}
+public void setReadCount(int i) {
+	
+}
+
+보드업데이트서블릿 두포스트
+     @Override
+   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       	HttpSession session = request.getSession(false);
+   		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+   		
+   		if(loginMember != null) {
+   			// 파일이 저장될 경로
+   	    	String path = getServletContext().getRealPath("/resources/upload/board");
+   	    	
+   	    	// 파일의 최대 사이즈 지정 (10MB)
+   	    	int maxSize = 10485760;
+   	    	
+   	    	// 파일 인코딩 설정
+   	    	String encoding = "UTF-8";
+
+   	    	// DefaultFileRenamePolicy : 중복되는 이름 뒤에 1 ~ 9999 붙인다.
+//   	    	MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new DefaultFileRenamePolicy());
+   	    	MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
+   	    	
+   			Board board = new BoardService().getBoardByBoardNo(Integer.parseInt(mr.getParameter("no")), true);
+   			
+   			if(board != null && loginMember.getId().equals(board.getWriterId())) {
+   	    		board.setBoardTitle(mr.getParameter("title"));
+   	    		board.setBoardContent(mr.getParameter("content"));
+   	    		
+   	    		String originalFileName = mr.getOriginalFileName("upfile");
+   	    		String filesystemName = mr.getFilesystemName("upfile");
+   	    		
+   	    		if(originalFileName != null && filesystemName != null) {
+   	    			// 기존에 업로드된 파일 삭제
+   	    			File file = new File(path + "/" + board.getRenamedFileName());
+   	    			
+   	    			if(file.exists()) {
+   	    				file.delete();
+   	    			}
+   	    			
+   	    			board.setOriginalFileName(originalFileName);
+   	    			board.setRenamedFileName(filesystemName);
+   	    		}
+   	    		
+   	    		int result = new BoardService().save(board);
+   	    		
+   	    		if(result > 0) {
+   	    			request.setAttribute("msg", "게시글 수정 성공");
+   	    			request.setAttribute("location", "/board/view?no=" + board.getBoardNo());
+   	    		} else {
+   	    			request.setAttribute("msg", "게시글 수정 실패");
+   	    			request.setAttribute("location", "/board/update?no=" + board.getBoardNo());	    			
+   	    		}
+   	    	} else {
+   				request.setAttribute("msg", "잘못된 접근입니다.");
+   				request.setAttribute("location", "/board/list");			
+   			}	    	
+   		} else {
+   			request.setAttribute("msg", "로그인 후 수정해 주세요.");
+   			request.setAttribute("location", "/");			
+   		}
+   		
+   		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+   	}
+   }
+
+보드뷰서블릿
+package com.petmeeting.mvc.board.controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.petmeeting.mvc.board.model.service.BoardService;
+import com.petmeeting.mvc.board.model.vo.Board;
+
+@WebServlet(name = "boardView", urlPatterns = { "/board/view" })
+public class BoardViewServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public BoardViewServlet() {
+    }
+    
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	Board board = null;
+    	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+    	
+    	System.out.println("게시글 번호 : " + boardNo);
+    	
+    	// 1. 쿠키에서 게시글 조회한 이력 확인-----------------------
+    	Cookie[] cookies = request.getCookies();
+    	String boardHistory = "";
+    	boolean hasRead = false;
+    	
+    	if(cookies != null) {
+    		for ( Cookie cookie : cookies ) {
+    			if(cookie.getName().equals("boardHistory")) {
+    				boardHistory = cookie.getValue();
+    				
+    				if(boardHistory.contains("|" + boardNo + "|")) {
+    					hasRead = true;
+    					
+    					break;
+    				}
+    			}
+    		}
+    	}
+    	
+    	// 2. 안 읽은 것만 쿠키에 기록-----------------------
+    	if(!hasRead) {
+    		Cookie cookie = new Cookie("boardHistory", boardHistory + "|" + boardNo + "|");
+    	
+    		cookie.setMaxAge(-1);
+    		response.addCookie(cookie);
+    	}
+    	
+    	board = new BoardService().getBoardByBoardNo(boardNo, hasRead);
+    	
+    	request.setAttribute("board", board);
+    	request.getRequestDispatcher("/views/board/view.jsp").forward(request, response);
+	}
+
+}
+
+
+

@@ -118,9 +118,11 @@ table#tbl-board td{
             <tr>
                 <th>첨부파일</th>
                 <td>
-                    <input type="file" name="upfile1" id="upfile1"><br>
-<!--                     <input type="file" name="upfile2" id="upfile2"><br> -->
-<!--                     <input type="file" name="upfile3" id="upfile3"> -->
+                    <input type="file" name="upfile" id="upfile"><br>
+                	<c:if test="${ not empty board.originalFileName }">
+                		<span>${ board.originalFileName }</span>
+                	</c:if>
+                
                 </td>
             </tr>
             <tr>

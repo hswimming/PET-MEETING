@@ -62,7 +62,9 @@ public class BoardWriteServlet extends HttpServlet {
             board.setBoardContent(mr.getParameter("content"));
             board.setSubjectId(mr.getParameter("subject"));
             
-
+            
+            board.setOriginalFileName(mr.getOriginalFileName("upfile"));
+            board.setRenamedFileName(mr.getFilesystemName("upfile"));
             
             
             int result = new BoardService().save(board);

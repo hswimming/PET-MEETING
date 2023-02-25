@@ -1,5 +1,6 @@
 package com.petmeeting.mvc.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,15 +63,28 @@ public class BoardUpdateServlet extends HttpServlet {
         	
         	MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
         	
-        	if(loginMember.getId().equals(mr.getParameter("writer"))) {
-        		
-        		Board board = new Board();
-        		
-        		board.setBoardNo(Integer.parseInt(mr.getParameter("boardNo")));
+        	Board board = new BoardService().getBoardByBoardNo(Integer.parseInt(mr.getParameter("boardNo")));
+        	
+        	if(board != null && loginMember.getId().equals(board.getMemberId())) {
+        	
         		board.setBoardName(mr.getParameter("category"));
         		board.setBoardTitle(mr.getParameter("title"));
         		board.setBoardContent(mr.getParameter("content"));
         		board.setSubjectId(mr.getParameter("subject"));
+        		
+        		String originalFileName = mr.getOriginalFileName("upfile");
+        		String filesystemName = mr.getFilesystemName("upfile");
+        		
+        		if(originalFileName != null && filesystemName != null) {
+        			File file = new File(path + "/" + board.getRenamedFileName());
+        			
+        			if(file.exists()) {
+        				file.delete();
+        			}		
+        			       			
+        			board.setOriginalFileName(originalFileName);
+        			board.setRenamedFileName(filesystemName);
+        		}
         		
         		int result = new BoardService().save(board);
         		
@@ -78,10 +92,9 @@ public class BoardUpdateServlet extends HttpServlet {
         			request.setAttribute("msg", "게시글이 수정되었습니다.");
         			request.setAttribute("location", "/board/view?boardNo="+board.getBoardNo());
         		} else {
-        			request.setAttribute("msg", "게시글이 수정 되지않았습니다.");
+        			request.setAttribute("msg", "게시글이 수정되지않았습니다.");
         			request.setAttribute("location", "/board/update?boardNo="+board.getBoardNo());
         		}
-        		
         		
         	} else {
         		request.setAttribute("msg", "잘못된 접근입니다.");

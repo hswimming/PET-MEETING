@@ -71,6 +71,7 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
+				<th>첨부파일</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
@@ -91,6 +92,15 @@
 					</a>
 				</td>
 				<td>${ board.memberNickName }</td>
+				<td>
+					<c:if test="${ empty board.originalFileName }">
+								<span> - </span>
+							</c:if>
+							<c:if test="${ not empty board.originalFileName }">
+								<img width="20px" src="${ path }/resources/images/file.png">
+							</c:if>
+				
+				</td>
 				<td>${ board.createDate }</td>
 				<td>${ board.views }</td>
 			</tr>

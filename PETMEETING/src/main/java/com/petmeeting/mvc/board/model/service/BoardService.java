@@ -63,7 +63,6 @@ public class BoardService {
 			
 		}
 		
-		
 		if(result > 0) {
 			commit(connection);
 		} else {
@@ -74,7 +73,7 @@ public class BoardService {
 		
 		return result;
 	}
-
+  
 
 	public int saveReply(Reply reply) {
 		int result = 0;
