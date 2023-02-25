@@ -128,4 +128,24 @@ public class WalkBoardService {
 		return result;
 	}
 
+	public int delete(int wbNo) {
+		int result = 0;
+		
+		Connection connection = getConnection();
+		
+		result = new WalkBoardDao().updateWbStatus(connection, wbNo, "N");
+		
+		if (result > 0) {
+			commit(connection);
+			
+		} else {
+			rollback(connection);
+			
+		}
+		
+		close(connection);
+		
+		return result;
+	}
+
 }

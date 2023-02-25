@@ -111,10 +111,9 @@ public class WalkBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT WB.WB_NO, WB.WB_TITLE, M.M_NICKNAME, WB.WB_VIEWS, WB.WB_CONTENT, WB.CREATE_DATE, WB.MODIFY_DATE, WB.ORIGINAL_FILENAME, WB.RENAMED_FILENAME, D.D_NAME, D.D_KIND, D.D_SIZE, D.D_GENDER, D.NEUTERED, D.VACCINE "
+		String query = "SELECT M.M_CODE, WB.WB_NO, WB.WB_TITLE, M.M_NICKNAME, WB.WB_VIEWS, WB.WB_CONTENT, WB.CREATE_DATE, WB.MODIFY_DATE, WB.ORIGINAL_FILENAME, WB.RENAMED_FILENAME "
 					 + "FROM WALKBOARD WB "
 					 + "JOIN MEMBER M ON(WB.M_CODE = M.M_CODE) "
-					 + "JOIN DOG D ON (WB.D_ID = D.D_ID) "
 					 + "WHERE WB.WB_STATUS = 'Y' AND WB.WB_NO=?";
 		
 		try {
@@ -127,6 +126,7 @@ public class WalkBoardDao {
 			if (rs.next()) {
 				walkBoard = new WalkBoard();
 				
+				walkBoard.setMemberCode(rs.getInt("M_CODE"));
 				walkBoard.setWbNo(rs.getInt("WB_NO"));
 				walkBoard.setWbTitle(rs.getString("WB_TITLE"));
 				walkBoard.setMemNickname(rs.getString("M_NICKNAME"));
@@ -298,6 +298,30 @@ public class WalkBoardDao {
 			
 		} finally {
 			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateWbStatus(Connection connection, int wbNo, String wbStatus) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE WALKBOARD SET WB_STATUS=? WHERE WB_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, wbStatus);
+			pstmt.setInt(2, wbNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+			
 		}
 		
 		return result;

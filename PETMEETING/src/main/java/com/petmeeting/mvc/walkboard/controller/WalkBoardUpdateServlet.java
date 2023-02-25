@@ -12,12 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.petmeeting.mvc.common.util.FileRename;
+import com.petmeeting.mvc.member.model.service.MemberService;
+import com.petmeeting.mvc.member.model.vo.Dog;
 import com.petmeeting.mvc.member.model.vo.Member;
 import com.petmeeting.mvc.walkboard.model.service.WalkBoardService;
 import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
 
 
-@WebServlet(name = "walkBoardUpdate", urlPatterns = { "/walkBoard/update" })
+@WebServlet(name = "walkBoardUpdate", urlPatterns = { "/walkboard/walkupdate" })
 public class WalkBoardUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,17 +30,22 @@ public class WalkBoardUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+    	Dog dog = new Dog();
     	
     	if (loginMember != null) {
     		WalkBoard walkBoard = new WalkBoardService().getWalkBoardBywbNo(Integer.parseInt(request.getParameter("wbNo")), true);
     		
-    		if (walkBoard != null && loginMember.getNickname().equals(walkBoard.getMemNickname())) {
+    		if (walkBoard != null && loginMember.getMCode() == walkBoard.getMemberCode()) {
+    			dog = new MemberService().findDogByCode(walkBoard.getMemberCode());
+    	    	
+    	    	request.setAttribute("dog", dog);
+    			
     			request.setAttribute("walkboard", walkBoard);
-    			request.getRequestDispatcher("/views/walkboard/update.jsp").forward(request, response);
+    			request.getRequestDispatcher("/views/walkboard/walkupdate.jsp").forward(request, response);
     			
     		} else {
     			request.setAttribute("msg", "잘못된 접근입니다.");
-        		request.setAttribute("location", "/walkboard/list");
+        		request.setAttribute("location", "/walkboard/walklist");
         		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
     		}
     		
@@ -57,7 +64,7 @@ public class WalkBoardUpdateServlet extends HttpServlet {
     	
     	if (loginMember != null) {
     		
-    		String path = getServletContext().getRealPath("/resources/upload/board");
+    		String path = getServletContext().getRealPath("/resources/upload/walkboard");
     		
     		int maxSize = 10485760;
     		
@@ -65,11 +72,13 @@ public class WalkBoardUpdateServlet extends HttpServlet {
     		
     		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
     		
-    		WalkBoard walkBoard = new WalkBoardService().getWalkBoardBywbNo(Integer.parseInt(mr.getParameter("wbNo")), true);
+    		WalkBoard walkBoard = new WalkBoardService().getWalkBoardBywbNo(loginMember.getMCode(), true);
     		
-    		if (walkBoard != null && loginMember.getNickname().equals(walkBoard.getMemNickname())) {
-    			walkBoard.setWbTitle(mr.getParameter("wbTitle"));
-    			walkBoard.setWbContent(mr.getParameter("wbContent"));
+    		
+    		if (walkBoard != null && loginMember.getMCode() == walkBoard.getMemberCode()) {
+    			walkBoard.setWbTitle(mr.getParameter("title"));
+    			walkBoard.setWbContent(mr.getParameter("content"));
+    			walkBoard.setWbNo(Integer.parseInt(mr.getParameter("boardNo")));
     			
     			String originalFileName = mr.getOriginalFileName("upfile");
     			String filesystemName = mr.getFilesystemName("upfile");
@@ -91,11 +100,11 @@ public class WalkBoardUpdateServlet extends HttpServlet {
     			
     			if (result > 0) {
     				request.setAttribute("msg", "게시글 수정 성공");
-	    			request.setAttribute("location", "/walkboard/view?wbNo=" + walkBoard.getWbNo());
+	    			request.setAttribute("location", "/walkboard/walkview?wbNo=" + walkBoard.getWbNo());
     				
     			} else {
     				request.setAttribute("msg", "게시글 수정 실패");
-	    			request.setAttribute("location", "/walkboard/update?wbNo=" + walkBoard.getWbNo());
+	    			request.setAttribute("location", "/walkboard/walkupdate?wbNo=" + walkBoard.getWbNo());
     				
     			}
     			

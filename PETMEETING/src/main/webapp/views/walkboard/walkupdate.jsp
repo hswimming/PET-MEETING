@@ -55,17 +55,19 @@
 		    margin:10px 0;
 		}
 		table#tbl-board{
-		    width:50%;
-		    margin:0 auto;
+		  	margin:0 auto;
 		    height: 50%;
+		    width: 70%;
 		    border:1px solid black;
 		    border-collapse:collapse;
 		    margin-bottom: 100px;
+		    table-layout: fixed;
 		}
 		table#tbl-board th{
 		    border:1px solid;
 		    padding:5px 0;
 		    text-align:center;
+		    width: 150px;
 		}
 		table#tbl-board td{
 		    border:1px solid;
@@ -77,7 +79,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 수정</title>
-    <link rel="stylesheet" href="./boardUpdate.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     
 	<!--한글폰트-->
@@ -91,7 +92,7 @@
 <body>
     <h1>게시글 수정하기</h1>
 
-    <form action="${ path }/walkboard/update" method="POST" enctype="multipart/form-data">
+    <form action="${ path }/walkboard/walkupdate" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="boardNo" value="${ walkboard.wbNo }">
     
         <table id='tbl-board'>
@@ -115,12 +116,12 @@
             <tr>
                 <th>강아지 정보</th>
                 <td>
-                	이름 : ${ walkboard.name }<br>
-					종류 : ${ walkboard.kind }<br>
-					크기 : ${ walkboard.size }<br>
-					성별 : ${ walkboard.gender }<br>
-					중성화 여부 : ${ walkboard.neutered }<br>
-					백신 접종 여부 : ${ walkboard.vaccine }<br>
+                	이름 : ${ dog.name }<br>
+					종류 : ${ dog.kind }<br>
+					크기 : ${ dog.size }<br>
+					성별 : ${ dog.gender }<br>
+					중성화 여부 : ${ dog.neutered }<br>
+					백신 접종 여부 : ${ dog.vaccine }<br>
                 </td>
             </tr>
             <tr>
@@ -135,7 +136,7 @@
                 <th colspan="2">
                     <div id="button">
                         <input type="submit" value="수정" class="btn btn-outline-secondary"> 
-                        <input type="button" onclick="location.replace('${ path }/walkBoard/list)" value="목록으로" class="btn btn-outline-secondary">
+                        <input type="button" onclick="location.replace('${ path }/walkboard/walklist)" value="목록으로" class="btn btn-outline-secondary">
                     </div>
                 </th>
             </tr>

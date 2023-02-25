@@ -30,7 +30,6 @@ public class EncodingFilter implements Filter{
 		if (requestMethod.equals("POST")) {
 			request.setCharacterEncoding("UTF-8");
 			
-			System.out.println(request.getCharacterEncoding() + " 인코딩 완료");
 		}
 		
 		// 다음 필터를 호출하거나, 마지막 필터면 servlet, JSP를 호출한다.

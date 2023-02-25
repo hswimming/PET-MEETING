@@ -71,7 +71,7 @@
 					<tr>
 						<td>${ walkboard.rowNum }</td>
 						<td>
-							<a href="${ path }/walkBoard/view?wbNo=${walkboard.wbNo}">
+							<a href="${ path }/walkboard/walkview?wbNo=${walkboard.wbNo}">
 								${ walkboard.wbTitle }
 							</a>
 						</td>
