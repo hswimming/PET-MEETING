@@ -153,7 +153,7 @@ public class MemberDao {
 		Dog dog = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM DOG WHERE M_CODE=?";
+		String query = "SELECT * FROM DOG WHERE M_CODE=? AND D_NUM = 1";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
@@ -164,6 +164,8 @@ public class MemberDao {
 			while(rs.next()) {
 				dog = new Dog();
 				
+				dog.setId(rs.getString("D_ID"));
+				dog.setNum(rs.getInt("D_NUM"));
 				dog.setMCode(rs.getInt("M_CODE"));
 				dog.setName(rs.getString("D_NAME"));
 				dog.setKind(rs.getString("D_KIND"));

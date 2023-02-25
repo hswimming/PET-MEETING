@@ -17,6 +17,8 @@ public class WalkBoardReply {
 	
 	private int mCode;
 	
+	private String memberId;
+	
 	private String wcNickname;
 	
 	private String wbComment;

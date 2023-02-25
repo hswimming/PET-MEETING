@@ -16,7 +16,7 @@ import com.petmeeting.mvc.member.model.vo.Member;
 import com.petmeeting.mvc.common.util.FileRename;
 import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet(name = "walkBoardWrite", urlPatterns = { "/walkBoard/write" })
+@WebServlet(name = "walkBoardWrite", urlPatterns = { "/walkBoard/walkwrite" })
 public class WalkBoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +30,17 @@ public class WalkBoardWriteServlet extends HttpServlet {
     	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
     	
     	if (loginMember != null) {
-    		request.getRequestDispatcher("/views/walkboard/write.jsp").forward(request, response);
+    		Dog dog = new Dog();
+    		dog = new MemberService().findDogByCode(loginMember.getMCode());
+    		
+    		request.setAttribute("dogName", dog.getName());
+    		request.setAttribute("dogKind", dog.getKind());
+    		request.setAttribute("dogSize", dog.getSize());
+    		request.setAttribute("dogGender", dog.getGender());
+    		request.setAttribute("dogNeutered", dog.getNeutered());
+    		request.setAttribute("dogVaccine", dog.getVaccine());
+    		
+    		request.getRequestDispatcher("/views/walkboard/walkwrite.jsp").forward(request, response);
     		
     	} else {
     		request.setAttribute("msg", "로그인 후 작성 해주세요.");
@@ -54,32 +64,33 @@ public class WalkBoardWriteServlet extends HttpServlet {
     		
     		MultipartRequest mr = new MultipartRequest(request, path, maxSize, encoding, new FileRename());
     		
-    		WalkBoard walkBoard = new WalkBoard();
+    		WalkBoard walkboard = new WalkBoard();
     		
     		Dog dog = new Dog();
     		
     		dog = new MemberService().findDogByCode(loginMember.getMCode());
     		
-    		walkBoard.setMemberCode(loginMember.getMCode());
-    		walkBoard.setDogId(dog.getId());
-    		walkBoard.setWbTitle(mr.getParameter("content_title"));
-    		walkBoard.setWbContent(mr.getParameter("content"));
-    		walkBoard.setMemNickname(loginMember.getNickname());
+    		walkboard.setMemberCode(loginMember.getMCode());
+    		walkboard.setDogId(dog.getId());
     		
-    		walkBoard.setRenamedFileName(mr.getFilesystemName("upfile"));
-    		walkBoard.setOriginalFileName(mr.getOriginalFileName("upfile"));
+    		walkboard.setWbTitle(mr.getParameter("content_title"));
+    		walkboard.setWbContent(mr.getParameter("content"));
     		
-    		System.out.println(walkBoard);
+    		walkboard.setRenamedFileName(mr.getFilesystemName("upfile"));
+    		walkboard.setOriginalFileName(mr.getOriginalFileName("upfile"));
     		
-    		int result = new WalkBoardService().save(walkBoard);
+    		
+    		int result = new WalkBoardService().save(walkboard);
+    		
+    		
     		
     		if (result > 0) {
     			request.setAttribute("msg", "게시글 등록 성공");
-        		request.setAttribute("location", "/walkBoard/list");
+        		request.setAttribute("location", "/walkboard/walklist");
         		
     		} else {
     			request.setAttribute("msg", "게시글 등록 실패");
-        		request.setAttribute("location", "/walkBoard/list");
+        		request.setAttribute("location", "/walkboard/walklist");
     		}
     		
     	} else {

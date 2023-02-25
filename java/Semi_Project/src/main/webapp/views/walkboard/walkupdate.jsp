@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
@@ -55,17 +55,19 @@
 		    margin:10px 0;
 		}
 		table#tbl-board{
-		    width:70%;
-		    margin:0 auto;
+		  	margin:0 auto;
 		    height: 50%;
+		    width: 70%;
 		    border:1px solid black;
 		    border-collapse:collapse;
 		    margin-bottom: 100px;
+		    table-layout: fixed;
 		}
 		table#tbl-board th{
 		    border:1px solid;
 		    padding:5px 0;
 		    text-align:center;
+		    width: 150px;
 		}
 		table#tbl-board td{
 		    border:1px solid;
@@ -76,58 +78,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 작성</title>
-    <link rel="stylesheet" href="./boardUpdate.css">
+    <title>게시글 수정</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     
 	<!--한글폰트-->
 	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
+	
 	<!--영어폰트-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>게시글 작성하기</h1>
+    <h1>게시글 수정하기</h1>
 
-    <form action="${ path }/walkBoard/write" method="POST" enctype="multipart/form-data">
+    <form action="${ path }/walkboard/walkupdate" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="boardNo" value="${ walkboard.wbNo }">
+    
         <table id='tbl-board'>
+            <tr>
                 <th>제목</th>
-                <td><input type="text" name="content_title" id="title"></td>
+                <td><input type="text" name="title" id="title" value=${ walkboard.wbTitle }></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><input type="text" name="writer" id="writer" value="${ loginMember.nickname }" readonly></td>
+                <td><input type="text" name="writer" id="writer" value="${ walkboard.memNickname }" readonly></td>
             </tr>
             <tr>
             	<th>첨부파일</th>
-				<td><input type="file" name="upfile"></td>
+				<td>
+					<input type="file" name="upfile"><br>
+					<c:if test="${ not empty walkboard.originalFileName }">
+						<span>${ walkboard.originalFileName }</span>
+					</c:if>
+				</td>
             </tr>
             <tr>
                 <th>강아지 정보</th>
                 <td>
-                	이름 : ${ walkboard.name }<br>
-					종류 : ${ walkboard.kind }<br>
-					크기 : ${ walkboard.size }<br>
-					성별 : ${ walkboard.gender }<br>
-					중성화 여부 : ${ walkboard.neutered }<br>
-					백신 접종 여부 : ${ walkboard.vaccine }<br>
+                	이름 : ${ dog.name }<br>
+					종류 : ${ dog.kind }<br>
+					크기 : ${ dog.size }<br>
+					성별 : ${ dog.gender }<br>
+					중성화 여부 : ${ dog.neutered }<br>
+					백신 접종 여부 : ${ dog.vaccine }<br>
                 </td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td> 
                     <div id="editorbox">
-                        <textarea name="content" id="editor"  placeholder="내용을 입력하세요." ></textarea>
+                        <textarea name="content" id="editor"  placeholder="내용을 입력하세요." >${ walkboard.wbContent }</textarea>
                     </div>
                 </td>
             </tr>
             <tr>
                 <th colspan="2">
                     <div id="button">
-                        <input type="reset" value="초기화" class="btn btn-outline-secondary">
-                        <input type="submit" value="등록" class="btn btn-outline-secondary"> 
+                        <input type="submit" value="수정" class="btn btn-outline-secondary"> 
+                        <input type="button" onclick="location.replace('${ path }/walkboard/walklist)" value="목록으로" class="btn btn-outline-secondary">
                     </div>
                 </th>
             </tr>

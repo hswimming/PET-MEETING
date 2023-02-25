@@ -112,10 +112,9 @@ public class WalkBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT WB.WB_NO, WB.WB_TITLE, M.M_NICKNAME, WB.WB_VIEWS, WB.WB_CONTENT, WB.CREATE_DATE, WB.MODIFY_DATE, WB.ORIGINAL_FILENAME, WB.RENAMED_FILENAME, D.D_NAME, D.D_KIND, D.D_SIZE, D.D_GENDER, D.NEUTERED, D.VACCINE "
+		String query = "SELECT M.M_CODE, WB.WB_NO, WB.WB_TITLE, M.M_NICKNAME, WB.WB_VIEWS, WB.WB_CONTENT, WB.CREATE_DATE, WB.MODIFY_DATE, WB.ORIGINAL_FILENAME, WB.RENAMED_FILENAME "
 					 + "FROM WALKBOARD WB "
 					 + "JOIN MEMBER M ON(WB.M_CODE = M.M_CODE) "
-					 + "JOIN DOG D ON (WB.D_ID = D.D_ID) "
 					 + "WHERE WB.WB_STATUS = 'Y' AND WB.WB_NO=?";
 		
 		try {
@@ -128,6 +127,7 @@ public class WalkBoardDao {
 			if (rs.next()) {
 				walkBoard = new WalkBoard();
 				
+				walkBoard.setMemberCode(rs.getInt("M_CODE"));
 				walkBoard.setWbNo(rs.getInt("WB_NO"));
 				walkBoard.setWbTitle(rs.getString("WB_TITLE"));
 				walkBoard.setMemNickname(rs.getString("M_NICKNAME"));
@@ -135,13 +135,6 @@ public class WalkBoardDao {
 				walkBoard.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));
 				walkBoard.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
 				walkBoard.setWbContent(rs.getString("WB_CONTENT"));
-				
-				walkBoard.setName(rs.getString("D_NAME"));
-				walkBoard.setKind(rs.getString("D_KIND"));
-				walkBoard.setSize(rs.getString("D_SIZE"));
-				walkBoard.setKind(rs.getString("D_GENDER"));
-				walkBoard.setNeutered(rs.getString("NEUTERED"));
-				walkBoard.setVaccine(rs.getString("VACCINE"));
 				
 				walkBoard.setReplies(this.getCommentsBywcNo(connection, wbNo));
 				walkBoard.setCreateDate(rs.getDate("CREATE_DATE"));
@@ -166,7 +159,7 @@ public class WalkBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT R.WR_NO, R.WB_NO, R.WR_CONTENT, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE "
+		String query = "SELECT M.M_CODE, R.WR_NO, R.WB_NO, R.WR_CONTENT, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE "
 					 + "FROM WALKREPLY R "
 					 + "JOIN MEMBER M ON(R.M_CODE = M.M_CODE) "
 					 + "WHERE R.WR_STATUS='Y' AND WR_NO=? "
@@ -182,6 +175,7 @@ public class WalkBoardDao {
 			while (rs.next()) {
 				WalkBoardReply reply = new WalkBoardReply();
 				
+				reply.setMCode(rs.getInt("M_CODE"));
 				reply.setWcNo(rs.getInt("WR_NO"));
 				reply.setWbNo(rs.getInt("WB_NO"));
 				reply.setWbComment(rs.getString("WR_CONTENT"));
@@ -332,6 +326,28 @@ public class WalkBoardDao {
 			close(pstmt);
 			
 		}
+		
+		return result;
+	}
+
+	public int updateWcStatus(Connection connection, int wcNo, String wcStatus) {
+		int result = 0;
+		String query = "UPDATE WALKREPLY SET WR_STATUS=? WHERE WR_NO=?";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+		
+			pstmt.setString(1, wcStatus);
+			pstmt.setInt(2, wcNo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
 		
 		return result;
 	}

@@ -101,12 +101,12 @@
                 <tr>
                     <th>강아지 정보</th>
                     <td>
-	                    이름 : ${ walkboard.name }<br>
-						종류 : ${ walkboard.kind }<br>
-						크기 : ${ walkboard.size }<br>
-						성별 : ${ walkboard.gender }<br>
-						중성화 여부 : ${ walkboard.neutered }<br>
-						백신 접종 여부 : ${ walkboard.vaccine }<br>
+	                    이름 : ${ dog.name }<br>
+						종류 : ${ dog.kind }<br>
+						크기 : ${ dog.size }<br>
+						성별 : ${ dog.gender }<br>
+						중성화 여부 : ${ dog.neutered }<br>
+						백신 접종 여부 : ${ dog.vaccine }<br>
                     </td>
                 </tr>
                 <tr>
@@ -119,20 +119,21 @@
                 </tr>
                 <tr>
                     <th colspan="2">
-                    <c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
-                        <button type="button" onclick="location.href='${ path }/walkBoard/update?wbNo=${ walkboard.wbNo }'">수정</button>
+                    <c:if test="${ not empty loginMember && loginMember.MCode == walkboard.memberCode }">
+                        <button type="button" onclick="location.href='${ path }/walkboard/walkupdate?wbNo=${ walkboard.wbNo }'">수정</button>
                         <button type="button" id="btnDelete">삭제</button>
                         </c:if>
-                        <button type="button" onclick="location.replace('${ path }/walkBoard/list')">목록</button>
+                        <button type="button" onclick="location.replace('${ path }/walkboard/walklist')">목록</button>
                     </th>
                 </tr>
             </table>
+            <br>
             <div id="comment-container">
                 <div class="comment-editor">
                     <form action="${ path }/walkBoard/reply" method="POST">
                         <input type="hidden" name="walkboardwbNo" value="${ walkboard.wbNo }">
-                        <input type="hidden" name="writer" value="${ walkboard.memNickname }">
-                        <textarea name="" id="commentContent" cols="55" rows="3"></textarea>
+                        <input type="hidden" name="writer" value="${ loginMember.nickname }">
+                        <textarea name="commentContent" id="commentContent" cols="55" rows="3"></textarea>
                         <button type="submit" id="btn-insert">등록</button>	    			
                     </form>
                 </div> 
@@ -147,7 +148,7 @@
                         	<span> ${ reply.wbComment }</span>
                     	</td>
                     	<td>
-                    		<c:if test="${ not empty loginMember && loginMember.nickname == walk_board.memNickname }">
+                    		<c:if test="${ not empty loginMember && loginMember.id == walkboardreply.memberId }">
 	                        	<button type="submit" id="commentbtn">삭제</button>
                     		</c:if>
                     	</td>
@@ -160,7 +161,7 @@
  	$(document).ready(() => {
  		$('#btnDelete').on('click', () => {
  			if(confirm('정말로 게시글을 삭제할까요?' )) {
- 				location.replace('${ path }/board/delete?no=${ walk_board.wbNo }');
+ 				location.replace('${ path }/walkboard/walkdelete?wbNo=${ walkboard.wbNo }');
  			}
  		});
  		
@@ -175,9 +176,16 @@
 			if (${ empty loginMember }) {
 				alert('로그인 후 이용 해주세요.');
 				
-				$('#userId').focus();
+				$('#so').focus();
 			}
 		});
+ 		
+ 		$('#commentbtn').on('click', () => {
+ 			if(confirm('정말로 댓글을 삭제할까요?' )) {
+ 				location.replace('${ path }/walkboard/replydelete?wcNo=${ walkboardreply.wcNo }');
+ 			}
+ 			
+ 		})
  		
  	}); 
  

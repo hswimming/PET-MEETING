@@ -46,7 +46,7 @@
 		<h2 style="text-align: center; font-size: 2em;">산책 친구 찾기 게시판</h2>
 		
 		<c:if test="${ not empty loginMember }">
-			<button id="btn-add" onclick="location.href='${ path }/walkBoard/write'">글쓰기</button><br><br>
+			<button id="btn-add" onclick="location.href='${ path }/walkBoard/walkwrite'">글쓰기</button><br><br>
 		</c:if>
 		<table id="tbl-board" class="table table-striped" style="border: 1px solid #dddddd">
 			<thead>
@@ -71,7 +71,7 @@
 					<tr>
 						<td>${ walkboard.rowNum }</td>
 						<td>
-							<a href="${ path }/walkBoard/view?wbNo=${walkboard.wbNo}">
+							<a href="${ path }/walkboard/walkview?wbNo=${walkboard.wbNo}">
 								${ walkboard.wbTitle }
 							</a>
 						</td>
@@ -90,8 +90,8 @@
 			</c:if>
 		</table>
 		<div id="pageBar">
-			<button onclick="location.href='${ path }/walkBoard/list?page=1'">&lt;&lt;</button>
-			<button onclick="location.href='${ path }/walkBoard/list?page=${ pageInfo.prevPage }'">&lt;</button>
+			<button onclick="location.href='${ path }/walkBoard/walklist?page=1'">&lt;&lt;</button>
+			<button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.prevPage }'">&lt;</button>
 			                  
 			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 				<c:choose>
@@ -99,13 +99,13 @@
 						<button disabled>${ status.current }</button>
 					</c:when>
 					<c:otherwise>
-						<button onclick="location.href='${ path }/walkBoard/list?page=${ status.current }'">${ status.current }</button>
+						<button onclick="location.href='${ path }/walkBoard/walklist?page=${ status.current }'">${ status.current }</button>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 
-                  <button onclick="location.href='${ path }/walkBoard/list?page=${ pageInfo.nextPage }'">&gt;</button>
-                  <button onclick="location.href='${ path }/walkBoard/list?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
+                  <button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.nextPage }'">&gt;</button>
+                  <button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
               </div>
           </div>
       </section>

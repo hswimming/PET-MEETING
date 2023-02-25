@@ -60,28 +60,7 @@ public class WalkBoardService {
 		
 		return walkBoard;
 	}
-
-//	게시글 등록
-//	public int save(Walk_Board walkboard) {
-//		int result = 0;
-//		
-//		Connection connection = getConnection();
-//		
-//		result = new Walk_BoardDao().insert_Walk_Board(connection, walkboard);
-//			
-//		if (result > 0) {
-//			commit(connection);
-//			
-//		} else {
-//			rollback(connection);
-//			
-//		}
-//		
-//		close(connection);
-//		
-//		return result;
-//		
-//	}
+	
 	
 //	게시글 등록
 	public int save(WalkBoard walkBoard) {
@@ -90,20 +69,15 @@ public class WalkBoardService {
 		Connection connection = getConnection();
 		
 		if (walkBoard.getWbNo() > 0) {
-			
 			result = new WalkBoardDao().updateWalkBoard(connection, walkBoard);
-			
 		} else {
-			
 			result = new WalkBoardDao().insertWalkBoard(connection, walkBoard);
 		}
 		
 		if (result > 0) {
 			commit(connection);
-			
 		} else {
 			rollback(connection);
-			
 		}
 		
 		close(connection);
@@ -111,6 +85,7 @@ public class WalkBoardService {
 		return result;
 		
 	}
+
 
 //	댓글 등록
 	public int saveReply(WalkBoardReply walkBoardReply) {
@@ -150,7 +125,23 @@ public class WalkBoardService {
 		
 		close(connection);
 		
-		return 1;
+		return result;
 	}
 
+//	댓글 삭제
+	public int deleteReply(int wcNo) {
+		int result = 0;
+		
+		Connection connection = getConnection();
+		result = new WalkBoardDao().updateWcStatus(connection, wcNo, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+			
+		} close(connection);
+		
+		return result;
+	}
 }

@@ -42,7 +42,7 @@
 					</c:if>
             	</div>
            		<c:if test="${ not empty loginMember }">
-           		<div style="position: absolute; right: 16%">
+           		<div style="position: absolute; right: 210px">
            			${ loginMember.name }님 안녕하세요.
            		</div>
             	<div class="login-container">
@@ -65,7 +65,7 @@
 				</div>
 				</c:if>
 				<c:if test="${ empty loginMember && not empty admin }">
-					<div style="position: absolute; right: 16%">
+					<div style="position: absolute; right: 210px">
 						관리자님 어서오시라요.
 					</div>
 					<div class="login-container">
@@ -144,4 +144,7 @@
 			location.replace("${ path }/walkboard/main")
 		});
 	});
+
 </script>
+
+    

@@ -7,15 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "walkBoardMain", urlPatterns = { "/walkBoard/main" })
+@WebServlet(name = "walkBoardMain", urlPatterns = { "/walkboard/main" })
 public class WalkBoardMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public WalkBoardMainServlet() {
     }
-
+    
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/views/walkboard_main/main.jsp").forward(request, response);
-	}
+    	request.getRequestDispatcher("/views/walkboard/main.jsp").forward(request, response);
+    }
+
 }

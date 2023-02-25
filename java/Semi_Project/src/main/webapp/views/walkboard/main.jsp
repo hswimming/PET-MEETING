@@ -8,7 +8,50 @@
 
 <jsp:include page="/views/common/header.jsp" />
 
-<link rel="stylesheet" href="${ path }/resources/css/wbmain.css">
+<style>
+#title {
+    text-align: center;
+    font-size: 2em;
+}
+
+.join {
+    text-align: right;
+}
+
+.b_wrapper {
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.b_wrapper div {
+	cursor: pointer;
+}
+
+#walkimg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#walk-list {
+    width: 35%;
+    height: 60%;
+    position: absolute;
+    top: 17%;
+    left: 8%;
+}
+
+#walk-board {
+    width: 80%;
+    height: 10%;
+    position: absolute;
+    top: 84%;
+    left: 13%;
+}
+</style>
+
 <script src="${ path }/resources/js/jquery-3.6.3.js"></script>
     
 	<section>
@@ -19,9 +62,9 @@
     
 		<!-- 게시판 선택 화면 -->
 		<div class="b_wrapper">
-			<img src="${ path }/image/walkmain.jpg" id="walkimg">
-			<div id="walk-list" onclick="location.href=''"></div>
-			<div id="walk-board" onclick="location.href='${ path }/walkBoard/list'"></div>
+			<img src="${ path }/resources/image/walkmain.jpg" id="walkimg">
+			<div id="walk-list" onclick="location.href='${ path }/views/walkboard/recowalk.jsp'"></div>
+			<div id="walk-board" onclick="location.href='${ path }/views/walkboard/walksearch.jsp'"></div>
 		</div>
 	</section>
 </body>

@@ -1,17 +1,22 @@
 package com.petmeeting.mvc.walkboard.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.petmeeting.mvc.member.model.service.MemberService;
+import com.petmeeting.mvc.member.model.vo.Dog;
+import com.petmeeting.mvc.member.model.vo.Member;
 import com.petmeeting.mvc.walkboard.model.service.WalkBoardService;
 import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
 
-@WebServlet(name = "walkBoardView", urlPatterns = { "/walkBoard/view" })
+@WebServlet(name = "walkBoardView", urlPatterns = { "/walkboard/walkview" })
 public class WalkBoardViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -20,10 +25,11 @@ public class WalkBoardViewServlet extends HttpServlet {
 
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	WalkBoard walkBoard = new WalkBoard();
+    	HttpSession session = request.getSession(false);
+    	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+    	WalkBoard walkboard = new WalkBoard();
     	int wbNo = Integer.parseInt(request.getParameter("wbNo"));
-    	
-    	System.out.println("게시글 번호 : " + wbNo);
+    	Dog dog = new Dog();
     	
     	Cookie[] cookies = request.getCookies();
     	String boardHistory = "";
@@ -53,12 +59,15 @@ public class WalkBoardViewServlet extends HttpServlet {
     		
     	}
     	
-    	walkBoard = new WalkBoardService().getWalkBoardBywbNo(wbNo, hasRead);
+    	walkboard = new WalkBoardService().getWalkBoardBywbNo(wbNo, hasRead);
+
+    	dog = new MemberService().findDogByCode(walkboard.getMemberCode());
     	
-    	// System.out.println(walkBoard);	
+    	request.setAttribute("dog", dog);
+    	request.setAttribute("loginMember", loginMember);
+    	request.setAttribute("walkboard", walkboard);
     	
-    	request.setAttribute("walkboard", walkBoard);
-    	request.getRequestDispatcher("/views/walkboard/view.jsp").forward(request, response);
+    	request.getRequestDispatcher("/views/walkboard/walkview.jsp").forward(request, response);
     	
 	}
 }
