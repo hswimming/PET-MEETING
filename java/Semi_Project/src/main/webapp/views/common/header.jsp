@@ -31,17 +31,62 @@
 	<nav  id="nav1" class="navbar bg-light">
            <div class="container-fluid">
             	<div class="login-container">
-					<c:if test="${ empty loginMember }">
 					  <div>
-                  	  	<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" alt="" id="logoimg">
+					  	<a href="${ path }">
+                  	  		<img src="https://cdn.pixabay.com/photo/2012/05/07/13/46/foot-48503__340.png" id="logoimg">
+						</a>
                 	  </div>
-                  	  	<button type="button" onclick="location.href='${ path }/member/signup'" id="si" class="btn btn-outline-secondary">회원가입</button>
-                   	 	<button type="button" onclick="location.href='${ path }/member/login'" id="so"  class="btn btn-outline-secondary">로그인</button>             
+					<c:if test="${ empty loginMember && empty admin }">
+                  	  	<button type="button" id="si" class="btn btn-outline-secondary">회원가입</button>
+                   	 	<button type="button" id="so" class="btn btn-outline-secondary">로그인</button>             
 					</c:if>
             	</div>
-           </div>
+           		<c:if test="${ not empty loginMember }">
+           		<div style="position: absolute; right: 16%">
+           			${ loginMember.name }님 안녕하세요.
+           		</div>
+            	<div class="login-container">
+            		
+					<table>
+						<tr>
+							<td>
+								<button id="myPage" class="btn btn-outline-secondary" onclick="location.href='${ path }/member/myPage'">내 정보</button>
+							</td>
+							<td>
+								<button id="logout" class="btn btn-outline-secondary" onclick="location.replace('${ path }/logout')">로그아웃</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				</c:if>
+				<c:if test="${ empty loginMember && not empty admin }">
+					<div style="position: absolute; right: 16%">
+						관리자님 어서오시라요.
+					</div>
+					<div class="login-container">
+						<table>
+							<tr>
+								<td colspan="2">
+					
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button id="aLogout" class="btn btn-outline-secondary" onclick="location.replace('${ path }/logout')">로그아웃</button>
+									<button id="manageMem" class="btn btn-outline-secondary" onclick="location.replace('${ path }/admin/manage')">회원관리</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</c:if>
+            	</div>
+            	
     </nav>
-       
     
     <div id="title">
             PET MEETING
@@ -51,36 +96,22 @@
     </div> 
   
 			
-				<c:if test="${ not empty loginMember }">
-					<table>
-						<tr>
-							<td colspan="2">
-								${ loginMember.name }님 안녕하세요.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button onclick="location.href='${ path }/member/myPage'">내 정보</button>
-							</td>
-							<td>
-								<button onclick="location.replace('${ path }/logout')">로그아웃</button>
-							</td>
-						</tr>
-					</table>
-				</c:if>
+				
 				
 				
 				<div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="fixed" >
-						<button type="button" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
+                    	<button type="button" id="warkboard_btn" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; 
+                    			border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button>
+                    <div class="btn-group" role="group">
+        	            <button type="button" id="board_btn" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" 
+        	            		style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">펫다이어리</a></li>
-                            <li><a class="dropdown-item" href="#">펫미팅 후기</a></li>
-                            <li><a class="dropdown-item" href="#">정보 공유</a></li>
-                            <li><a class="dropdown-item" href="#">문의하기</a></li>
-                            <li><a class="dropdown-item" href="#">공지사항</a></li>
-                            <li><a class="dropdown-item" href="#">신고하기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B1&page=1">펫다이어리</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B3&page=1">정보 공유</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B4&page=1">문의하기</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B5&page=1">공지사항</a></li>
+                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B6&page=1">신고하기</a></li>
                         </ul>
                     </div>
                 </div>
@@ -90,6 +121,8 @@
     <header style="border: 1px solid;">
         <h1 style="text-align: center;">PETMEETING</h1>
     </header>
+
+		
 		
 <!-- <script src="main.js"></script> -->
 <%-- JavaScript Bundle with Popper --%>
@@ -99,6 +132,16 @@
 			location.replace("${ path }/views/member/myPage.jsp");	
 		});
 		
+		$('#si').on('click', () => {
+			location.replace("${ path }/views/member/signup.jsp");
+		});
+		
+		$('#so').on('click', () => {
+			location.replace("${ path }/views/member/login.jsp");
+		});
+		
+		$('#warkboard_btn').on('click', () =>{
+			location.replace("${ path }/walkboard/main")
+		});
 	});
-
 </script>

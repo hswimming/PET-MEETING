@@ -26,25 +26,33 @@ public class WalkBoardReplyServlet extends HttpServlet {
     	HttpSession session = request.getSession(false);
 		Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
 		
-		int wbNo = Integer.parseInt(request.getParameter("wbNo"));
-		String wbComment = request.getParameter("wbComment");
-		
-		WalkBoardReply walkBoardReply = new WalkBoardReply();
-		
-		walkBoardReply.setWbNo(wbNo);
-		walkBoardReply.setMCode(loginMember.getMCode());
-//		walkBoardReply.setWcNickname(loginMember.getNickname());
-		walkBoardReply.setWbComment(wbComment);
-		
-		result = new WalkBoardService().saveReply(walkBoardReply);
-		
-		if (result > 0) {
-			request.setAttribute("msg", "댓글 등록 성공");
-			request.setAttribute("location", "/walkBoard/view?wbNo=" + wbNo);
+		if (loginMember != null) {
+			
+			int wbNo = Integer.parseInt(request.getParameter("wbNo"));
+			String wbComment = request.getParameter("wbComment");
+			
+			WalkBoardReply walkBoardReply = new WalkBoardReply();
+			
+			walkBoardReply.setWbNo(wbNo);
+			walkBoardReply.setMCode(loginMember.getMCode());
+			walkBoardReply.setWbComment(wbComment);
+			walkBoardReply.setWcNickname(loginMember.getNickname());
+			
+			result = new WalkBoardService().saveReply(walkBoardReply);
+			
+			if (result > 0) {
+				request.setAttribute("msg", "댓글 등록 성공");
+				request.setAttribute("location", "/walkBoard/view?wbNo=" + wbNo);
+				
+			} else {
+				request.setAttribute("msg", "댓글 등록 실패");
+				request.setAttribute("location", "/walkBoard/view?wbNo=" + wbNo);
+			}
 			
 		} else {
-			request.setAttribute("msg", "댓글 등록 실패");
-			request.setAttribute("location", "/walkBoard/view?wbNo=" + wbNo);
+			request.setAttribute("msg", "로그인 후 작성해 주세요");
+        	request.setAttribute("location", "/");
+			
 		}
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

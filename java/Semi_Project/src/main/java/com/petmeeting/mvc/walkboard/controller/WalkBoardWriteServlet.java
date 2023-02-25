@@ -61,23 +61,13 @@ public class WalkBoardWriteServlet extends HttpServlet {
     		dog = new MemberService().findDogByCode(loginMember.getMCode());
     		
     		walkBoard.setMemberCode(loginMember.getMCode());
-    		
-    		walkBoard.setMemNickname(loginMember.getNickname());
-    		
-    		 walkBoard.setDogId(dog.getId());
-    		 
-    		 // walkBoard.setNum(dog.getNum());
-    		// System.out.println(dog);
-    		
+    		walkBoard.setDogId(dog.getId());
     		walkBoard.setWbTitle(mr.getParameter("content_title"));
-    		walkBoard.setMemNickname(loginMember.getNickname());
     		walkBoard.setWbContent(mr.getParameter("content"));
+    		walkBoard.setMemNickname(loginMember.getNickname());
     		
     		walkBoard.setRenamedFileName(mr.getFilesystemName("upfile"));
     		walkBoard.setOriginalFileName(mr.getOriginalFileName("upfile"));
-    		
-//    		walkBoard.setWbTitle(mr.getParameter("wbTitle"));
-//    		walkBoard.setWbContent(mr.getParameter("wbContent"));
     		
     		System.out.println(walkBoard);
     		
