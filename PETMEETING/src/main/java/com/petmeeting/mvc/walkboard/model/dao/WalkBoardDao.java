@@ -135,13 +135,6 @@ public class WalkBoardDao {
 				walkBoard.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
 				walkBoard.setWbContent(rs.getString("WB_CONTENT"));
 				
-				walkBoard.setName(rs.getString("D_NAME"));
-				walkBoard.setKind(rs.getString("D_KIND"));
-				walkBoard.setSize(rs.getString("D_SIZE"));
-				walkBoard.setKind(rs.getString("D_GENDER"));
-				walkBoard.setNeutered(rs.getString("NEUTERED"));
-				walkBoard.setVaccine(rs.getString("VACCINE"));
-				
 				walkBoard.setReplies(this.getCommentsBywcNo(connection, wbNo));
 				walkBoard.setCreateDate(rs.getDate("CREATE_DATE"));
 				walkBoard.setModifyDate(rs.getDate("MODIFY_DATE"));
@@ -207,17 +200,17 @@ public class WalkBoardDao {
 	public int insertWalkBoard(Connection connection, WalkBoard walkBoard) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, 0, ?, ?, DEFAULT, DEFAULT, 0, DEFAULT, ?, ?)";
+		String query = "INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, 0, DEFAULT, ?, ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
 			pstmt.setInt(1, walkBoard.getMemberCode());
-			// pstmt.setString(2, walkBoard.getDogId());
-			pstmt.setString(2, walkBoard.getWbTitle());
-			pstmt.setString(3, walkBoard.getWbContent());
-			pstmt.setString(4, walkBoard.getOriginalFileName());
-			pstmt.setString(5, walkBoard.getRenamedFileName());
+			pstmt.setString(2, walkBoard.getDogId());
+			pstmt.setString(3, walkBoard.getWbTitle());
+			pstmt.setString(4, walkBoard.getWbContent());
+			pstmt.setString(5, walkBoard.getOriginalFileName());
+			pstmt.setString(6, walkBoard.getRenamedFileName());
 			
 			result = pstmt.executeUpdate();
 			

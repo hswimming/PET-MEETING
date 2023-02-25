@@ -42,19 +42,4 @@ public class WalkBoard {
 	
 	private String renamedFileName;
 	
-//	강아지 정보
-	private int num; // (강아지 각각의 번호)
-	
-	private String name;
-	
-	private String kind;
-	
-	private String size;
-	
-	private String gender;
-	
-	private String neutered;
-	
-	private String vaccine;
-	
 }

@@ -137,18 +137,6 @@
                 <br><br>
                 
                 <!-- 주인 옵션 -->
-                <label>현재 거주하는 지역</label><br><br>
-                <select name="area" id="area" class="select">
-                    <optgroup label="현재 거주지 선택">
-                        <option selected>----------</option>
-                        <option value="gangnam-gu">강남구</option>
-                        <option value="jongno-gu">종로구</option>
-                        <option value="mapo-gu">마포구</option>
-                        <option value="guro-gu">구로구</option>
-                    </optgroup>
-                </select>
-
-                <br><br>
                 
                 <label>주인 성별</label><br><br>
                 <label>
@@ -171,7 +159,7 @@
     <script>
 		$(document).ready(() => {
 			$('#search_button').on('click', () => {
-				location.replace('${ path }/walkboard/list')
+				location.replace('${ path }/walkboard/walklist')
 			});
 			
 			

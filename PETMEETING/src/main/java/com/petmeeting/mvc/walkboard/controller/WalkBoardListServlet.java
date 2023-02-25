@@ -15,7 +15,7 @@ import com.petmeeting.mvc.member.model.vo.Member;
 import com.petmeeting.mvc.walkboard.model.service.WalkBoardService;
 import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
 
-@WebServlet(name = "walkBoardList", urlPatterns = { "/walkboard/list" })
+@WebServlet(name = "walkBoardList", urlPatterns = { "/walkboard/walklist" })
 public class WalkBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -62,7 +62,6 @@ public class WalkBoardListServlet extends HttpServlet {
 		dog.setVaccine(vaccine);
 		dog.setNeutered(request.getParameter("neuter"));
 		
-		member.setAddress(request.getParameter("area"));
 		member.setGender(request.getParameter("gender"));
 		
 		// 조회 서비스로 넘기기

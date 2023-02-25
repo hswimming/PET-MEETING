@@ -77,7 +77,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 작성</title>
-    <link rel="stylesheet" href="./boardUpdate.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     
 	<!--한글폰트-->
@@ -91,7 +90,7 @@
 <body>
     <h1>게시글 작성하기</h1>
 
-    <form action="${ path }/walkBoard/write" method="POST" enctype="multipart/form-data">
+    <form action="${ path }/walkBoard/walkwrite" method="POST" enctype="multipart/form-data">
         <table id='tbl-board'>
         	<tr>
                 <th>제목</th>
@@ -108,13 +107,22 @@
             <tr>
                 <th>강아지 정보</th>
                 <td>
-                	이름 : ${ walkboard.name }<br>
-					종류 : ${ walkboard.kind }<br>
-					크기 : ${ walkboard.size }<br>
-					성별 : ${ walkboard.gender }<br>
-					중성화 여부 : ${ walkboard.neutered }<br>
-					백신 접종 여부 : ${ walkboard.vaccine }<br>
+                	이름 : ${ dogName }<br>
+					종류 : ${ dogKind }<br>
+					크기 : ${ dogSize }<br>
+					성별 : ${ dogGender }<br>
+					중성화 여부 : ${ dogNeutered }<br>
+					백신 접종 여부 : ${ dogVaccine }<br>
                 </td>
+            </tr>
+             <tr>
+               <th>주인 성별</th>
+               <c:if test="${ loginMember.gender == 'M' }">
+               	   <td>남자</td>
+               </c:if>
+               <c:if test="${ loginMember.gender == 'F' }">
+               	   <td>여자</td>
+               </c:if>
             </tr>
             <tr>
                 <th>내용</th>

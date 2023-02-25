@@ -92,22 +92,15 @@ public class WalkBoardService {
 		Connection connection = getConnection();
 		
 		if (walkBoard.getWbNo() > 0) {
-			
-			result = new WalkBoardDao().insertWalkBoard(connection, walkBoard);
-			
-			
-		} else {
-			
 			result = new WalkBoardDao().updateWalkBoard(connection, walkBoard);
-			
+		} else {
+			result = new WalkBoardDao().insertWalkBoard(connection, walkBoard);
 		}
 		
 		if (result > 0) {
 			commit(connection);
-			
 		} else {
 			rollback(connection);
-			
 		}
 		
 		close(connection);
