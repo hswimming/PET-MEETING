@@ -91,13 +91,11 @@ public class WalkBoardService {
 		
 		if (walkBoard.getWbNo() > 0) {
 			
-			result = new WalkBoardDao().insertWalkBoard(connection, walkBoard);
-			
+			result = new WalkBoardDao().updateWalkBoard(connection, walkBoard);
 			
 		} else {
 			
-			result = new WalkBoardDao().updateWalkBoard(connection, walkBoard);
-			
+			result = new WalkBoardDao().insertWalkBoard(connection, walkBoard);
 		}
 		
 		if (result > 0) {
@@ -114,6 +112,7 @@ public class WalkBoardService {
 		
 	}
 
+//	댓글 등록
 	public int saveReply(WalkBoardReply walkBoardReply) {
 		int result = 0;
 		Connection connection = getConnection();
@@ -131,6 +130,27 @@ public class WalkBoardService {
 		close(connection);
 		
 		return result;
+	}
+
+//	게시글 삭제
+	public int delete(int wbNo) {
+		int result = 0;
+		
+		Connection connection = getConnection();
+		
+		result = new WalkBoardDao().updateWbStatus(connection, wbNo, "N");
+		
+		if (result > 0) {
+			commit(connection);
+			
+		} else {
+			rollback(connection);
+			
+		}
+		
+		close(connection);
+		
+		return 1;
 	}
 
 }

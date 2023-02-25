@@ -65,7 +65,7 @@ INSERT INTO DOG VALUES (D_ID.NEXTVAL, DEFAULT, DEFAULT, 1, '보리19', '미니�
 INSERT INTO DOG VALUES (D_ID.NEXTVAL, DEFAULT, DEFAULT, 2, '보리20', '미니핀', '중형견', '암컷', 'Y', 'Y', 20);
 
 -- WALKBOARD
-INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, 1, 22, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y', NULL, NULL);
+INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, 22, 'DOG43', '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y', NULL, NULL);
 INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, 2, 23, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y', NULL, NULL);
 INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, 3, 24, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y', NULL, NULL);
 INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, 4, 25, '산책 친구 구합니다', '산책 친구 구합니다', SYSDATE, SYSDATE, 0, 'Y', NULL, NULL);

@@ -64,10 +64,10 @@ public class WalkBoardWriteServlet extends HttpServlet {
     		
     		walkBoard.setMemNickname(loginMember.getNickname());
     		
-    		// walkBoard.setNum(dog.getNum());
-    		// walkBoard.setDogId(dog.getId());
+    		 walkBoard.setDogId(dog.getId());
+    		 
+    		 // walkBoard.setNum(dog.getNum());
     		// System.out.println(dog);
-    		// walkBoard.setDogId(dog.getId());
     		
     		walkBoard.setWbTitle(mr.getParameter("content_title"));
     		walkBoard.setMemNickname(loginMember.getNickname());

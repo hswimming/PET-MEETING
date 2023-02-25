@@ -208,17 +208,17 @@ public class WalkBoardDao {
 	public int insertWalkBoard(Connection connection, WalkBoard walkBoard) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, 0, ?, ?, DEFAULT, DEFAULT, 0, DEFAULT, ?, ?)";
+		String query = "INSERT INTO WALKBOARD VALUES (WB_NO_SEQ.NEXTVAL, ?, ?, ?, ?, DEFAULT, DEFAULT, 0, DEFAULT, ?, ?)";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
 			pstmt.setInt(1, walkBoard.getMemberCode());
-			// pstmt.setString(2, walkBoard.getDogId());
-			pstmt.setString(2, walkBoard.getWbTitle());
-			pstmt.setString(3, walkBoard.getWbContent());
-			pstmt.setString(4, walkBoard.getOriginalFileName());
-			pstmt.setString(5, walkBoard.getRenamedFileName());
+			pstmt.setString(2, walkBoard.getDogId());
+			pstmt.setString(3, walkBoard.getWbTitle());
+			pstmt.setString(4, walkBoard.getWbContent());
+			pstmt.setString(5, walkBoard.getOriginalFileName());
+			pstmt.setString(6, walkBoard.getRenamedFileName());
 			
 			result = pstmt.executeUpdate();
 			
@@ -306,6 +306,31 @@ public class WalkBoardDao {
 			
 		} finally {
 			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/* 게시글 삭제 쿼리 */
+	public int updateWbStatus(Connection connection, int wbNo, String wbStatus) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE WALKBOARD SET WB_STATUS=? WHERE WB_NO=?";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setString(1, wbStatus);
+			pstmt.setInt(2, wbNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+			
 		}
 		
 		return result;
