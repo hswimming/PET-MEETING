@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.petmeeting.mvc.common.util.PageInfo;
+import com.petmeeting.mvc.member.model.vo.Dog;
+import com.petmeeting.mvc.member.model.vo.Member;
 import com.petmeeting.mvc.walkboard.model.service.WalkBoardService;
 import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
-import com.petmeeting.mvc.common.util.PageInfo;
 
 @WebServlet(name = "walkBoardList", urlPatterns = { "/walkboard/list" })
 public class WalkBoardListServlet extends HttpServlet {
@@ -44,4 +46,28 @@ public class WalkBoardListServlet extends HttpServlet {
     	request.setAttribute("list", list);
     	request.getRequestDispatcher("/views/walkboard/walklist.jsp").forward(request, response);
 	}
+    
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	Dog dog = new Dog();
+    	Member member = new Member();
+    	
+    	dog.setSize(request.getParameter("size"));
+    	dog.setGender(request.getParameter("dogGender"));
+    	dog.setKind(request.getParameter("kind"));
+    	
+    	String vaccine = request.getParameter("vaccine") != null ?
+				String.join(",", request.getParameterValues("vaccine")) : null;
+		
+		dog.setVaccine(vaccine);
+		dog.setNeutered(request.getParameter("neuter"));
+		
+		member.setAddress(request.getParameter("area"));
+		member.setGender(request.getParameter("gender"));
+		
+		// 조회 서비스로 넘기기
+		
+    }
+    
+    
 }
