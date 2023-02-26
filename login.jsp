@@ -7,7 +7,7 @@
 <style>
     #container {
          margin-top: 5%; 
-         margin-right: 65px;  
+         padding-left: 80px;
     }
     
     .btn_login {
@@ -67,13 +67,13 @@
         <div id="container" class="container">
             <div class="content">
                 <div class="login_wrap">
-                    <form action="" method="POST">
+                    <form action="${ path }/member/login" method="POST">
                         <div>
-                            <input type="text" id="id" name="id" class="input_text" placeholder="아이디" maxlength="16">
+                            <input type="text" id="inputId" name="inputId" class="input_text" placeholder="아이디" maxlength="16">
                         </div>
                         <br>
                         <div>
-                            <input type="password" id="password" name="password" class="input_text" placeholder="비밀번호" maxlength="16">
+                            <input type="password" id="inputPwd" name="inputPwd" class="input_text" placeholder="비밀번호" maxlength="16">
                         </div>
                         <br>
                         <div class="btn_login_wrap"> 
@@ -91,8 +91,8 @@
                     </form>
                     
                     <ul class="find_wrap" id="find_wrap">
-                        <li><a href="${ path }/member/findid" class="find_text">아이디 찾기</a></li>
-                        <li><a href="${ path }/member/findpwd" class="find_text" style="padding: 50px;">비밀번호 찾기</a></li>
+                        <li><a onclick="popupfindId();" class="find_text">아이디 찾기</a></li>
+                        <li><a onclick="location.href='${ path }/member/checkAgreement.jsp'" class="find_text" style="padding: 50px;">비밀번호 찾기</a></li>
                         <li><a href="${ path }/member/signup" class="find_text">회원가입</a></li>
                     </div>
                     </ul>
@@ -100,12 +100,56 @@
         </div>
     </section>
 <script type="text/javascript">
-	$(document).ready(() => {
-		$('#saveid').on('click', () => {
-			var svid = $(''))
-		});
+	var popupWidth = 100;
+	var popupHeight = 50;
+	
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	
+// 	window.open('', '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+
+
+	function popupfindId() { 
+		window.open("${ path }/views/member/findId.jsp","pop", "height=' + popupHeight + ', width=' + popupWidth + ', left=' + popupX + ', top=' + popupY + ', scrollbars=yes, resizable=yes"); 
+		}
+	
+// 	function popupfindPwd() { 
 		
-	});
+// 		window.open("${ path }/views/member/checkAgreement.jsp"); 
+// // 		window.open("${ path }/views/member/checkAgreement.jsp","pop", "height=' + popupHeight + ', width=' + popupWidth + ', left=' + popupX + ', top=' + popupY + ', scrollbars=yes, resizable=yes"); 
+// 		}
+
+	var loginBtn = document.getElementById("btn_login");
+	
+	loginBtn.addEventListener("click", login);
+	
+	// 로그인 버튼 클릭 실행 함수
+	function login() {
+	  var saveIdCheckbox = document.getElementById("saveid");
+	  
+	  // 체크박스가 체크되면, input 요소의 값을 저장
+	  if (saveIdCheckbox.checked) {
+	    var inputIdValue = document.getElementById("inputId").value;
+	    // Local Storage에 값 저장
+	    localStorage.setItem("savedId", inputIdValue); 
+	  }
+	}
+
+	// 페이지 로딩 시 저장한 값확인하여 input 요소에 입력
+	window.onload = function() {
+	  var savedId = localStorage.getItem("savedId");
+	  if (savedId !== null) {
+	    var inputId = document.getElementById("inputId");
+	    inputId.value = savedId;
+	    
+	    // 체크박스도 체크된 상태로 표시
+	    var saveIdCheckbox = document.getElementById("saveid");
+	    saveIdCheckbox.checked = true;
+	  }
+	};
 	
 </script>
 

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmeeting.mvc.member.model.service.MemberService;
 import com.petmeeting.mvc.member.model.vo.Member;
@@ -22,19 +23,17 @@ public class MemberSignUpServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
 		Member member = new Member();
 		
-		member.setId(request.getParameter("id"));
-		member.setPassword(request.getParameter("password"));
-		member.setName(request.getParameter("name"));
-		member.setNickname(request.getParameter("nickname"));
-		member.setPhone(request.getParameter("phone"));
+		member.setId(request.getParameter("inputId"));
+		member.setPassword(request.getParameter("inputPwd"));
+		member.setName(request.getParameter("inputName"));
+		member.setNickname(request.getParameter("inputNickname"));
+		member.setPhone(request.getParameter("inputPhone"));
 		member.setAddress(request.getParameter("address"));
-		member.setEmail(request.getParameter("email"));
-		member.setBirth(request.getParameter("birth"));
-		member.setGender(request.getParameter("gender"));
+		member.setEmail(request.getParameter("inputEmail"));
+		member.setBirth(request.getParameter("inputBirth"));
+		member.setGender(request.getParameter("inputGender"));
 		
 		
 		System.out.println(member);
@@ -42,14 +41,12 @@ public class MemberSignUpServlet extends HttpServlet {
 		int result = new MemberService().memberSave(member);
 		
 		
-		
-		
 		if(result > 0) {
 			request.setAttribute("msg", "회원 가입 성공");
 			request.setAttribute("location", "/");
 		} else {
 			request.setAttribute("msg", "회원 가입 실패하셨습니다, 다시 확인해 주세요.");
-			request.setAttribute("location", "/");			
+			request.setAttribute("location", "/member/signup");			
 		}
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
