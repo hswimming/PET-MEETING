@@ -13,24 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.petmeeting.mvc.member.model.service.MemberService;
 
-@WebServlet(name = "memberCheck", urlPatterns = { "/member/nickCheck" })
-public class MemberCheckServlet extends HttpServlet {
+@WebServlet("/member/emailCheck")
+public class MemberEmailCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MemberCheckServlet() {
+    public MemberEmailCheckServlet() {
     }
 
-    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Map<String, Boolean> map = new HashMap<>();
-    	String nickname = request.getParameter("nickname");
-    	
-    	map.put("duplicate", new MemberService().isDuplicateNick(nickname));
-    	
-    	response.setContentType("application/json;charset=UTF-8");
-    	
-    	new Gson().toJson(map, response.getWriter());
-    
-    }
+		Map<String, Boolean> map = new HashMap<>();
+		String inputEmail = request.getParameter("inputEmail");	
+		
+		map.put("duplicateEmail", new MemberService().isDuplicateEmail(inputEmail));
+				
+		response.setContentType("application/json;charset=UTF-8");
+		
+		new Gson().toJson(map, response.getWriter());
+	}
 
 }

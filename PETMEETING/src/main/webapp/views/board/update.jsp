@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
+<jsp:include page="/views/common/header.jsp" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
      
 
-h1 {
+#updateH1 {
     font-family: 'Jua', sans-serif;
     color: rgb(12, 66, 12);
     text-align: center;
@@ -36,7 +37,7 @@ h1 {
     color: rgb(12, 66, 12);   
 }
 
-#title, #writer, #subject{
+#boardTitle, #writer, #subject{
     width: 97%;
 }
 
@@ -59,11 +60,13 @@ table#tbl-board{
     border:1px solid black;
     border-collapse:collapse;
     margin-bottom: 100px;
+    font-family: 'Jua', sans-serif;
 }
 table#tbl-board th{
     border:1px solid;
     padding:5px 0;
     text-align:center;
+    background-color: whitesmoke;
 }
 table#tbl-board td{
     border:1px solid;
@@ -89,7 +92,7 @@ table#tbl-board td{
 <body>
 
 
-    <h1>수정하기</h1>
+    <h1 id="updateH1">수정하기</h1>
 
     <form action="${ path }/board/update" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="boardNo" value="${ board.boardNo }">
@@ -105,7 +108,7 @@ table#tbl-board td{
             </tr>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" id="title" value=${ board.boardTitle }></td>
+                <td><input type="text" name="title" id="boardTitle" value=${ board.boardTitle }></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -152,4 +155,5 @@ table#tbl-board td{
 
 
 </body>
-</html>
+
+<jsp:include page="/views/common/footer.jsp" />

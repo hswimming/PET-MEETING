@@ -10,11 +10,16 @@
 <meta charset="UTF-8">
 <title>게시판글목록페이지</title>
    <style>
-   section {
-   margin:auto;
+   		a {
+   			text-decoration: none;
+   			color: green;
+   		}
    
-   width:70%;
-   }
+	   section {
+	   margin:auto;
+	   width:70%;
+	   }
+	   
         section#board-list-container{
             width:600px; margin:0 auto; text-align:center;
         }
@@ -46,7 +51,7 @@
     <section id="content">
 		<div id="board-list-container">
 		<h2 id="boardH2"style="text-align: center; font-size: 2em;">
-		<c:if test="${ param.boardCode eq 'B1' }"><c:out value="펫 다이어리"/></c:if>
+			<c:if test="${ param.boardCode eq 'B1' }"><c:out value="펫 다이어리"/></c:if>
             <c:if test="${ param.boardCode eq 'B2' }"><c:out value="펫미팅 후기"/></c:if>
             <c:if test="${ param.boardCode eq 'B3' }"><c:out value="정보 공유"/></c:if>
             <c:if test="${ param.boardCode eq 'B4' }"><c:out value="문의 / 건의"/></c:if>
@@ -54,7 +59,7 @@
             <c:if test="${ param.boardCode eq 'B6' }"><c:out value="신고하기"/></c:if>
         </h2>
 		<c:if test="${ not empty loginMember }">
-			<button id="btn-add" onclick="location.href='${ path }/board/write'">글쓰기</button><br><br>
+			<button id="btn-add" onclick="location.href='${ path }/board/write'" class="btn btn-outline-secondary">글쓰기</button><br><br>
 		</c:if>
               
 		<select name="category" id="category" onchange="location.href=this.value" style="margin-bottom: 5px;">
@@ -73,11 +78,12 @@
 	
 	
 
-		<table id="tbl-board">
+		<table id="tbl-board" class="table table-hover" >
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
+				<th>첨부파일</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
@@ -93,11 +99,20 @@
 			<tr>
 				<td>${ board.rowNum }</td>
 				<td>
-					<a href="${ path }/board/view?boardNo=${board.boardNo}">
-						${ board.boardTitle }
-					</a>
+					<a href="${ path }/board/view?boardCode=${board.boardCode}&boardNo=${board.boardNo}">
+               		   ${ board.boardTitle }
+            	   </a>
 				</td>
 				<td>${ board.memberNickName }</td>
+				<td>
+					<c:if test="${ empty board.originalFileName }">
+								<span> - </span>
+							</c:if>
+							<c:if test="${ not empty board.originalFileName }">
+								<img width="20px" src="${ path }/resources/images/file.png">
+							</c:if>
+				
+				</td>
 				<td>${ board.createDate }</td>
 				<td>${ board.views }</td>
 			</tr>

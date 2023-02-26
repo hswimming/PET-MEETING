@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.petmeeting.mvc.board.model.service.BoardService;
+import com.petmeeting.mvc.board.model.vo.Board;
 import com.petmeeting.mvc.board.model.vo.Reply;
 import com.petmeeting.mvc.member.model.vo.Member;
 
@@ -30,8 +31,10 @@ public class BoardReplyServlet extends HttpServlet {
         Member loginMember =(session == null) ? null : (Member) session.getAttribute("loginMember");
         
         if(loginMember != null) {
+        	Board board = new Board();
         	
         	int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+        	board = new BoardService().getBoardByBoardNo(boardNo, false);
         	String content = request.getParameter("content");
         	
         	
@@ -48,7 +51,8 @@ public class BoardReplyServlet extends HttpServlet {
         	
         	if(result > 0) {
         		request.setAttribute("msg", "댓글이 등록되었습니다.");
-        		request.setAttribute("location", "/board/view?boardNo=" + boardNo);
+        		request.setAttribute("location", "/board/view?boardCode="+ board.getBoardCode() +"&boardNo=" + boardNo);
+//        		request.setAttribute("location", "/board/view?boardNo=" + boardNo);
         	} else {
         		request.setAttribute("msg", "댓글이 등록되지 않았습니다.");
         		request.setAttribute("location", "/board/view?boardNo=" + boardNo);

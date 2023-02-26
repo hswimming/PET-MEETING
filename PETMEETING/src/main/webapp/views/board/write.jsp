@@ -73,12 +73,14 @@
 		    border-collapse:collapse;
 		    margin-bottom: 100px;
 		    table-layout: fixed;
+		    font-family: 'Jua', sans-serif;
 		}
 		table#tbl-board th{
 		    border:1px solid;
 		    padding:5px 0;
 		    text-align:center;
 		    width: 150px;
+		    background-color: whitesmoke;
 		}
 		table#tbl-board td{
 		    border:1px solid;
@@ -126,7 +128,7 @@
             <tr>
                 <th>첨부파일</th>
                 <td>
-                    <input type="file" name="upfile1" id="upfile1"><br>
+                    <input type="file" name="upfile" id="upfile"><br>
 
                 </td>
             </tr>
@@ -148,7 +150,7 @@
             </tr>
         </table>
     </form>
-
+</body>
 
 
 <!--ckeditor-->

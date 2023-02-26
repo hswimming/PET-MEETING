@@ -30,6 +30,13 @@
 	#adminNav a:hover {
 		background-color: blanchedalmond;
 	}
+	
+	#recentBoard td div{
+		float: left;
+		margin-right: 50px;
+				
+
+	}
 </style>
 
 
@@ -40,8 +47,8 @@
 			<ul id="adminNav">
 				<li style="height: 10px; width: 100%; background-color: blanchedalmond"></li>
 				<li><a href="${ path }/admin/manage">페이지 현황 보기</a></li>
-				<li><a href="">산책 추천 게시판</a></li>
-				<li><a href="">공지 사항 게시판</a></li>
+				<li><a href="${ path }/walkboard/walklist">산책 추천 게시판</a></li>
+				<li><a href="${ path }/board/list?boardCode=B5&page=1">공지 사항 게시판</a></li>
 			</ul>
         </article>
         <article>
@@ -52,28 +59,26 @@
                         <td style="background-color: blanchedalmond;"></td>
                     </tr>
                     <tr>
-                        <th>회원</th>
-                        <td style="width: 90%;">1(0)</td>
+                        <th>전체 회원 수</th>
+                        <td style="width: 90%;">${ countMember }</td>
                     </tr>
                     <tr>
                         <th style="width: 20%;">게시글</th>
-                        <td>0(0)</td>
+                        <td>${ countBoard }</td>
                     </tr>
                     <tr>
-                        <th>댓글</th>
-                        <td>0(0)</td>
                     </tr>
                 </table>
             </div>
             <div>
                 <table id="recentReply" class="adminTable">
                     <tr>
-                        <th style="background-color: blanchedalmond;">최신 댓글</th>
+                        <th style="background-color: blanchedalmond;">산책 게시판 <br> 최신글</th>
                         <td style="background-color: blanchedalmond;"></td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td style="width: 500px;">0(0)</td>
+                        <td style="width: 500px;"></td>
                     </tr>
                     <tr>
                         <th style="width: 100px;"></th>
@@ -90,19 +95,23 @@
             <div>
                 <table id="recentBoard" class="adminTable">
                     <tr>
-                        <th style="background-color: blanchedalmond;">최근 게시글</th>
+                        <th style="background-color: blanchedalmond;">게시판 최신글</th>
                         <td style="background-color: blanchedalmond;"></td>
                     </tr>
                     <tr>
-                        <th></th>
-                        <td style="width: 400px;">0(0)</td>
+                        <th>1</th>
+                        <td style="width: 400px;" id="recentBoard">
+                        	<div>${ board.boardTitle }</div>
+                        	<div style="overflow: hidden;">${ board.boardContent }</div>
+                        	<div>${ board.memberNickName }</div>
+                        </td>
                     </tr>
                     <tr>
-                        <th style="width: 100px;"></th>
+                        <th style="width: 100px;">2</th>
                         <td></td>
                     </tr>
                     <tr>
-                        <th></th>
+                        <th>3</th>
                         <td></td>
                     </tr>
                 </table>

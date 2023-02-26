@@ -9,7 +9,7 @@
 <jsp:include page="/views/common/header.jsp" />
 
 <style>
-#title {
+#walkTitle {
     text-align: center;
     font-size: 2em;
 }
@@ -55,7 +55,7 @@
 <script src="${ path }/resources/js/jquery-3.6.3.js"></script>
     
 	<section>
-		<div id="title">
+		<div id="walkTitle">
 			<br>
 			<h4>이동하고 싶은 게시판을 선택 하세요!</h4>
 		</div>

@@ -176,7 +176,7 @@
 			if (${ empty loginMember }) {
 				alert('로그인 후 이용 해주세요.');
 				
-				$('#userId').focus();
+				$('#so').focus();
 			}
 		});
  		
@@ -185,5 +185,4 @@
  </script>   
     
 </body>
-</html>
 <jsp:include page="/views/common/footer.jsp" />

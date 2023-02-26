@@ -6,6 +6,8 @@ import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.getConnection;
 import java.sql.Connection;
 
 import com.petmeeting.mvc.admin.model.vo.Admin;
+import com.petmeeting.mvc.board.model.dao.BoardDao;
+import com.petmeeting.mvc.board.model.vo.Board;
 import com.petmeeting.mvc.member.model.dao.MemberDao;
 
 public class AdminService {
@@ -17,7 +19,7 @@ public class AdminService {
 			
 			return null;
 		}
-
+		
 		return admin;
 	}
 
@@ -30,6 +32,38 @@ public class AdminService {
 		
 		return admin;
 		
+	}
+
+	public int AllCountboard() {
+		int count = 0;
+		Connection connection = getConnection();
+		
+		count = new BoardDao().getAllBoardCount(connection);
+		
+		close(connection);
+		
+		return count;
+		
+	}
+
+	public int CountMember() {
+		int count = 0;
+		Connection connection = getConnection();
+		
+		count = new BoardDao().getCountMember(connection);
+	
+		close(connection);
+		
+		return count;
+	}
+
+	public Board recentBoard() {
+		Connection connection = getConnection();
+		Board board = new BoardDao().recentBoard(connection);
+		
+		close(connection);
+		
+		return board;
 	}
 	
 	

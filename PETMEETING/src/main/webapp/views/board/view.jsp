@@ -25,6 +25,7 @@
             margin:10px 0;
         }
         table#tbl-board{
+        	font-family: 'Jua', sans-serif;
             width:500px; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both;
         }
         table#tbl-board th{
@@ -69,7 +70,14 @@
 <body>
     <section id="content">   
         <div id="board-write-container">
-            <h2 style="text-align: center; font-size: 2em;">게시판</h2>
+            <h2 style="text-align: center; font-size: 2em;">
+            	<c:if test="${ param.boardCode eq 'B1' }"><c:out value="펫 다이어리"/></c:if>
+            	<c:if test="${ param.boardCode eq 'B2' }"><c:out value="펫미팅 후기"/></c:if>
+          	    <c:if test="${ param.boardCode eq 'B3' }"><c:out value="정보 공유"/></c:if>
+            	<c:if test="${ param.boardCode eq 'B4' }"><c:out value="문의 / 건의"/></c:if>
+         	    <c:if test="${ param.boardCode eq 'B5' }"><c:out value="공지사항"/></c:if>
+          	 	<c:if test="${ param.boardCode eq 'B6' }"><c:out value="신고하기"/></c:if>
+            </h2>
             <table id="tbl-board" >
                 <tr>
                     <th>카테고리</th>
@@ -101,9 +109,18 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td colspan="3">
-                        <span> - </span>
-                    </td>
+                    <c:if test="${ empty board.originalFileName }">
+	                    <td colspan="3">
+	                        <span> - </span>
+	                    </td>
+                    </c:if>
+                    <c:if test="${ not empty board.originalFileName }">
+	                    <td colspan="3">
+	                        <a href="javascript:" id="fileDown">
+	                        	<span> ${ board.originalFileName } </span>
+	                        </a>
+	                    </td>
+                    </c:if>
                 </tr>
                 <tr>
                     <th>내 용</th>
@@ -112,10 +129,10 @@
                 <tr>
                     <th colspan="4">
                     <c:if test="${ not empty loginMember && loginMember.id == board.memberId }">
-                        <button type="button" onclick="location.href='${ path }/board/update?boardNo=${ board.boardNo }'">수정</button>
-                        <button type="button" id="btnDelete">삭제</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.href='${ path }/board/update?boardNo=${ board.boardNo }'">수정</button>
+                        <button type="button" class="btn btn-outline-secondary" id="btnDelete">삭제</button>
                         </c:if>
-                        <button type="button" onclick="location.href='${ path }/board/list?boardCode=${ board.boardCode }&page=1'">목록</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.href='${ path }/board/list?boardCode=${ board.boardCode }&page=1'">목록</button>
                  
                     </th>
                 </tr>
@@ -129,7 +146,7 @@
 	                    
                         <input type="hidden" name="boardNo" value="${ board.boardNo }">
                         <textarea name="content" id="content" cols="55" rows="2"></textarea>
-                        <button type="submit" id="btn-insert">등록</button>	    			
+                        <button type="submit" id="btn-insert" class="btn btn-outline-secondary">등록</button>	    			
                     </form>
                 </div>
             </div>
@@ -146,7 +163,7 @@
 	                    <td>
 	                    	<c:if test="${ not empty loginMember && loginMember.id == reply.memberId }">
 	                        	
-	                        	<button type="button" id="btnRDelete" rNo="${ reply.replyNo }">삭제</button>
+	                        	<button type="button" id="btnRDelete" class="btn btn-outline-secondary" rNo="${ reply.replyNo }">삭제</button>
 	                    	</c:if>
 	    
 	                    </td>
@@ -178,8 +195,17 @@
 				location.replace('${ path }/board/delete?boardNo=${ board.boardNo }&boardCode=${board.boardCode}');
 			}
     	});
+    	
+    	$('#fileDown').on('click', () => {
+            let oname = encodeURIComponent('${ board.originalFileName }');
+            let rname = encodeURIComponent('${ board.renamedFileName }');
+            
+            location.assign('${ path }/board/fileDown?oname=' + oname + '&rname=' + rname);
+    		
+    	});
 		
 	});
     </script>
 </body>
-</html>
+
+<jsp:include page="/views/common/footer.jsp" />

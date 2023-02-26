@@ -22,12 +22,17 @@
 }
 
 #lastDiv {
-    border: 1px solid;
-    width: 10%;
-    text-align: right;
-    float: right;
-    height: 100%;
+	margin-top: 10px;
+	font-family: 'Jua', sans-serif;
 }
+
+#lastDiv input{
+	width: 200px;
+	height: 200px;
+	font-size: 1.5em;
+}
+
+
 
 #mainimg {
     text-align: center;
@@ -166,7 +171,9 @@ footer {
                 <button class="next" id="next">다음</button>
             </div>
             <div id="lastDiv" class="mainDiv">
-
+				<div>
+					<input id="map_btn" class="btn btn-outline-secondary" type="button" value="지도로 검색하기" >
+				</div>
             </div>
         </article>
 	</section>
@@ -212,6 +219,10 @@ footer {
 	        }
 	
 	        init();
+	        
+	        $('#map_btn').on('click', () =>{
+	        	location.replace('${ path }/views/walkboard/mapAPI.jsp');
+	        });
 	        
 	    });
 	

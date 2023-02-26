@@ -135,7 +135,7 @@ public class WalkBoardDao {
 				walkBoard.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
 				walkBoard.setWbContent(rs.getString("WB_CONTENT"));
 				
-				walkBoard.setReplies(this.getCommentsBywcNo(connection, wbNo));
+				walkBoard.setReplies(this.getRepliesBywbNo(connection, wbNo));
 				walkBoard.setCreateDate(rs.getDate("CREATE_DATE"));
 				walkBoard.setModifyDate(rs.getDate("MODIFY_DATE"));
 				
@@ -153,35 +153,36 @@ public class WalkBoardDao {
 	}
 	
 	/* 댓글 조회 쿼리 */
-	private List<WalkBoardReply> getCommentsBywcNo(Connection connection, int wcNo) {
+	private List<WalkBoardReply> getRepliesBywbNo(Connection connection, int wbNo) {
 		List<WalkBoardReply> replies = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String query = "SELECT R.WR_NO, R.WB_NO, R.WR_CONTENT, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE "
+		String query = "SELECT M.M_CODE, R.WR_NO, R.WB_NO, R.WR_CONTENT, M.M_NICKNAME, R.CREATE_DATE, R.MODIFY_DATE "
 					 + "FROM WALKREPLY R "
 					 + "JOIN MEMBER M ON(R.M_CODE = M.M_CODE) "
-					 + "WHERE R.WR_STATUS='Y' AND WR_NO=? "
+					 + "WHERE R.WR_STATUS='Y' AND WB_NO=? "
 					 + "ORDER BY R.WR_NO DESC";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, wcNo);
+			pstmt.setInt(1, wbNo);
 			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				WalkBoardReply reply = new WalkBoardReply();
+				WalkBoardReply walkBoardReply = new WalkBoardReply();
 				
-				reply.setWcNo(rs.getInt("WR_NO"));
-				reply.setWbNo(rs.getInt("WB_NO"));
-				reply.setWbComment(rs.getString("WR_CONTENT"));
-				reply.setWcNickname(rs.getString("M_NICKNAME"));
-				reply.setCreateDate(rs.getDate("CREATE_DATE"));
-				reply.setModifyDate(rs.getDate("MODIFY_DATE"));
+				walkBoardReply.setMCode(rs.getInt("M_CODE"));
+				walkBoardReply.setWcNo(rs.getInt("WR_NO"));
+				walkBoardReply.setWbNo(rs.getInt("WB_NO"));
+				walkBoardReply.setWbComment(rs.getString("WR_CONTENT"));
+				walkBoardReply.setWcNickname(rs.getString("M_NICKNAME"));
+				walkBoardReply.setCreateDate(rs.getDate("CREATE_DATE"));
+				walkBoardReply.setModifyDate(rs.getDate("MODIFY_DATE"));
 				
-				replies.add(reply);
+				replies.add(walkBoardReply);
 				
 			}
 			
@@ -302,7 +303,8 @@ public class WalkBoardDao {
 		
 		return result;
 	}
-
+	
+	// 게시글 삭제 쿼리
 	public int updateWbStatus(Connection connection, int wbNo, String wbStatus) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -323,6 +325,29 @@ public class WalkBoardDao {
 			close(pstmt);
 			
 		}
+		
+		return result;
+	}
+	
+	/* 댓글 삭제 쿼리 */
+	public int updateWcStatus(Connection connection, int wcNo, String wcStatus) {
+		int result = 0;
+		String query = "UPDATE WALKREPLY SET WR_STATUS=? WHERE WR_NO=?";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+		
+			pstmt.setString(1, wcStatus);
+			pstmt.setInt(2, wcNo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
 		
 		return result;
 	}

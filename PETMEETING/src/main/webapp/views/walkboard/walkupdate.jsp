@@ -6,13 +6,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
+<jsp:include page="/views/common/header.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
     <style>
-		h1 {
+		#walkUbdate {
 		    font-family: 'Jua', sans-serif;
 		    color: rgb(12, 66, 12);
 		    text-align: center;
@@ -38,7 +39,7 @@
 		    color: rgb(12, 66, 12);   
 		}
 		
-		#title, #writer, #subject{
+		#walkTitle, #writer, #subject{
 		    width: 97%;
 		}
 		
@@ -90,7 +91,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>게시글 수정하기</h1>
+    <h1 id="walkUbdate">게시글 수정하기</h1>
 
     <form action="${ path }/walkboard/walkupdate" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="boardNo" value="${ walkboard.wbNo }">
@@ -98,7 +99,7 @@
         <table id='tbl-board'>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" id="title" value=${ walkboard.wbTitle }></td>
+                <td><input type="text" name="title" id="walkTitle" value=${ walkboard.wbTitle }></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -151,4 +152,5 @@
 <script>ClassicEditor.create( document.querySelector( '#editor' ), { language: "ko" }); </script>
 
 </body>
-</html>
+
+<jsp:include page="/views/common/footer.jsp" />

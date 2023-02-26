@@ -7,6 +7,19 @@
 
 <jsp:include page="/views/common/header.jsp" />
 
+<style>
+	h3{
+		font-family: 'Jua', sans-serif;
+	}
+	
+	#memberInfoTable {
+		font-family: 'Jua', sans-serif;
+	}
+	
+	#dog_info {
+		font-family: 'Jua', sans-serif;
+	}
+</style>
 
  <section>
     <article id="member_info">
@@ -76,7 +89,7 @@
 	            </td>
 	        </tr>
 	     </table>
-	     <input type="button" id="memberUpdate_btn" value="수정" style="margin-top: 10px">
+	     <input type="button" id="memberUpdate_btn" class="btn btn-outline-secondary" value="수정" style="margin-top: 10px; font-family: 'Jua', sans-serif;">
     </div>
 	<br>
 	<hr>
@@ -145,8 +158,8 @@
 	        	</c:forEach>
 	        </div>
 	        <div style="text-align: center; margin-top: 10px">
-	   			<input type="submit" id="dogUpdate_btn" value="추가">
-	   			<input type="button" id="dogDelete_btn" value="삭제">
+	   			<input type="submit" id="dogUpdate_btn" class="btn btn-outline-secondary" value="추가">
+	   			<input type="button" id="dogDelete_btn" class="btn btn-outline-secondary" value="삭제">
 	        </div>
       	</form>
     </article>

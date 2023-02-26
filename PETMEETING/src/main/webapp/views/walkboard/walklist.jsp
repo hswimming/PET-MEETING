@@ -17,9 +17,15 @@
 </head>
 	<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 	<style>
+		a {
+			text-decoration: none;
+			color: green;
+		}	
+	
 		section {
 			margin:auto;
 		   	width:70%;
+		   	font-family: 'Jua', sans-serif;
 	   	}
         section#board-list-container{
             width:600px; margin:0 auto; text-align:center;
@@ -33,6 +39,10 @@
         table#tbl-board th, table#tbl-board td{
             border:1px solid; padding: 5px 0; text-align:center;
         } 
+        #tbl-board th {
+        	background-color: orange;
+        }
+        
         button#btn-add{
 			float:right;
         }
@@ -48,14 +58,14 @@
 		<c:if test="${ not empty loginMember }">
 			<button id="btn-add" onclick="location.href='${ path }/walkBoard/walkwrite'">글쓰기</button><br><br>
 		</c:if>
-		<table id="tbl-board" class="table table-striped" style="border: 1px solid #dddddd">
+		<table id="tbl-board" class="table table-hover" style="border: 1px solid #dddddd">
 			<thead>
 				<tr>
 					<th style="bakcground-color: #eeeeee; ">글번호</th>
 					<th style="bakcground-color: #eeeeee; ">제목</th>
 					<th style="bakcground-color: #eeeeee; ">작성자</th>
-					<th style="bakcground-color: #eeeeee; ">작성일</th>
 					<th style="bakcground-color: #eeeeee; ">첨부파일</th>
+					<th style="bakcground-color: #eeeeee; ">작성일</th>
 					<th style="bakcground-color: #eeeeee; ">조회수</th>
 				</tr>
 			</thead>
@@ -76,7 +86,6 @@
 							</a>
 						</td>
 						<td>${ walkboard.memNickname }</td>
-						<td>${ walkboard.createDate }</td>
 						<td>
 							<c:if test="${ empty walkboard.originalFileName }">
 								<span> - </span>
@@ -84,6 +93,8 @@
 							<c:if test="${ not empty walkboard.originalFileName }">
 								<img width="20px" src="${ path }/resources/images/file.png">
 							</c:if>
+						</td>
+						<td>${ walkboard.createDate }</td>
 						<td>${ walkboard.wbViews }</td>
 					</tr>
 				</c:forEach>

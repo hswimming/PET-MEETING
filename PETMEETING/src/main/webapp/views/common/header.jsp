@@ -92,37 +92,28 @@
             PET MEETING
     </div>   
     
-    <div id="addimg">
-    </div> 
-  
-			
-				
-				
-				
-				<div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="fixed" >
-                    	<button type="button" id="warkboard_btn" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; 
-                    			border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button>
-                    <div class="btn-group" role="group">
-        	            <button type="button" id="board_btn" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" 
-        	            		style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B1&page=1">펫다이어리</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B3&page=1">정보 공유</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B4&page=1">문의하기</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B5&page=1">공지사항</a></li>
-                            <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B6&page=1">신고하기</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <div id="addimg"></div> 
+	<div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="fixed" >
+    	<button type="button" id="warkboard_btn" class="btn btn-primary" style="height: 150px; margin-bottom: 10px; 
+         			border-bottom-left-radius: 0.375rem; border-bottom-right-radius: 0.375rem;">산책가기</button>
+        <div class="btn-group" role="group">
+          		<button type="button" id="board_btn" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" 
+	            		style="height: 150px; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">게시판</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B1&page=1">펫다이어리</a></li>
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B2&page=1">펫미팅 후기</a></li>
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B3&page=1">정보 공유</a></li>
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B4&page=1">문의하기</a></li>
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B5&page=1">공지사항</a></li>
+                <li><a class="dropdown-item" href="${ path }/board/list?boardCode=B6&page=1">신고하기</a></li>
+               </ul>
+           </div>
+    </div>
+		<div style="border: 1px solid;">
+		    <h1 style="text-align: center; font-family: 'Jua', 'sans-sefif'">PET MEETING</h1>
+		</div>
 </header>					
-		
-<body>
-    <header style="border: 1px solid;">
-        <h1 style="text-align: center;">PETMEETING</h1>
-    </header>
 
-		
 		
 <!-- <script src="main.js"></script> -->
 <%-- JavaScript Bundle with Popper --%>

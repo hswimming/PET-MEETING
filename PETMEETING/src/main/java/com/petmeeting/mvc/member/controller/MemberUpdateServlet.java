@@ -35,7 +35,6 @@ public class MemberUpdateServlet extends HttpServlet {
     		member.setMCode(loginMember.getMCode());
     		member.setNickname(request.getParameter("nickname"));
     		member.setPhone(request.getParameter("phone"));
-    		member.setAddress(request.getParameter("address"));
     		
     		result = new MemberService().memberSave(member);
     		

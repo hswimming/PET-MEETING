@@ -6,6 +6,12 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp" />
+<style>
+	#dog_info {
+		font-family: 'Jua', sans-serif;
+	}
+</style>
+
 
 <section>
 	<br>
@@ -24,7 +30,7 @@
 	                <!-- 강아지 정보 삽입 -->
 	                <img src="https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png" alt="사진을 올려주세요.">
 	                <div style="text-align: center; margin-top: 10px;">
-	                    <input type="file" name="upimg"><br>
+	                    <input type="file" name="upimg" class="btn btn-outline-secondary"><br>
 	                </div>
                     <div class="form-div">
                         <label for="dogName" class="form-label"><b>이름</b></label> <br>
@@ -114,7 +120,7 @@
 	        	</div>
 	        </div>
 	        <div style="text-align: center; margin-top: 10px">
-		        <input type="submit" value="저장">
+		        <input type="submit" value="저장" class="btn btn-outline-secondary">
 	        </div>
       	</form>
         </article>

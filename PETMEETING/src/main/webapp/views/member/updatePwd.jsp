@@ -29,7 +29,7 @@
 				<tr>
 					<th>변경할 비밀번호</th>
 					<td>
-						<input type="password" name="userPwd" id="pass1" required>
+						<input type="password" name="inputPwd" id="pass1" required>
 					</td>
 				</tr>
 				<tr>

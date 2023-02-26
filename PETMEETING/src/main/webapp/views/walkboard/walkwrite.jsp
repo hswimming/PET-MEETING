@@ -6,13 +6,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>    
 
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
+<jsp:include page="/views/common/header.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
     <style>
-		h1 {
+		#boardH1 {
 		    font-family: 'Jua', sans-serif;
 		    color: rgb(12, 66, 12);
 		    text-align: center;
@@ -38,7 +39,7 @@
 		    color: rgb(12, 66, 12);   
 		}
 		
-		#title, #writer, #subject{
+		#boardTitle, #writer, #subject{
 		    width: 97%;
 		}
 		
@@ -88,13 +89,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>게시글 작성하기</h1>
+    <h1 id="boardH1">게시글 작성하기</h1>
 
     <form action="${ path }/walkBoard/walkwrite" method="POST" enctype="multipart/form-data">
         <table id='tbl-board'>
         	<tr>
                 <th>제목</th>
-                <td><input type="text" name="content_title" id="title"></td>
+                <td><input type="text" name="content_title" id="boardTitle"></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -151,4 +152,4 @@
 <script>ClassicEditor.create( document.querySelector( '#editor' ), { language: "ko" }); </script>
 
 </body>
-</html>
+<jsp:include page="/views/common/footer.jsp" />

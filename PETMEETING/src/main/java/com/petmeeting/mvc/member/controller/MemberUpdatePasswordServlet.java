@@ -26,7 +26,7 @@ public class MemberUpdatePasswordServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	int result = 0;
-    	String userPwd = request.getParameter("userPwd");
+    	String userPwd = request.getParameter("inputPwd");
     	HttpSession session = request.getSession(false);
     	Member loginMember = (session == null) ? null : (Member)session.getAttribute("loginMember");
 

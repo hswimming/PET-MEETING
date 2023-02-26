@@ -127,7 +127,7 @@ footer ul {
 /* 탭 메뉴 css */
 body{
     margin-top: 100px;
-    font-family: 'Trebuchet MS', serif;
+    font-family: 'Jua', sans-serif;
     line-height: 1.6
 }
 
@@ -147,6 +147,7 @@ ul.tabs li{
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
+    
 }
 
 ul.tabs li.current{
@@ -162,12 +163,14 @@ ul.tabs li.current{
 
 .tab-content.current{
     display: inherit;
+    
 }
 
 /* 강아지 탭 안에 들어가는 정보 css*/
 .form-control {
     width: 95%;
     margin: 5px 10px 8px 0px;
+    font-family: 'Jua', sans-serif;
     font-size: 1.5em;
     border: solid 1px #dadada;
     background: #fff;

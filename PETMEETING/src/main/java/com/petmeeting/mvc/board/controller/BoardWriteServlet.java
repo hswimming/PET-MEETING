@@ -61,9 +61,9 @@ public class BoardWriteServlet extends HttpServlet {
             board.setBoardContent(mr.getParameter("content"));
             board.setSubjectId(mr.getParameter("subject"));
             
+            board.setOriginalFileName(mr.getOriginalFileName("upfile"));
+            board.setRenamedFileName(mr.getFilesystemName("upfile"));
 
-            
-            
             int result = new BoardService().save(board);
             
             if(result > 0) {
@@ -71,7 +71,7 @@ public class BoardWriteServlet extends HttpServlet {
          	   request.setAttribute("location", "/board/list?boardCode="+board.getBoardCode());
             } else {
          	   request.setAttribute("msg", "게시글이 등록되지 않았습니다.");
-         	   request.setAttribute("location", "/board/list?boardCode="+board.getBoardCode());
+         	   request.setAttribute("location", "/board/write");
             }
         } else {
      	   request.setAttribute("msg", "로그인 후 작성해 주세요");

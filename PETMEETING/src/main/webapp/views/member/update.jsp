@@ -6,6 +6,13 @@
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="/views/common/header.jsp" />
+<style>
+	#memberInfoTable td {
+		padding-left: 10px;		
+
+	}
+</style>
+
 
 <section>
 	<article id="member_info">
@@ -51,7 +58,7 @@
 		            주소
 		        </td>
 		        <td>
-		            <input type="text" name="address" value="${ loginMember.address }">
+					${ loginMember.address }
 		        </td>
 		    </tr>
 		    <tr>
