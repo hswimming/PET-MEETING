@@ -144,16 +144,16 @@
                 </div> 
             </div>
             <table id="tbl-comment">
-            	<c:forEach var="rrrr" items="${ walkboard.replies }">
+            	<c:forEach var="reply" items="${ walkboard.replies }">
                 	<tr class="level1">
                     	<td>
-                        	<sub class="comment-writer">${ rrrr.wcNickname }</sub>
-                        	<sub class="comment-date">${ rrrr.createDate }</sub>
+                        	<sub class="comment-writer">${ reply.wcNickname }</sub>
+                        	<sub class="comment-date">${ reply.createDate }</sub>
                         	<br><br>
-                        	<span> ${ rrrr.wbComment }</span>
+                        	<span> ${ reply.wbComment }</span>
                     	</td>
                     	<td>
-                    		<c:if test="${ not empty loginMember && loginMember.id == walkboardreply.memberId }">
+                    		<c:if test="${ not empty loginMember && loginMember.MCode == walkboardreply.MCode }">
 	                        	<button type="submit" id="commentbtn">삭제</button>
                     		</c:if>
                     	</td>
@@ -174,7 +174,7 @@
 			let oname = encodeURIComponent('${ walk_board.originalFileName }');
 			let rname = encodeURIComponent('${ walk_board.renamedFileName }');
 			
-			location.assign('${ path }/walk_board/fileDown?oname=${ walk_board.originalFileName }&rname=${ walk_board.renamedFileName }');
+			location.assign('${ path }/walkboard/fileDown?oname=${ walk_board.originalFileName }&rname=${ walkboard.renamedFileName }');
 		});
  		
  		$('#commentContent').on('focus', () => {

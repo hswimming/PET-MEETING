@@ -19,19 +19,25 @@ public class WalkBoardReplyDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int result = 0;
 		
+		int wbNo = Integer.parseInt(request.getParameter("wbNo"));
 		int wcNo = Integer.parseInt(request.getParameter("wcNo"));
 		
-		result = new WalkBoardService().deleteReply(wcNo);
+		result = new WalkBoardService().deleteReply(wbNo, wcNo);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "댓글 삭제 성공");
-			request.setAttribute("location", "/walkboard/walkview?wcNo=" + wcNo);
+			request.setAttribute("location", "/walkboard/walkview?wbNo=" + wbNo);
 			
 		} else {
 			request.setAttribute("msg", "댓글 삭제 실패");
-			request.setAttribute("location", "/walkboard/walkview?wcNo=" + wcNo);
+			request.setAttribute("location", "/walkboard/walkview?wbNo=" + wbNo);
+			
 			
 		}
+		
+		System.out.println(wcNo);
+		System.out.println(wbNo);
+		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}

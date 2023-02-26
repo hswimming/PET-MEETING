@@ -128,11 +128,16 @@ public class WalkBoardService {
 		return result;
 	}
 
+//	public int deleteReply(int wbNo, int wcNo) {
+//		return 0;
+//	}
+
 //	댓글 삭제
-	public int deleteReply(int wcNo) {
+	public int deleteReply(int wbNo, int wcNo) {
 		int result = 0;
 		
 		Connection connection = getConnection();
+		
 		result = new WalkBoardDao().updateWcStatus(connection, wcNo, "N");
 		
 		if(result > 0) {
@@ -141,6 +146,8 @@ public class WalkBoardService {
 			rollback(connection);
 			
 		} close(connection);
+		
+		System.out.println(wcNo);
 		
 		return result;
 	}
