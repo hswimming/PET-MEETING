@@ -17,9 +17,14 @@
 </head>
 	<script src="${ path }/resources/js/jquery-3.6.3.js"></script>
 	<style>
+		 a {
+		 	text-decoration: none;
+		 	color: green;
+		  }
 		section {
 			margin:auto;
-		   	width:70%;
+			font-family: 'Jua', sans-serif;
+			width:70%;
 	   	}
         section#board-list-container{
             width:600px; margin:0 auto; text-align:center;
@@ -32,7 +37,10 @@
         }
         table#tbl-board th, table#tbl-board td{
             border:1px solid; padding: 5px 0; text-align:center;
-        } 
+        }
+         table#tbl-board th{
+        	background-color:orange;
+        }
         button#btn-add{
 			float:right;
         }
@@ -46,7 +54,7 @@
 		<h2 style="text-align: center; font-size: 2em;">산책 친구 찾기 게시판</h2>
 		
 		<c:if test="${ not empty loginMember }">
-			<button id="btn-add" onclick="location.href='${ path }/walkBoard/walkwrite'">글쓰기</button><br><br>
+			<button id="btn-add" class="btn btn-outline-secondary" onclick="location.href='${ path }/walkBoard/walkwrite'">글쓰기</button><br><br>
 		</c:if>
 		<table id="tbl-board" class="table table-striped" style="border: 1px solid #dddddd">
 			<thead>

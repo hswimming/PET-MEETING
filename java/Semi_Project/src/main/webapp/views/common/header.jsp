@@ -119,13 +119,9 @@
 		
 <body>
     <header style="border: 1px solid;">
-        <h1 style="text-align: center;">PETMEETING</h1>
+        <h1 style="text-align: center; font-family: 'Jua', sans-serif;">PETMEETING</h1>
     </header>
 
-		
-		
-<!-- <script src="main.js"></script> -->
-<%-- JavaScript Bundle with Popper --%>
 <script>
 	$(document).ready(() => {
 		$('#btnMyPage').on('click', () => {
@@ -146,5 +142,3 @@
 	});
 
 </script>
-
-    

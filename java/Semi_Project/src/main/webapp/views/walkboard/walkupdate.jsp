@@ -62,12 +62,14 @@
 		    border-collapse:collapse;
 		    margin-bottom: 100px;
 		    table-layout: fixed;
+		    font-family: 'Jua', sans-serif;
 		}
 		table#tbl-board th{
 		    border:1px solid;
 		    padding:5px 0;
 		    text-align:center;
 		    width: 150px;
+		    background-color:whitesmoke;
 		}
 		table#tbl-board td{
 		    border:1px solid;
@@ -136,7 +138,7 @@
                 <th colspan="2">
                     <div id="button">
                         <input type="submit" value="수정" class="btn btn-outline-secondary"> 
-                        <input type="button" onclick="location.replace('${ path }/walkboard/walklist)" value="목록으로" class="btn btn-outline-secondary">
+                        <input type="button" onclick="location.replace('${ path }/walkboard/walklist')" value="목록으로" class="btn btn-outline-secondary">
                     </div>
                 </th>
             </tr>

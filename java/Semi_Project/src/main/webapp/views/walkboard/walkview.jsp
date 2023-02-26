@@ -16,6 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 보기</title>
     <style>
+    	section{
+    	width:70%;
+    	margin:auto;
+    	font-family: 'Jua', sans-serif;
+    	}
         section>div#board-write-container{
             width:600px; margin:0 auto; text-align:center;
         }
@@ -26,7 +31,7 @@
             width:500px; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both;
         }
         table#tbl-board th{
-            width: 125px; border:1px solid; padding: 5px 0; text-align:center;
+            width: 125px; border:1px solid; padding: 5px 0; text-align:center; background-color:whitesmoke;
         } 
         table#tbl-board td{
             border:1px solid; padding: 5px 0 5px 10px; text-align:left;
@@ -115,15 +120,15 @@
                 </tr>
                 <tr>
                     <th>내 용</th>
-                    <td>${ walkboard.wbContent }</td>
+                    <td style="min-height: 200px">${ walkboard.wbContent }</td>
                 </tr>
                 <tr>
                     <th colspan="2">
                     <c:if test="${ not empty loginMember && loginMember.MCode == walkboard.memberCode }">
-                        <button type="button" onclick="location.href='${ path }/walkboard/walkupdate?wbNo=${ walkboard.wbNo }'">수정</button>
-                        <button type="button" id="btnDelete">삭제</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.href='${ path }/walkboard/walkupdate?wbNo=${ walkboard.wbNo }'">수정</button>
+                        <button type="button" id="btnDelete" class="btn btn-outline-secondary">삭제</button>
                         </c:if>
-                        <button type="button" onclick="location.replace('${ path }/walkboard/walklist')">목록</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.replace('${ path }/walkboard/walklist')">목록</button>
                     </th>
                 </tr>
             </table>
@@ -131,21 +136,21 @@
             <div id="comment-container">
                 <div class="comment-editor">
                     <form action="${ path }/walkBoard/reply" method="POST">
-                        <input type="hidden" name="walkboardwbNo" value="${ walkboard.wbNo }">
+                        <input type="hidden" name="wbNo" value="${ walkboard.wbNo }">
                         <input type="hidden" name="writer" value="${ loginMember.nickname }">
                         <textarea name="commentContent" id="commentContent" cols="55" rows="3"></textarea>
-                        <button type="submit" id="btn-insert">등록</button>	    			
+                        <button type="submit" id="btn-insert" class="btn btn-outline-secondary">등록</button>	    			
                     </form>
                 </div> 
             </div>
             <table id="tbl-comment">
-            	<c:forEach var="reply" items="${ walkboard.replies }">
+            	<c:forEach var="rrrr" items="${ walkboard.replies }">
                 	<tr class="level1">
                     	<td>
-                        	<sub class="comment-writer">${ reply.wcNickname }</sub>
-                        	<sub class="comment-date">${ reply.createDate }</sub>
+                        	<sub class="comment-writer">${ rrrr.wcNickname }</sub>
+                        	<sub class="comment-date">${ rrrr.createDate }</sub>
                         	<br><br>
-                        	<span> ${ reply.wbComment }</span>
+                        	<span> ${ rrrr.wbComment }</span>
                     	</td>
                     	<td>
                     		<c:if test="${ not empty loginMember && loginMember.id == walkboardreply.memberId }">

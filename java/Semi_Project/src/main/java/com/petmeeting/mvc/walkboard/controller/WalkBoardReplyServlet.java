@@ -22,6 +22,28 @@ public class WalkBoardReplyServlet extends HttpServlet {
        
     public WalkBoardReplyServlet() {
     }
+    
+//    @Override
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//    	HttpSession session = request.getSession(false);
+//    	Member loginMember = (session == null) ? null : (Member) session.getAttribute("loginMember");
+//    	
+//    	if (loginMember != null) {
+//    		
+//    		WalkBoardReply walkBoardReply = new WalkBoardReply();
+//    		
+//    		walkBoardReply = new MemberService().findMemberById(loginMember.getId());
+//        	
+//        	request.setAttribute("wcNickname", walkBoardReply.getWcNickname());
+//        	request.setAttribute("createDate", walkBoardReply.getCreateDate());
+//        	request.setAttribute("wbComment", walkBoardReply.getWbComment());
+//        	
+//        	request.getRequestDispatcher("/views/walkboard/walkview.jsp").forward(request, response);
+//    		
+//    		
+//    	}
+//    	
+//    }
 
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +55,7 @@ public class WalkBoardReplyServlet extends HttpServlet {
 		
 		if (loginMember != null) {
 			
-			int wbNo = Integer.parseInt(request.getParameter("walkboardwbNo"));
+			int wbNo = Integer.parseInt(request.getParameter("wbNo"));
 			String wbComment = request.getParameter("commentContent");
 			
 			WalkBoardReply walkBoardReply = new WalkBoardReply();
@@ -41,7 +63,7 @@ public class WalkBoardReplyServlet extends HttpServlet {
 			walkBoardReply.setWbNo(wbNo);
 			walkBoardReply.setMCode(loginMember.getMCode());
 			walkBoardReply.setWbComment(wbComment);
-			walkBoardReply.setWcNickname(loginMember.getNickname());
+//			walkBoardReply.setWcNickname(loginMember.getNickname());
 			
 			result = new WalkBoardService().saveReply(walkBoardReply);
 			

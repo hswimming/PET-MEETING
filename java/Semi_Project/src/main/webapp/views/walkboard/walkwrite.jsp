@@ -7,6 +7,8 @@
 
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
+<jsp:include page="/views/common/header.jsp" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,11 +63,13 @@
 		    border:1px solid black;
 		    border-collapse:collapse;
 		    margin-bottom: 100px;
+		    font-family: 'Jua', sans-serif;
 		}
 		table#tbl-board th{
 		    border:1px solid;
 		    padding:5px 0;
 		    text-align:center;
+		    background-color:whitesmoke;
 		}
 		table#tbl-board td{
 		    border:1px solid;
@@ -150,5 +154,4 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/translations/ko.js"></script>
 <script>ClassicEditor.create( document.querySelector( '#editor' ), { language: "ko" }); </script>
 
-</body>
-</html>
+<jsp:include page="/views/common/footer.jsp" />
