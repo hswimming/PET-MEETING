@@ -66,7 +66,7 @@
 				</c:if>
 				<c:if test="${ empty loginMember && not empty admin }">
 					<div style="position: absolute; right: 210px">
-						관리자님 어서오시라요.
+						관리자님 어서오세요.
 					</div>
 					<div class="login-container">
 						<table>
@@ -110,7 +110,7 @@
            </div>
     </div>
 		<div style="border: 1px solid;">
-		    <h1 style="text-align: center; font-family: 'Jua', 'sans-sefif'">PET MEETING</h1>
+		    <h1 id="indexMove" style="text-align: center; font-family: 'Jua', 'sans-sefif'">PET MEETING</h1>
 		</div>
 </header>					
 

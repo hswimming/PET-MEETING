@@ -8,6 +8,11 @@
         <li>Copyright ©2023 Pet Meeting</li>
         <li>강남지원 1관 : 서울특별시 강남구 테헤란로14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F
         </li>
+        <li>
+   			<a href="${ path }">
+        		<img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-instagram-icon-png-image_6315974.png" width=50px; >
+			</a>
+        </li>
     </ul>
 </footer>
 	

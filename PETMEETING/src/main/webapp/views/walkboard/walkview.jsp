@@ -26,7 +26,7 @@
             width:500px; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both;
         }
         table#tbl-board th{
-            width: 125px; border:1px solid; padding: 5px 0; text-align:center;
+            width: 125px; border:1px solid; padding: 5px 0; text-align:center; background-color: whitesmoke;
         } 
         table#tbl-board td{
             border:1px solid; padding: 5px 0 5px 10px; text-align:left;
@@ -120,10 +120,10 @@
                 <tr>
                     <th colspan="2">
                     <c:if test="${ not empty loginMember && loginMember.MCode == walkboard.memberCode }">
-                        <button type="button" onclick="location.href='${ path }/walkboard/walkupdate?wbNo=${ walkboard.wbNo }'">수정</button>
-                        <button type="button" id="btnDelete">삭제</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.href='${ path }/walkboard/walkupdate?wbNo=${ walkboard.wbNo }'">수정</button>
+                        <button type="button" class="btn btn-outline-secondary" id="btnDelete">삭제</button>
                         </c:if>
-                        <button type="button" onclick="location.replace('${ path }/walkboard/walklist')">목록</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.replace('${ path }/walkboard/walklist')">목록</button>
                     </th>
                 </tr>
             </table>
@@ -134,7 +134,7 @@
                         <input type="hidden" name="walkboardwbNo" value="${ walkboard.wbNo }">
                         <input type="hidden" name="writer" value="${ walkboard.memNickname }">
                         <textarea name="" id="commentContent" cols="55" rows="3"></textarea>
-                        <button type="submit" id="btn-insert">등록</button>	    			
+                        <button class="btn btn-outline-secondary" type="submit" id="btn-insert">등록</button>	    			
                     </form>
                 </div> 
             </div>
@@ -149,7 +149,7 @@
                     	</td>
                     	<td>
                     		<c:if test="${ not empty loginMember && loginMember.MCode == walkboard.memberCode }">
-	                        	<button type="submit" id="commentbtn">삭제</button>
+	                        	<button class="btn btn-outline-secondary" type="submit" id="commentbtn">삭제</button>
                     		</c:if>
                     	</td>
                 	</tr>

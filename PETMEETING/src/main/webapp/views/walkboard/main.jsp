@@ -66,8 +66,13 @@
 			<div id="walk-list" onclick="location.href='${ path }/views/walkboard/recowalk.jsp'"></div>
 			<div id="walk-board" onclick="location.href='${ path }/views/walkboard/walksearch.jsp'"></div>
 		</div>
+		<a id="pageMove" href='#indexMove'></a>
 	</section>
 </body>
-</html>
+<script>
+		$(document).ready(() => {
+			$('#pageMove').get(0).click();
+		});
+</script>
 
 <jsp:include page="/views/common/footer.jsp" />

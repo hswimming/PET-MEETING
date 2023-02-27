@@ -41,7 +41,6 @@
 
 
    <section id="adminSection">
-   		
         <h4 style="text-align: center; margin-top: 10px">관리자 페이지</h4>
         <article>
 			<ul id="adminNav">
@@ -116,9 +115,15 @@
                     </tr>
                 </table>
             </div>
+            <a id="pageMove" href='#indexMove'></a>
         </article>
     </section>
 
+	<script>
+		$(document).ready(() => {
+			$('#pageMove').get(0).click();
+		});
+	</script>
 
 <jsp:include page="/views/common/footer.jsp" /> 
 	
