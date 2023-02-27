@@ -92,12 +92,13 @@
                     
                     <ul class="find_wrap" id="find_wrap">
                         <li><a onclick="popupfindId();" class="find_text">아이디 찾기</a></li>
-                        <li><a onclick="location.href='${ path }/member/checkAgreement.jsp'" class="find_text" style="padding: 50px;">비밀번호 찾기</a></li>
+                        <li><a onclick="popupfindPwd();" class="find_text" style="padding: 50px;">비밀번호 찾기</a></li>
                         <li><a href="${ path }/member/signup" class="find_text">회원가입</a></li>
                     </div>
                     </ul>
             </div>
         </div>
+        <a id="pageMove" href='#indexMove'></a>
     </section>
 <script type="text/javascript">
 	var popupWidth = 100;
@@ -151,6 +152,13 @@
 	  }
 	};
 	
+	$(document).ready(() => {
+		$('#pageMove').get(0).click();
+	});
+	
+	function popupfindPwd() { 
+	      window.open("${ path }/views/member/findPwd.jsp","pop", "height=' + popupHeight + ', width=' + popupWidth + ', left=' + popupX + ', top=' + popupY + ', scrollbars=yes, resizable=yes"); 
+	      }
 </script>
 
 

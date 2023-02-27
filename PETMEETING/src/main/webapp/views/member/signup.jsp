@@ -228,6 +228,7 @@
             </div>
         </form>
     </div>
+    <a id="pageMove" href='#indexMove'></a>
 </section>
 
 <script type="text/javascript">
@@ -554,6 +555,10 @@
 				}
 			});
 		});
+	});
+	
+	$(document).ready(() => {
+		$('#pageMove').get(0).click();
 	});
 	
 	

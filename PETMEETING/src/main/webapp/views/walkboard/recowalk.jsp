@@ -175,6 +175,7 @@ footer {
 					<input id="map_btn" class="btn btn-outline-secondary" type="button" value="지도로 검색하기" >
 				</div>
             </div>
+            <a id="pageMove" href='#indexMove'></a>
         </article>
 	</section>
 	<script>
@@ -223,6 +224,8 @@ footer {
 	        $('#map_btn').on('click', () =>{
 	        	location.replace('${ path }/views/walkboard/mapAPI.jsp');
 	        });
+	        
+	        $('#pageMove').get(0).click();
 	        
 	    });
 	

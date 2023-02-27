@@ -101,8 +101,8 @@
 			</c:if>
 		</table>
 		<div id="pageBar">
-			<button onclick="location.href='${ path }/walkBoard/walklist?page=1'">&lt;&lt;</button>
-			<button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.prevPage }'">&lt;</button>
+			<button onclick="location.href='${ path }/walkboard/walklist?page=1'">&lt;&lt;</button>
+			<button onclick="location.href='${ path }/walkboard/walklist?page=${ pageInfo.prevPage }'">&lt;</button>
 			                  
 			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 				<c:choose>
@@ -110,13 +110,13 @@
 						<button disabled>${ status.current }</button>
 					</c:when>
 					<c:otherwise>
-						<button onclick="location.href='${ path }/walkBoard/walklist?page=${ status.current }'">${ status.current }</button>
+						<button onclick="location.href='${ path }/walkboard/walklist?page=${ status.current }'">${ status.current }</button>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 
-                  <button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.nextPage }'">&gt;</button>
-                  <button onclick="location.href='${ path }/walkBoard/walklist?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
+                  <button onclick="location.href='${ path }/walkboard/walklist?page=${ pageInfo.nextPage }'">&gt;</button>
+                  <button onclick="location.href='${ path }/walkboard/walklist?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
               </div>
           </div>
       </section>
