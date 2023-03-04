@@ -12,6 +12,7 @@ import java.util.List;
 import com.petmeeting.mvc.board.model.vo.Board;
 import com.petmeeting.mvc.board.model.vo.Reply;
 import com.petmeeting.mvc.common.util.PageInfo;
+import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
 
 import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.close;;
 
@@ -412,37 +413,37 @@ public class BoardDao {
 		return count;
 	}
 
-	public Board recentBoard(Connection connection) {
+	public List<Board> recentBoard(Connection connection) {
+		List<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Board board = null;
 
 		String query = "SELECT RNUM, B_NO, B_TITLE, B_CONTENT, M_NICKNAME "
-					 + "FROM( "
-					 + "SELECT ROWNUM AS RNUM, B_NO, B_TITLE, B_CONTENT, M_NICKNAME "
-					 + "FROM( "
-				     + "    SELECT B_NO, B_TITLE,B_CONTENT, M_NICKNAME "
-					 + "    FROM BOARD B "
-				     + "    JOIN MEMBER M ON (B.M_CODE = M.M_CODE) "
-					 + "    ORDER BY B_NO DESC) "
-					 + ") "
-					 + "WHERE RNUM = ?";
+					 + "FROM ( "
+					 + "        SELECT ROWNUM AS RNUM, B_NO, B_TITLE, B_CONTENT, M_NICKNAME "
+					 + "        FROM ( "
+					 + "                SELECT B_NO, B_TITLE, B_CONTENT, M_NICKNAME "
+					 + "                FROM BOARD B "
+					 + "                JOIN MEMBER M ON (B.M_CODE = M.M_CODE) "
+					 + "                ORDER BY B_NO DESC) "
+					 + "    ) "
+					 + "WHERE RNUM BETWEEN 1 AND 3";
 		
 		try {
 			pstmt = connection.prepareStatement(query);
 			
-			pstmt.setInt(1, 1);
-			
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				board = new Board();	
+				Board board = new Board();	
 				
 				board.setRowNum(rs.getInt(1));
 				board.setBoardNo(rs.getInt(2));
 				board.setBoardTitle(rs.getString(3));
 				board.setBoardContent(rs.getString(4));
 				board.setMemberNickName(rs.getString(5));
+				
+				list.add(board);
 			}
 			
 			
@@ -454,7 +455,52 @@ public class BoardDao {
 		}
 		
 		
-		return board;
+		return list;
+	}
+
+	public List<WalkBoard> recentWalkBoard(Connection connection) {
+		List<WalkBoard> walkList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String query = "SELECT RNUM, WB_NO, WB_TITLE, WB_CONTENT, WB_STATUS, M_NICKNAME "
+					 + "FROM ( "
+					 + "        SELECT ROWNUM AS RNUM, WB_NO, WB_TITLE, WB_CONTENT, WB_STATUS, M_NICKNAME "
+					 + "        FROM ( "
+					 + "                SELECT WB_NO, WB_TITLE, WB_CONTENT, WB_STATUS, M_NICKNAME "
+					 + "                FROM WALKBOARD W "
+					 + "                JOIN MEMBER M ON (W.M_CODE = M.M_CODE) "
+					 + "                ORDER BY WB_NO DESC) "
+					 + "    ) "
+					 + "WHERE (RNUM BETWEEN 1 AND 3) AND WB_STATUS = 'Y'";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				WalkBoard walkBoard = new WalkBoard();
+				
+				walkBoard.setRowNum(rs.getInt(1));
+				walkBoard.setWbNo(rs.getInt(2));
+				walkBoard.setWbTitle(rs.getString(3));
+				walkBoard.setWbContent(rs.getString(4));
+				walkBoard.setMemNickname(rs.getString(6));
+				
+				walkList.add(walkBoard);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return walkList;
 	}
 	
 

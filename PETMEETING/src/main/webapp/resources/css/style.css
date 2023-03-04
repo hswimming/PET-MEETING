@@ -221,7 +221,6 @@ ul.tabs li.current{
 }
 
 .adminTable tr td{
-    text-align: right;
     padding-right: 10px;
 }
 

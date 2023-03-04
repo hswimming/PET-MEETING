@@ -4,11 +4,13 @@ import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.close;
 import static com.petmeeting.mvc.common.jdbc.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.petmeeting.mvc.admin.model.vo.Admin;
 import com.petmeeting.mvc.board.model.dao.BoardDao;
 import com.petmeeting.mvc.board.model.vo.Board;
 import com.petmeeting.mvc.member.model.dao.MemberDao;
+import com.petmeeting.mvc.walkboard.model.vo.WalkBoard;
 
 public class AdminService {
 
@@ -57,13 +59,22 @@ public class AdminService {
 		return count;
 	}
 
-	public Board recentBoard() {
+	public List<Board> recentBoard() {
 		Connection connection = getConnection();
-		Board board = new BoardDao().recentBoard(connection);
+		List<Board> list = new BoardDao().recentBoard(connection);
 		
 		close(connection);
 		
-		return board;
+		return list;
+	}
+
+	public List<WalkBoard> recentWalkBoard() {
+		Connection connection = getConnection();
+		List<WalkBoard> walkList = new BoardDao().recentWalkBoard(connection);
+		
+		close(connection);
+		
+		return walkList;
 	}
 	
 	

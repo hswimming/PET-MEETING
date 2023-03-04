@@ -7,10 +7,16 @@
 
 <jsp:include page="/views/common/header.jsp" />
 <style>
-	#memberInfoTable td {
-		padding-left: 10px;		
+	#memberInfoTable {
+		text-align: center;
+	}
+	
+	#memberInfoTable td:nth-of-type(2) {
+		text-align: left;		
+		padding-left: 10px;
 
 	}
+	
 </style>
 
 
